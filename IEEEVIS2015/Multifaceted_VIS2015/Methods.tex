@@ -36,34 +36,35 @@ The long formulas shown in the middle of Figure~\ref{fig:discreminate} exemplify
 Thinking of the previously viewed objects $O_1$ and $O_2$ as referees with varying degrees of influence in a competition between $O_3$ and $O_4$, provides an intuition for an additional important guideline: an object should not referee a competition that it is part of. For example, using $O_3$ as a previous element in a competition between itself and $O_4$ would result in an open feedback-loop and should be avoided. However, the visual probability can be used to discriminate between the objects regardless of such restrictions.
 
 \begin{algorithm}
-\caption{Viewed Object Detection Algorithm}\label{alg:ObjectDetection}
+\caption{Viewed Object Detection Algorithm}
+\label{alg:ObjectDetection}
 \begin{algorithmic}[1]
-\For{$i \gets 0 \text{ to } n-1$}
-	\State $t \gets CurrentTime()$
-	\State $gs(t, O_i) = 1 - \min{(1, (\frac{d}{R}))}$
-	\If{$ t = 0$}
-		\State $ps(t, O_i) = 1$
-		\State $vs(t, O_i) = gs(t,O_i)$
-	\Else
-		\State $sumVST \gets 0$
-		\State $sumVS \gets 0$
-		\For{$j \gets 0 \text{ to } n-1$}
-			\If{$vs(t-1,O_j)> 0$ and $ vs(t,O_j)> 0$}
-				\State $sumVST \gets sumVST + vs(t-1, O_j) \times T(O_i,O_j)$
-				\State $sumVS \gets sumVs + vs(t-1, O_j)$				
-			\EndIf
-		\EndFor
-		\State $ps'(t, O_i) = \frac{sumVST}{sumVS} \times VP(t, O_i)$
-		\State $maxPS \gets MIN\_VAL$
-		\For{$k \gets 0 \text{ to } n-1$}
-			\If{$gs(t,O_k)> 0$ and $ps'(t,O_k) > maxPS$}
-				\State $maxPS \gets ps'(t,O_k)$
-			\EndIf
-		\EndFor
-		\State $ps(t,O_i) = \frac{ps'(t, O_i)}{maxPS}$
-		\State $vs(t, O_i) = gs(t, O_i) \times ps(t, O_i)$
-	\EndIf
-\EndFor
+\FOR{$i \gets 0 \text{ to } n-1$}
+	\STATE $t \gets CurrentTime()$
+	\STATE $gs(t, O_i) = 1 - \min{(1, (\frac{d}{R}))}$
+	\IF{$ t = 0$}
+		\STATE $ps(t, O_i) = 1$
+		\STATE $vs(t, O_i) = gs(t,O_i)$
+	\ELSE
+		\STATE $sumVST \gets 0$
+		\STATE $sumVS \gets 0$
+		\FOR{$j \gets 0 \text{ to } n-1$}
+			\IF{$vs(t-1,O_j)> 0$ and $ vs(t,O_j)> 0$}
+				\STATE $sumVST \gets sumVST + vs(t-1, O_j) \times T(O_i,O_j)$
+				\STATE $sumVS \gets sumVs + vs(t-1, O_j)$				
+			\ENDIF
+		\ENDFOR
+		\STATE $ps'(t, O_i) = \frac{sumVST}{sumVS} \times VP(t, O_i)$
+		\STATE $maxPS \gets MIN\_VAL$
+		\FOR{$k \gets 0 \text{ to } n-1$}
+			\IF{$gs(t,O_k)> 0$ and $ps'(t,O_k) > maxPS$}
+				\STATE $maxPS \gets ps'(t,O_k)$
+			\ENDIF
+		\ENDFOR
+		\STATE $ps(t,O_i) = \frac{ps'(t, O_i)}{maxPS}$
+		\STATE $vs(t, O_i) = gs(t, O_i) \times ps(t, O_i)$
+	\ENDIF
+\ENDFOR
 \end{algorithmic}
 \end{algorithm}
 

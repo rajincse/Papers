@@ -6,7 +6,7 @@ Version=4
 MainFile=Multifaceted_VIS2015.tex
 UseBibTeX=1
 UseMakeIndex=0
-ActiveProfile=LaTeX ⇨ DVI ⇨ PDF
+ActiveProfile=LaTeX ⇨ PS ⇨ PDF
 ProjectLanguage=de
 ProjectDialect=DE
 
