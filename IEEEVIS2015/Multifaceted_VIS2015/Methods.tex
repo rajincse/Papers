@@ -2,9 +2,12 @@
 This section described a novel instrumentation method that leverages eye-tracking to detect in real-time which rendered objects users are looking at while working with a data visualization.  We present a general approach, details about the instrumentation of a specific data visualization, and a visual analysis system which we built to analyze eye-tracking data we collected in this way. 
 
 \subsection{Detecting viewed objects in data visualization content}
-Eye-tracking is a low resolution input. Unlike mouse input, eye-tracking can indicate a small screen region that a user is fixating, rather than a particular pixel. Typically, such a region is about one inch in diameter, though specific values depend on the user's distance to the monitor. As such, eye-tracking data cannot accurately indicate which visual object is viewed, if many objects are close together. This is not a significant problem for traditional AOI analyses, which generally use large AOIs. However, our goal was to detect the viewing of visual primitives typical of data visualization content, such as network nodes or glyphs. Generally, such visualization content is dense and intricate and eye-tracking can often not accurately discriminate between the viewing of multiple, tightly packed visualization primitives. We deal with this issue in two ways. 
 
-First, we use a fuzzy interpretation of gaze data and detect a likelihood rather than a certainty that an object was viewed. To this end, we compute object viewing scores that range between zero- the object is not viewed, and one- the object is certainly viewed.  This is in fact a principled approach due to the eye-tracker's low resolution: sometimes there simply isn't a way to tell with absolute certainty which visual objects a user is looking at. Using a probabilistic interpretation of whether an object is viewed or not has implications on interpreting and analyzing the resulting data, which we discuss throughout the rest of the paper. Figure~\ref{fig:systemBlockDiagram} shows the concept of our system. The visualization block serves the data for the rendering to the renderer. The data is includes the position of visual objects. The renderes serves model transformation which is used to convert the stream of gaze positions from screen space to model space. The object detection algorithm collects the model space positions of visual objects from the rendered, model space positions of gazes from the screen to model transform and, the prediction scores of visual objects. The algorithm calculates the fuzzy score of visual objects which is used as an input to the object viewing prediction modules. The detail calculations of the algorithm is described later in the section.
+\subsubsection{General Approach}
+Eye-tracking is a low resolution input. Unlike mouse input, eye-tracking can indicate a small screen region that a user is fixating, rather than a particular pixel. Typically, such a region is about one inch in diameter, though specific values depend on the user's distance to the monitor. As such, eye-tracking data cannot accurately indicate which visual object is viewed, if many objects are close together. This is not a significant problem for traditional AOI analyses, which generally use large AOIs. However, our goal was to detect the viewing of visual primitives typical of data visualization content, such as network nodes or glyphs. Generally, such visualization content is dense and intricate and eye-tracking can often not accurately discriminate between the viewing of multiple, tightly packed visualization primitives. 
+%We deal with this issue in two ways. 
+
+We use a fuzzy interpretation of gaze data and detect a likelihood rather than a certainty that an object was viewed. To this end, we compute object viewing scores that range between zero- the object is not viewed, and one- the object is certainly viewed.  This is in fact a principled approach due to the eye-tracker's low resolution: sometimes there simply isn't a way to tell with absolute certainty which visual objects a user is looking at. Using a probabilistic interpretation of whether an object is viewed or not has implications on interpreting and analyzing the resulting data, which we discuss throughout the rest of the paper. Figure~\ref{fig:systemBlockDiagram} shows the concept of our system. The visualization block serves the data for the rendering to the renderer. The data is includes the position of visual objects. The renderes serves model transformation which is used to convert the stream of gaze positions from screen space to model space. The object detection algorithm collects the model space positions of visual objects from the rendered, model space positions of gazes from the screen to model transform and, the prediction scores of visual objects. The algorithm calculates the fuzzy score of visual objects which is used as an input to the object viewing prediction modules. The detail calculations of the algorithm is described later in the section.
 
 \begin{figure}[htb]
   \centering
@@ -13,7 +16,8 @@ First, we use a fuzzy interpretation of gaze data and detect a likelihood rather
 	\label{fig:systemBlockDiagram}
 \end{figure}
 
-Second, analysis of eye-tracking data over interactive stimuli is a challenge. Figure~\ref{fig:AOIInteractive} shows one example of it. At time $t$ an user is looking at a view which is shown in Figure~\ref{fig:AOIInteractive}(a). The main interest of analysis is two blocks containing movie name:``Raiders of the Lost Ark'' and ``Star Wars: Episode V - The Empire Strikes Back''. The red rectangle around them shows the AOIs defined at time $t$. At time $t+1$ the user zooms out and translates the view downward which is shown in Figure~\ref{fig:AOIInteractive}(b). The AOIs drawn at time $t$ becomes inapplicable at the view of time $t+1$. At time $t+1$ a new set of AOIs need to defined. Our method automatically defines the AOIs.
+\subsubsection{AOI Analysis Method}
+Analysis of eye-tracking data over interactive stimuli is a challenge. Figure~\ref{fig:AOIInteractive} shows one example of it. At time $t$ an user is looking at a view which is shown in Figure~\ref{fig:AOIInteractive}(a). The main interest of analysis is two blocks containing movie name:``Raiders of the Lost Ark'' and ``Star Wars: Episode V - The Empire Strikes Back''. The red rectangle around them shows the AOIs defined at time $t$. At time $t+1$ the user zooms out and translates the view downward which is shown in Figure~\ref{fig:AOIInteractive}(b). The AOIs drawn at time $t$ becomes inapplicable at the view of time $t+1$. At time $t+1$ a new set of AOIs need to defined. Our method automatically defines the AOIs.
 
 \begin{figure}[htb]
   \centering
@@ -22,7 +26,15 @@ Second, analysis of eye-tracking data over interactive stimuli is a challenge. F
 	\label{fig:AOIInteractive}
 \end{figure}
 
-Third, we leverage Salvucci's paradigm of ``intelligent gaze interpretation''~\cite{salvucci2000intelligent} to increase the accuracy of pin-pointing which particular object is viewed when a gaze-sample is registered in the vicinity of multiple objects. We do this by predicting which of these objects is the most likely viewing target at that particular moment in time. We make such predictions based on the visualization's properties and knowledge about how the visualization is generally used. An example scenario is shown in Figure~\ref{fig:discreminate}: four visual objects ($O_{1\ldots 4}$), two of which are connected ($O_1$ and $O_3$), and one of which is highlighted ($O_3$), are shown on the screen. A gaze sample registers between $O_3$ and $O_4$. Intuitively, it is more likely that $O_3$ was viewed since it is highlighted. Moreover, if we knew that $O_1$ was viewed just before the current moment, this assumption becomes stronger, since users are more likely to look at connected elements together. 
+\subsubsection{Distance method for detecting visual object}
+We assume that if a visual object is seen then there must be many gaze samples closer to that visual object. We hypothesize the human eye uses different method of perceiving visual objects with different shapes. Human eye peripheral vision helps to register less points in the screen to view an object. Suppose we have $n$ visual objects in our model: $\{O_0, O_1, \ldots, O_i, \ldots, O_{n-1} \}$. For a gaze sample from the eye tracker we get the coordinates in screen space: $gaze_{screen}(gx_{screen}, gy_{screen})$. As the visual objects are in the model space, we transform the gaze sample in to the model space: $gaze_{model}(gx_{model}, gy_{model})$. We have to decide which object among ${O_i: 0 \geq i \geq n-1}$ was viewed based on the gaze sample $gaze_{model}(gx_{model}, gy_{model})$. The na{\i}ve approach is for each $O_i$, calculating the distance $d_i$ between $gaze_{model}$ and $O_i$. The calculation method for $d_i$ depends on the shape of the visual objects. If the visual object is a small circle or a dot then we can use the euclidean distance formula: $d_i =\sqrt{{(Ox_i-gx_{model})}^2+{(Oy_i-gy_{model})}^2}$. In our case the visual object was a rectangle. In case of the shape rectangle, $d_i =\{ \text{ minimum distance between the edges of the rectangle and } gaze_{model}\}$. We hypothesize calculating the distance from the gaze sample is not enough as human eye perceives a region centering on $gaze_{model}$ with the peripheral vision. We assume the region is a circle with radius $R$ and center at $gaze_{model}$.  Okoe et al.~\cite{okoe2014gaze} showed a method for calculating a gaze score for object $O_i$. Equation~\ref{eq:GS} is the formula of calculating gaze score for object $O_i$ at time $t$. 
+
+
+\subsubsection{Probabilistic aspect of object viewing score}
+
+Salvucci et al.~\cite{salvucci2000intelligent} presented ``intelligent gaze interpretation'' method for representing viewed object detection. In addition to the distance measure of the object, a probabilistic approach for quantifying each object is presented by them. In their method, each object $O_i$ has a general viewing probability $VP(O_i)$ and a transition probability from another object $O_j$: $T(O_i,O_j)$. Based on these probabilities the prediction score $ps$ is calculated. By combining the $ps$ and $gs$ , we calculate viewing score $vs$ for object $O_i$ at time $t$ in Equation~\ref{eq:VS}.
+
+We leverage Salvucci's paradigm of ``intelligent gaze interpretation''~\cite{salvucci2000intelligent} to increase the accuracy of pin-pointing which particular object is viewed when a gaze-sample is registered in the vicinity of multiple objects. We do this by predicting which of these objects is the most likely viewing target at that particular moment in time. We make such predictions based on the visualization's properties and knowledge about how the visualization is generally used. An example scenario is shown in Figure~\ref{fig:discreminate}: four visual objects ($O_{1\ldots 4}$), two of which are connected ($O_1$ and $O_3$), and one of which is highlighted ($O_3$), are shown on the screen. A gaze sample registers between $O_3$ and $O_4$. Intuitively, it is more likely that $O_3$ was viewed since it is highlighted. Moreover, if we knew that $O_1$ was viewed just before the current moment, this assumption becomes stronger, since users are more likely to look at connected elements together. 
 
 \begin{figure}[htb]
   \centering
@@ -39,9 +51,21 @@ Thinking of the previously viewed objects $O_1$ and $O_2$ as referees with varyi
 \caption{Viewed Object Detection Algorithm}
 \label{alg:ObjectDetection}
 \begin{algorithmic}[1]
+\State \textbf{Inputs: } 
+\Statex $n = $ Total objects
+\Statex $\{O_i: 0 \geq i \geq n-1\} = $ Visual object list 
+\Statex $R = $ Peripheral vision radius
+\Statex $ t = $ Current time
+\Statex $gaze_{screen}(gx_{screen}, gy_{screen}) = $ Gaze sample at time $t$
+\Statex $zoom = $ Current zoom level
+\State \textbf{Outputs:}
+\Statex $vs(t, O_i) = $ Viewing score of $O_i$ at time $t$
+\State \textbf{Initialization: }
+\Statex $gaze_{model}(gx_{model}, gy_{model}) \gets \text{transform}(gaze_{screen}, zoom)$
+\Statex
 \For{$i \gets 0 \text{ to } n-1$}
-	\State $t \gets CurrentTime()$
-	\State $gs(t, O_i) = 1 - \min{(1, (\frac{d}{R}))}$
+	\State $d_i = \text{distance}(O_i, gaze_{model})$
+	\State $gs(t, O_i) = 1 - \min{(1, (\frac{d_i}{R}))}$
 	\If{$ t = 0$}
 		\State $ps(t, O_i) = 1$
 		\State $vs(t, O_i) = gs(t,O_i)$
@@ -69,13 +93,15 @@ Thinking of the previously viewed objects $O_1$ and $O_2$ as referees with varyi
 \end{algorithm}
 
 We formalize the process of computing a viewing score $vs$ for object $O_i$ at time $t$  ($vs(t,O_i)$) with the following general formulas:
+
+
 \begin{equation}
 vs(t, O_i) = gs(t, O_i) \times ps(t, O_i)
 \label{eq:VS}
 \end{equation}
 
 \begin{equation}
-gs(t, O_i) = 1 - \min{(1, (\frac{d}{R}))}
+gs(t, O_i) = 1 - \min{(1, (\frac{d_i}{R}))}
 \label{eq:GS}
 \end{equation}
 
