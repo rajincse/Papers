@@ -120,16 +120,72 @@ We have use the previously described principles to instrument Doerk's interactiv
 
 To apply the previously described instrumentation method to this visualization, we had to define visual probabilities for objects, and transition probabilities between objects. One way to do this is by making informal assumptions about how the visualization may be directing users' visual patterns, a method employed by Salvucci~\cite{salvucci2000intelligent}. For instance, transitions between connected items may occur more often. It is reasonable to assume this, both because of the visual cue of a connecting line (i.e., users want to look at connected visuals together), but also because of the underlying data relation that the connection stands for (i.e., users want to look at connected data together). Also, transitions between objects of the same type, for instance from genre to genre, may be more dominant, especially in scanning processes. Finally, we can assume that elements that are hovered or highlighted are more likely to be viewed than those that are not, again, both because of a visual imperative (i.e., the eye is attracted to highlighted elements) and a task or data cue (i.e., the user already expressed interest in the data).
 
-A more principled way to determine typical viewing patterns and sequences in a specific visualization is to run a preliminary eye-tracking study. In our case, we were able to leverage data collected from a pilot study, in which we instrumented an initial version of our PivotPaths visualization and collected viewing scores that were computed using gaze-coordinates alone (i.e., without including prediction scores). Analyzing the resulting data by summarizing what objects were typically viewed before other objects confirmed the assumptions we made informally (Figure~\ref{fig:transitions}, top) (e.g., transitions between connected elements are between $1.5$ and $6$ times more likely than between unconnected elements). 
+A more principled way to determine typical viewing patterns and sequences in a specific visualization is to run a preliminary eye-tracking study. In our case, we were able to leverage data collected from a pilot study, in which we instrumented an initial version of our PivotPaths visualization and collected viewing scores that were computed using gaze-coordinates alone (i.e., without including prediction scores). Analyzing the resulting data by summarizing what objects were typically viewed before other objects confirmed the assumptions we made informally (Table~\ref{tab:Transition1}) (e.g., transitions between connected elements are between $1.5$ and $6$ times more likely than between unconnected elements). 
 
-Based on this information, we defined the transition and viewing probabilities as shown in Figure~\ref{fig:transitions}, bottom. These transition probabilities do not match directly the observed probabilities for the following reason. First, as can be seen in Figure~\ref{fig:pivotpaths}, movies, actors, and directors and genres occupy separate spaces. As such, it is unlikely that we will need to discriminate between a movie and an actor, or between a movie and a director. As such, we only care about how these probabilities compare to each other within the actor segment, the movie segment, and the director plus genre segment. Second, while we refer to the values in Figure~\ref{fig:transitions} as probabilities, they don't need to add to one because of the way we compute scores. 
+Based on this information, we defined the transition and viewing probabilities as shown in Table~\ref{tab:Transition2} and Table~\ref{tab:Transition3}. These transition probabilities do not match directly the observed probabilities for the following reason. First, as can be seen in Figure~\ref{fig:pivotpaths}, movies, actors, and directors and genres occupy separate spaces. As such, it is unlikely that we will need to discriminate between a movie and an actor, or between a movie and a director. As such, we only care about how these probabilities compare to each other within the actor segment, the movie segment, and the director plus genre segment. Second, while we refer to the values in Table~\ref{tab:Transition1}, Table~\ref{tab:Transition2} and Table~\ref{tab:Transition3} as probabilities, they don't need to add to one because of the way we compute scores. 
 
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=0.75\linewidth]{images/transitions.eps}
-  \caption{Transition and viewing probabilities in our instrumented visualization system (bottom two table) were informed by real patterns observed in a preliminary eye tracking study (top). }
-	\label{fig:transitions}
-\end{figure}
+%\begin{figure}[htb]
+  %\centering
+  %\includegraphics[width=0.75\linewidth]{images/transitions.eps}
+  %\caption{Transition and viewing probabilities in our instrumented visualization system (bottom two table) were informed by real patterns observed in a preliminary eye tracking study (top). }
+	%\label{fig:transitions}
+%\end{figure}
+
+
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{|l|c|}
+			\hline
+			 \multicolumn{2}{|c|}{Real Transition Probabilities ( Old Prototype)} \\ \hline
+			Movie $\rightarrow$ Movie & 0.77\\\hline
+			Movie $\rightarrow$ Unconnected Actor & 0.022\\\hline
+			Movie $\rightarrow$ Connected Actor & 0.148\\\hline
+			Movie $\rightarrow$ Unconnected Genre & 0.001\\\hline
+			Movie $\rightarrow$ Connected Genre & 0.019\\\hline
+			Movie $\rightarrow$ Unconnected Director & 0.016\\\hline
+			Movie $\rightarrow$ Connected Director & 0.024\\
+			\hline			
+		\end{tabular}
+	\caption{Real transition probabilities observed in a preliminary eye tracking study.}
+	\label{tab:Transition1}
+\end{table}
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{|l|c|}
+			\hline
+			 \multicolumn{2}{|c|}{Transition Probabilities} \\ \hline
+			Movie $\rightarrow$ Movie & 1\\\hline
+			Movie $\rightarrow$ Unconnected Actor & 0.2\\\hline
+			Movie $\rightarrow$ Connected Actor & 0.6\\\hline
+			Movie $\rightarrow$ Connected Actor, hover & 1\\\hline
+			Movie $\rightarrow$ Unconnected Genre & 0.1\\\hline
+			Movie $\rightarrow$ Connected Genre & 0.5\\\hline
+			Movie $\rightarrow$ Connected Genre, hover & 0.9\\\hline
+			Movie $\rightarrow$ Unconnected Director & 0.2\\\hline
+			Movie $\rightarrow$ Connected Director & 0.6\\\hline
+			Movie $\rightarrow$ Connected Director, hover & 1\\
+			\hline			
+		\end{tabular}
+	\caption{Transition probabilities in our instrumented visualization system informed by Table~\ref{tab:Transition1}.}
+	\label{tab:Transition2}
+\end{table}
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{|l|c|}
+			\hline
+			 \multicolumn{2}{|c|}{Visual Probabilities} \\ \hline
+				Object hovered & 1\\\hline
+				Object not hovered & 0.75\\
+			\hline			
+		\end{tabular}
+	\caption{Viewing probabilities in our instrumented visualization system informed by Table~\ref{tab:Transition1}.}
+	\label{tab:Transition3}
+\end{table}
+
+
 
 Finally, as part of instrumentation, our system collected application screen shots, mouse input events and states (e.g., cursor position, mouse press, mouse release), interactive events (e.g., hovering, zooming, panning), raw gaze samples captured at a rate of $60$Hz, and visual elements with non-zero viewing scores also captured a rate of $60$Hz, since new viewing scores are computed for every gaze sample. For each viewed element we recorded the type (i.e., movie, actor, director, genre), its gaze score ($gs$), it's prediction score ($ps$), and the aggregated viewing score ($vs$). All recorded data was time stamped. 
 
