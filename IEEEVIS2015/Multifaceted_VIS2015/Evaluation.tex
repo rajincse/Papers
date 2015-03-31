@@ -79,6 +79,11 @@ The data we collected allowed us to do this analysis for all three approaches 3.
 We show object viewing activity over time using a heatmap representation, by discretizing time and displaying it horizontally, and listing viewed objects vertically. The viewed objects listed vertically were colored based on their type (movie, actor, director, genre) and could be sorted based on either first time they were viewed, amount of viewing activity, or type. 
 Showing viewing data at multiple time scales requires a method of aggregating viewing scores collected every $15$ms into larger time intervals. While it may be interesting to explore the effects of different aggregation strategies, our current system only implemented one. We use Formula~\ref{eq:Aggregate} to compute the aggregated score of $O_i$ in time interval $T$. Intuitively, the formula averages all non-zero viewing scores collected in interval $T$, but also takes into account the duration of $T$. For instance, six high viewing scores recorded in a $100$ms time span are sufficient to yield a high aggregated score for that interval ( $\frac{100 \times 60 }{1000} = 6$), while for a $1000$ms interval we would require $60$ high viewing scores ( $\frac{1000 \times 60 }{1000} = 60$).
 
+\begin{equation}
+aggScore{i,T,} = \frac{\displaystyle\sum_{t \in T }{vs_{i,t}}}{\max (count(vs_{i,t} > 0 , t \in T),|T| \times \frac{60}{1000}) }
+\label{eq:Aggregate}
+\end{equation}
+
 The top of Figure~\ref{fig:heatmap} shows data for the first four tasks aggregated over all ten users. The four clusters noticeable in the heatmap provide a first indication that elements viewed by users are in tight correlation with the four tasks they had to do, which is in accordance with our hypothesis and expectation. However, the four different clusters appearing in the heatmap are not sufficiently telling, since the views involved in each task were distinct and showed different data. As such, even a random sampling of objects from these views could produce a similar high level clustering in the heatmap. 
 
 \begin{figure*}[htb]
