@@ -33,19 +33,14 @@ Unlike mouse input, eye-tracking can only indicate a small screen region that a 
 
 As such, we advocate for a fuzzy interpretation of gaze data and detecting likelihoods that objects are viewed rather than certainties. To this end, we can compute object gazes scores $gs$ that range between zero- the object is not viewed, and one- the object is certainly viewed as shown in Figure~\ref{fig:gazeScoreFig3} and Formula~\ref{eq:GS}. The region of radius $R$ used in the formula is analogue to the user's foveated region, and as such needs to be constant in screen space. Thus, if the view is zoomed in or out, $R$ needs to be scaled accordingly in model space to remain constant in screen space.  A more detailed discussion about choosing an appropriate $R$ is given in the discussion section [REMINDER]. Finally, we mention that similar approaches were used by Salvucci et al.~\cite{salvucci2000intelligent} and Okoe et al.~\cite{okoe2014gaze}.
 Finally, we note that the object scores ($gs$) do not directly equate to probabilities. The distinction is important because it implies that our implementation can detect two objects as being viewed simultaneously ($gs_1 = 1$ and $gs_2=1$). We think this is appropriate since a person can in fact visually register multiple objects at the same time, and in fact even think of them as a unit using the process of mental information chunking.
-\begin{figure}[htb]
-  \centering
-  \includegraphics[width=\linewidth]{images/gazeScoreFig3.eps}
-  \caption{Calculating a gaze score $gs$ for a given object and a gaze sample landing nearby, where $d$ is the distance from the object to the gaze sample, and $R$ is the radius of the user's foveated region. }
-	\label{fig:gazeScoreFig3}
-\end{figure}
+
 
 \subsubsection{An intelligent algorithm for viewed object detection in data visualization}
 \label{sec:MehthodsIntelligentAlgorithm}
 Salvucci and Anderson described the concept of ``intelligent gaze interpretation'' in the context of a gaze-activated interface ~\cite{salvucci2000intelligent}. Their method achieved better accuracy in detecting which interface control a user is gazing at, by integrating both the proximity of the gaze to the control, and the likelihood that the control would be the target of a gaze-interaction in the interfaces' current state and context of use. Formally, their algorithm identifies the most likely currently viewed item $i_{viewed}$ by solving 
 
 \begin{equation*}
-i_{best} = \displaystyle \argmax_{i\in I}[Pr(g|i)\cdot Pr(i)]
+i_{viewed} = \displaystyle \argmax_{i\in I}[Pr(g|i)\cdot Pr(i)]
 \end{equation*}
 
 , where $Pr(g|i)$ is the probability of producing a gaze at location $g$ given the intention of viewing item $i$, and $Pr(i)$ is the prior probability of an item $i$  being the target of a gaze-interaction. In Salvucci and Anderson's proof of concept implementation these prior probabilities were based on assumptions about how an interface might be used and were hardcoded into the system.  
@@ -56,6 +51,12 @@ We adapt Salvucci and Anderson's paradigm to increase the accuracy of determinin
 We illustrate this scenario in Figure~\ref{fig:discreminateFig4}(b): four visual objects ($O_{1\ldots 4}$), two of which are connected ($O_1$ and $O_3$), and one of which is highlighted ($O_3$), are shown on the screen. A new gaze sample registers between $O_3$ and $O_4$. Intuitively, it is more likely that $O_3$ was viewed since it is highlighted. Moreover, if we knew that $O_1$ was viewed just before the current moment, and, as described above we assume that users generally view neighboring nodes together, then this likelihood becomes even stronger.  
 Formally, we compute a viewing score $vs$ of object $i$ at time $t$ ($vs(i,t)$) by weighing the gaze score $gs(i,t)$ described in Section~\ref{sec:ProbabilisticObjectDetection} by a prediction score $ps(i,t)$ that object $i$ is a viewing target at time $t$ (Formula~\ref{eq:ps}). This prediction score is computed based on the likelihood that the object is viewed given the current state of the visualization (e.g., the object is highlighted), and the likelihood that it is viewed if some other specific object (e.g.,  a node's neighbor) was viewed just before it. Those two components are formalized by the  $\alpha$ score and $\beta$ score in Formula~\ref{eq:beta}.
 
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.5\linewidth]{images/gazeScoreFig3.eps}
+  \caption{Calculating a gaze score $gs$ for a given object and a gaze sample landing nearby, where $d$ is the distance from the object to the gaze sample, and $R$ is the radius of the user's foveated region. }
+	\label{fig:gazeScoreFig3}
+\end{figure}
 %Formula 1
 \begin{equation}
 gs_{i,t} = 1 - \min (1, (\frac{d}{R}))
@@ -162,151 +163,6 @@ A more principled way to determine typical viewing patterns and sequences in a s
 	\label{tab:Transition2}
 \end{table}
 
-\begin{table}[htbp]
-	\label{tab:TransitionFromMovie}
-	\centering
-		\begin{tabular}{|c|c|c|c|c|}
-			\hline
-			 \multicolumn{2}{ |l| }{Movie to}  &\shortstack{	No. of  \\ Transitions} 	&\shortstack{transition \\ prob.}	&\shortstack{	adjusted \\ transition \\ prob.}\\ \hline
-      \multirow{4}{*}{Actor}	&-	&793	&0.076	&0.004	\\	\cline{2-5}
-															&H	&147	&0.014	&0.032	\\	\cline{2-5}
-															&C	&228	&0.022	&0.019	\\	\cline{2-5}
-															&CH	&616	&0.059	&0.089	\\	\hline
-				\multirow{2}{*}{Movie}	&-	&5727	&0.548	&0.131	\\	\cline{2-5}
-																&H	&1798	&0.172	&0.368	\\	\hline
-				\multirow{4}{*}{Director}	&-	&304	&0.029	&0.01	\\	\cline{2-5}
-																	&H	&37	&0.004	&0.051	\\	\cline{2-5}
-																	&C	&51	&0.005	&0.027	\\	\cline{2-5}
-																	&CH	&174	&0.017	&0.135	\\	\hline
-				\multirow{4}{*}{Genre}	&-	&193	&0.018	&0.005	\\	\cline{2-5}
-																&H	&40	&0.004	&0.027	\\	\cline{2-5}
-																&C	&69	&0.007	&0.015	\\	\cline{2-5}
-																&CH	&282	&0.027	&0.087	\\	\hline
-					\multicolumn{2}{ |l| }{Total}	&10459	&1	&1	\\		
-				\hline
-		\end{tabular}		
-		\caption*{(a)Transitions from Movies}\smallskip
-		
-		\begin{tabular}{|c|c|c|c|c|}
-			\hline
-			 \multicolumn{2}{ |l| }{Actor to}  &\shortstack{	No. of  \\ Transitions} 	&\shortstack{transition \\ prob.}	&\shortstack{	adjusted \\ transition \\ prob.}\\ \hline
-						 \multirow{2}{*}{Actor}	&-	&4711	&0.533	&0.032	\\	\cline{2-5}
-																		&H	&2164	&0.245	&0.372	\\	\hline
-							\multirow{4}{*}{Movie}	&-	&839	&0.095	&0.031	\\	\cline{2-5}
-																			&H	&213	&0.024	&0.113	\\	\cline{2-5}
-																			&C	&386	&0.044	&0.157	\\	\cline{2-5}
-																			&CH	&352	&0.04	&0.236	\\	\hline
-							\multirow{2}{*}{Director}	&-	&68	&0.008	&0.003	\\	\cline{2-5}
-																				&H	&29	&0.003	&0.034	\\	\hline
-							\multirow{2}{*}{Genre}	&-	&43	&0.005	&0.002	\\	\cline{2-5}
-																			&H	&39	&0.004	&0.02	\\	\hline
-								\multicolumn{2}{ |l| }{Total}	&8844	&1	&1	\\	
-	\hline
-
-		\end{tabular}
-	\caption*{(b)Transitions from Actors}\smallskip
-	\begin{tabular}{|c|c|c|c|c|}
-			\hline
-			 \multicolumn{2}{ |l| }{Director to}  &\shortstack{	No. of  \\ Transitions} 	&\shortstack{transition \\ prob.}	&\shortstack{	adjusted \\ transition \\ prob.}\\ \hline
-       \multirow{2}{*}{Actor}	&-	&71	&0.042	&0.001	\\	\cline{2-5}
-															&H	&24	&0.014	&0.011	\\	\hline
-			\multirow{4}{*}{Movie}	&-	&271	&0.162	&0.031	\\	\cline{2-5}
-														&H	&55	&0.033	&0.121	\\	\cline{2-5}
-														&C	&130	&0.077	&0.108	\\	\cline{2-5}
-														&CH	&93	&0.055	&0.139	\\	\hline
-			\multirow{2}{*}{Director}	&-	&384	&0.229	&0.054	\\	\cline{2-5}
-																&H	&160	&0.095	&0.299	\\	\hline
-			\multirow{2}{*}{Genre}	&-	&256	&0.153	&0.026	\\	\cline{2-5}
-															&H	&234	&0.139	&0.211	\\	\hline
-				\multicolumn{2}{ |l| }{Total}	&1678	&1	&1	\\	
-				\hline
-		\end{tabular}
-		\caption*{(c)Transitions from Director}\smallskip
-		\begin{tabular}{|c|c|c|c|c|}
-			\hline
-			 \multicolumn{2}{ |l| }{Genre to}  &\shortstack{	No. of  \\ Transitions} 	&\shortstack{transition \\ prob.}	&\shortstack{	adjusted \\ transition \\ prob.}\\ \hline
-       \multirow{2}{*}{Actor}	&-	&61	&0.03	&0	\\	\cline{2-5}
-															&H	&32	&0.016	&0.011	\\	\hline
-				\multirow{4}{*}{Movie}	&-	&229	&0.113	&0.012	\\	\cline{2-5}
-																&H	&46	&0.023	&0.077	\\	\cline{2-5}
-																&C	&172	&0.085	&0.024	\\	\cline{2-5}
-																&CH	&138	&0.068	&0.135	\\	\hline
-				\multirow{2}{*}{Director}	&-	&282	&0.139	&0.015	\\	\cline{2-5}
-																	&H	&195	&0.096	&0.383	\\	\hline
-				\multirow{2}{*}{Genre}	&-	&348	&0.172	&0.013	\\	\cline{2-5}
-																&H	&526	&0.259	&0.328	\\	\hline
-					\multicolumn{2}{ |l| }{Total}	&2029	&1	&1	\\	
-			\hline
-		\end{tabular}
-		\caption*{(d)Transitions from Genres}\smallskip
-	\captionof{table}{Transitions from Movies}
-\end{table}
 
 
-%\begin{table}[htbp]
-	%\centering
-		%\begin{tabular}{|c|c|c|c|c|}
-			%\hline
-			 %\multicolumn{2}{ |l| }{Actor to}  &\shortstack{	No. of  \\ Transitions} 	&\shortstack{transition \\ prob.}	&\shortstack{	adjusted \\ transition \\ prob.}\\ \hline
-       %\multirow{2}{*}{Actor}	&-	&1905	&0.515	&0.033	\\	\cline{2-5}
-															%&H	&890	&0.24	&0.369	\\	\hline
-				%\multirow{4}{*}{Movie}	&-	&392	&0.106	&0.037	\\	\cline{2-5}
-															%&H	&125	&0.034	&0.15	\\	\cline{2-5}
-															%&C	&152	&0.041	&0.158	\\	\cline{2-5}
-															%&CH	&153	&0.041	&0.199	\\	\hline
-				%\multirow{2}{*}{Director}	&-	&33	&0.009	&0.004	\\	\cline{2-5}
-															%&H	&8	&0.002	&0.022	\\	\hline
-				%\multirow{2}{*}{Genre}	&-	&24	&0.006	&0.002	\\	\cline{2-5}
-															%&H	&20	&0.005	&0.025	\\	\hline
-					%\multicolumn{2}{ |l| }{Total}	&3702	&1	&1	\\	
-	%\hline
-		%\end{tabular}
-	%\caption{Transitions from Actors}
-	%\label{tab:TransitionFromActor}
-%\end{table}
-
-%\begin{table}[htbp]
-	%\centering
-		%\begin{tabular}{|c|c|c|c|c|}
-			%\hline
-			 %\multicolumn{2}{ |l| }{Director to}  &\shortstack{	No. of  \\ Transitions} 	&\shortstack{transition \\ prob.}	&\shortstack{	adjusted \\ transition \\ prob.}\\ \hline
-       %\multirow{2}{*}{Actor}	&-	&25	&0.037	&0.001	\\	\cline{2-5}
-															%&H	&10	&0.015	&0.01	\\	\hline
-				%\multirow{4}{*}{Movie}	&-	&106	&0.156	&0.031	\\	\cline{2-5}
-																%&H	&23	&0.034	&0.132	\\	\cline{2-5}
-																%&C	&44	&0.065	&0.086	\\	\cline{2-5}
-																%&CH	&25	&0.037	&0.144	\\	\hline
-				%\multirow{2}{*}{Director}	&-	&166	&0.245	&0.06	\\	\cline{2-5}
-																	%&H	&65	&0.096	&0.311	\\	\hline
-				%\multirow{2}{*}{Genre}	&-	&117	&0.173	&0.032	\\	\cline{2-5}
-																%&H	&97	&0.143	&0.193	\\ \hline
-																%\multicolumn{2}{ |l| }{Total}	&678	&1	&1	\\
-%
-				 %\hline
-		%\end{tabular}
-	%\caption{Transitions from Directors}
-	%\label{tab:TransitionFromDirector}
-%\end{table}
-
-%\begin{table}[htbp]
-	%\centering
-		%\begin{tabular}{|c|c|c|c|c|}
-			%\hline
-			 %\multicolumn{2}{ |l| }{Genre to}  &\shortstack{	No. of  \\ Transitions} 	&\shortstack{transition \\ prob.}	&\shortstack{	adjusted \\ transition \\ prob.}\\ \hline
-       %\multirow{2}{*}{Actor}	&-	&41	&0.048	&0.001	\\	\cline{2-5}
-															%&H	&10	&0.012	&0.009	\\	\hline
-				%\multirow{4}{*}{Movie}	&-	&111	&0.129	&0.014	\\	\cline{2-5}
-																%&H	&18	&0.021	&0.065	\\	\cline{2-5}
-																%&C	&76	&0.088	&0.027	\\	\cline{2-5}
-																%&CH	&62	&0.072	&0.137	\\	\hline
-				%\multirow{2}{*}{Director}	&-	&115	&0.134	&0.016	\\	\cline{2-5}
-																	%&H	&77	&0.09	&0.413	\\	\hline
-				%\multirow{2}{*}{Genre}	&-	&151	&0.176	&0.014	\\	\cline{2-5}
-																%&H	&199	&0.231	&0.304	\\	\cline{2-5}
-					%\multicolumn{2}{ |l| }{Total}	&860	&1	&1	\\	
-	%\hline
-		%\end{tabular}
-	%\caption{Transitions From Genres}
-	%\label{tab:TransitionFromGenre}
-%\end{table}
 Finally, as part of instrumentation, our system collected application screen shots, interactive events (e.g., hovering, zooming, panning), raw gaze samples captured at a rate of $60$Hz, and visual elements with non-zero viewing scores computed at the same rate of $60$Hz. For each viewed element we recorded the type (i.e., movie, actor, director, genre), its label, its gaze score ($gs$), its prediction score ($ps$), and the aggregated viewing score ($vs$). All recorded data was time stamped. 
