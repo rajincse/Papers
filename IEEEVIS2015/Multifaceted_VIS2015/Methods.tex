@@ -14,6 +14,7 @@ Next, we describe an effective algorithm for mapping gaze samples to objects tha
 We will describe our algorithm incrementally in the following three sections, starting from a na\"{\i}ve approach that simply draws AOIs dynamically around visualization objects, to an `intelligent' one that detects objects more accurately by using knowledge about how specific visualizations may be typically used.  A comparative evaluation of these three object detection algorithms is presented in Section~\ref{sec:EvalResults}.
 
 \subsection{Algorithms for viewed object detection in data visualizations}
+\label{sec:MethodsAlgorithmsViewedObjectDetection}
 \subsubsection{AOI-based viewed object detection}
 \label{sec:AOIBasedViewedObjectDetection}
 A na\"{\i}ve viewed object detection approach is to treat object shapes as dynamic AOIs and determine that the viewed object is that with the most recent fixation landing in its AOI. This is a natural first try at detecting viewed visual objects from gaze data, given that manually drawn AOIs are typically used in the same manner in offline eye-tracking data analysis, and that the similar concept of objects of interest (OOIs) has been proposed already by Stellmach et al.~\cite{stellmach20103d} for generative 3D content.
