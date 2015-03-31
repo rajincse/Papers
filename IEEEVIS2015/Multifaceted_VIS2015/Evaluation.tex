@@ -95,24 +95,6 @@ The transition counts between different types of objects are shown in the third 
 However, these numbers could be slightly misleading because they do not take into account the number of objects in each category (e.g., actor, movie, unconnected, connected, highlighted) that a  user could transition to. For example, when transitioning their gaze from a movie to an actor, there are typically many more unconnected and unhighlighted actors to choose from, then there are actors that are either connected to the movie and/or highlighted. As such, it is natural that raw transition counts and probabilities to unconnected and unhighlited  actors should be higher than for other actor transitions. In more concrete example, assume a movie is connected to two actors and there are another eight unconnected items in the view. If there was no transitioning preference for either connected or unconnected items, the probability to jump to a connected item would be 0.2 and 0.8 to jump to an unconnected item. If however, we observe that users jump to one of the two connected items in 50\% of cases, and to unconnected items also in 50\% of cases, then there is clearly a significant biases towards viewing connected items together.
 
 
-\begin{table}[htbp]
-	\centering
-		\begin{tabular}{|l|c|}
-			\hline
-			 \multicolumn{2}{|c|}{Assumed visual and transition weights} \\ \hline
-			Movie to unconnected actor & 0.3\\\hline
-			Movie to connected actor & 1\\\hline
-			Movie to unconnected genre & 0.2\\\hline
-			Movie to connected genre & 0.8\\\hline
-			Movie to unconnected director & 0.3\\\hline
-			Movie to connected director & 1\\\hline
-			Any object hovered & 1\\\hline
-			Any object not hovered & 0.5\\
-			\hline			
-		\end{tabular}
-	\caption{Transition probabilities in our instrumented visualization (assumed).}
-	\label{tab:Transition2}
-\end{table}
 
 \begin{table}[htbp]	
 	\centering
