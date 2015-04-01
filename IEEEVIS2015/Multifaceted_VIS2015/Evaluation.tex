@@ -40,7 +40,7 @@ Moreover, the data we collected allowed us to do this analysis for all three app
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[width=0.5\linewidth]{images/algosComparison.eps}
+  \includegraphics[width=0.6\linewidth]{images/algosComparison.eps}
   \caption{Comparison of different algorithms for analyzing eye tracking data.}
 	\label{fig:quantitative}
 \end{figure}
@@ -49,11 +49,17 @@ Moreover, the data we collected allowed us to do this analysis for all three app
 \subsubsection{Data collected automatically is relevant and useful}
 \label{sec:EvalDataCollected}
 We use two visual representations and analyses and show that data collected automatically using our approach are tightly correlated with the tasks that users had to do. Moreover, we show that such analyses can yield insights into how users perform tasks in an instrumented visualization. We chose this valuation method because it essentially provides evidence that the automatic instrumentation approach can be used to solve the inverse problem: an observer or analyst who is unfamiliar to a subject's intentions can determine what these are by looking at the subject's visual interest in particular data. 
+
 \textbf{First}, we created heatmap representations from our collected data (Figure 7). We listed viewed objects vertically and discretized viewing scores, using averaging, into $500ms$ intervals, which we arranged horizontally. Thus, time is shown horizontally, viewed objects vertically, and intensity of heatmap cells indicate the degree to which an object was viewed at a given moment in time. The viewed objects listed vertically were colored based on their type (movie, actor, director, genre) and could be sorted by either first time they were viewed, amount of viewing activity, or type. 
+
 Figure 7, left, shows the results for a subject performing the second instance of task 1: finding commonalities between two Indiana Jones movies (see section 4.1). The heatmap is ordered by the amount of visual attention that the subject dedicated to each element in the visualization. We notice that elements at the top of the heatmap are tightly connected to the subject's  task.   
+
 Figure 7, right, shows a subject's results for one of the instances of task 3, which was significantly less structured than task 1 (see section 4.1). This heatmap  was sorted by the first time each object was viewed and shows how subjects were moving through different aspects of the analyses, and revisiting them at different moments in time. 
+
 \textbf{Second}, we formalized the relevance of each visual item to a particular task and plot this relevance against the amount of interest that each item attracted, as shown in Figure 6. These plots illustrate the degree to which task relevance impacts the amount that each visual item is tended to by subjects, and aimed to demonstrate that our instrumentation captures relevant data.  
+
 We formalize the relevance of a visual item to a task, as the network minimum distance between that item and any item mentioned in the task description.  This definition is not complete as items might be relevant to a task even though they are not directly mentioned in the description.  For instance, items that eventually constitute a subject's answer will elicit more of the subject's attention. Moreover, this definition is particular to the visualization we instrumented.
+
 A few insights can be drawn from analyzing these images. First, even though many items were shown to subjects during their tasks, only a few were viewed for significant periods of time, and many were not viewed at all. In fact, the interest in a particular item drops exponentially with that item's relevance to the task, which aligns with knowledge that people's perception is goal-driven.  Second, the types of data that users view more are correlated to each task particularities. For example, task 3 involved movie recommendations and Figure~\ref{fig:RelevanceDiagram}(c) illustrates that genres and directors were viewed significantly more than in task 4, which involved determining the identify of a group of actors. 
 
 
@@ -84,7 +90,7 @@ A few insights can be drawn from analyzing these images. First, even though many
 
 
 \subsubsection{Assumptions about viewing transition patterns hold}
-We analyzed common viewing-transition patterns in the data we collected. Examples include how often our subjects change views from a genre to an un-highlighted item versus to a highlighted one, or how often subjects transition between connected items and unconnected items. We found that the assumptions described in section 3, that users show a preference to transition their view to connected or highlighted items, holds. The data is summarized in the last columns  (adjusted transitions) of the panels in Table~\ref{tab:TransitionFromMovie}. 
+We analyzed common viewing-transition patterns in the data we collected. Examples include how often our subjects change views from a genre to an un-highlighted item versus to a highlighted one, or how often subjects transition between connected items and unconnected items. We found that the assumptions described in section 3, that users show a preference to transition their view to connected or highlighted items, holds. The data is summarized in the last columns  (adjusted transitions) of the panels in Table~\ref{tab:TransitionFromMovie}.
 
 To this end, we first discarded the prediction component from our collected data, since the prediction represents the assumption we try to test, and would thus bias the data. We counted viewing transitions between all types of objects to all other types of objects, and we separated transitions to connected objects and to highlighted objects from all other ones, as seen in the first columns in Table~\ref{tab:TransitionFromMovie}.  For example, after viewing a movie, a user could view either a director, or an actor, or a genre, each of which can be either connected or unconnected to the movie, and highlighted or not. A subject could also transition between two movies, and, since movies are not connected to each other in our visualization, the only options are to view a highlighted or un-highlighted movie.  We note that we skipped transitions to or from empty space.  
 
