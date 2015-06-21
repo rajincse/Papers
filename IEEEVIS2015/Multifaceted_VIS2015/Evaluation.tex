@@ -121,82 +121,82 @@ A quick inspection of the contents of Table~\ref{tab:TransitionFromMovie} will s
 
 \begin{table}[htbp]	
 	\centering
-		\begin{tabular}{|c|c|c|c|c|}
+		\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
-			 \multicolumn{2}{ |c| }{Movie to}  &\shortstack{No. of\\transitions} 	&\shortstack{ Raw\\transition\\probability }	&\shortstack{	 Real\\transition\\probability}\\ \hline
-      \multirow{4}{*}{Actor}	&-	&793	&0.076	&0.004	\\	\cline{2-5}
-															&H	&147	&0.014	&0.032	\\	\cline{2-5}
-															&C	&228	&0.022	&0.019	\\	\cline{2-5}
-															&CH	&616	&0.059	&0.089	\\	\hline
-				\multirow{2}{*}{Movie}	&-	&5727	&0.548	&0.131	\\	\cline{2-5}
-																&H	&1798	&0.172	&0.368	\\	\hline
-				\multirow{4}{*}{Director}	&-	&304	&0.029	&0.01	\\	\cline{2-5}
-																	&H	&37	&0.004	&0.051	\\	\cline{2-5}
-																	&C	&51	&0.005	&0.027	\\	\cline{2-5}
-																	&CH	&174	&0.017	&0.135	\\	\hline
-				\multirow{4}{*}{Genre}	&-	&193	&0.018	&0.005	\\	\cline{2-5}
-																&H	&40	&0.004	&0.027	\\	\cline{2-5}
-																&C	&69	&0.007	&0.015	\\	\cline{2-5}
-																&CH	&282	&0.027	&0.087	\\	\hline
-					\multicolumn{2}{ |c| }{Total}	&10459	&1	&1	\\		
+			 \multicolumn{2}{ |c| }{Movie to}  &\shortstack{No. of\\transitions} 	&\shortstack{ Observed \\transition\\probability }	&\shortstack{	 Unbiased\\transition\\probability} & \shortstack{Ratio \\$\frac{\text{Observed}}{\text{Unbiased}}$}\\ \hline
+      \multirow{4}{*}{Actor}	&-	&793	&0.076	&0.004& 19	\\	\cline{2-6}
+															&H	&147	&0.014	&0.032	&0.44	\\	\cline{2-6}
+															&C	&228	&0.022	&0.019	&1.16	\\	\cline{2-6}
+															&CH	&616	&0.059	&0.089	&0.66	\\	\hline
+				\multirow{2}{*}{Movie}	&-	&5727	&0.548	&0.131	&4.18	\\	\cline{2-6}
+																&H	&1798	&0.172	&0.368	&0.47	\\	\hline
+				\multirow{4}{*}{Director}	&-	&304	&0.029	&0.01	&2.9	\\	\cline{2-6}
+																	&H	&37	&0.004	&0.051	&0.08	\\	\cline{2-6}
+																	&C	&51	&0.005	&0.027	&0.19	\\	\cline{2-6}
+																	&CH	&174	&0.017	&0.135	&0.13	\\	\hline
+				\multirow{4}{*}{Genre}	&-	&193	&0.018	&0.005	&3.6	\\	\cline{2-6}
+															&H	&40	&0.004	&0.027	&0.15	\\	\cline{2-6}
+															&C	&69	&0.007	&0.015	&0.47	\\	\cline{2-6}
+															&CH	&282	&0.027	&0.087	&0.31	\\	\hline
+					\multicolumn{2}{ |c| }{Total}	&10459	&1	&1	&1	\\
 				\hline
 		\end{tabular}		
 		%\caption*{(a)Transitions from Movies}
 		\smallskip
 		
-		\begin{tabular}{|c|c|c|c|c|}
+		\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
-			 \multicolumn{2}{ |c| }{Actor to}   &\shortstack{No. of\\transitions} 	&\shortstack{ Raw\\transition\\probability }	&\shortstack{	 Real\\transition\\probability}\\ \hline
-						 \multirow{2}{*}{Actor}	&-	&4711	&0.533	&0.032	\\	\cline{2-5}
-																		&H	&2164	&0.245	&0.372	\\	\hline
-							\multirow{4}{*}{Movie}	&-	&839	&0.095	&0.031	\\	\cline{2-5}
-																			&H	&213	&0.024	&0.113	\\	\cline{2-5}
-																			&C	&386	&0.044	&0.157	\\	\cline{2-5}
-																			&CH	&352	&0.04	&0.236	\\	\hline
-							\multirow{2}{*}{Director}	&-	&68	&0.008	&0.003	\\	\cline{2-5}
-																				&H	&29	&0.003	&0.034	\\	\hline
-							\multirow{2}{*}{Genre}	&-	&43	&0.005	&0.002	\\	\cline{2-5}
-																			&H	&39	&0.004	&0.02	\\	\hline
-								\multicolumn{2}{ |c| }{Total}	&8844	&1	&1	\\	
+			 \multicolumn{2}{ |c| }{Actor to}    &\shortstack{No. of\\transitions} 	&\shortstack{ Observed \\transition\\probability }	&\shortstack{	 Unbiased\\transition\\probability} & \shortstack{Ratio \\$\frac{\text{Observed}}{\text{Unbiased}}$}\\ \hline
+						 \multirow{2}{*}{Actor}	&-	&4711	&0.533	&0.032	&16.66	\\	\cline{2-6}
+																		&H	&2164	&0.245	&0.372	&0.66	\\	\hline
+							\multirow{4}{*}{Movie}	&-	&839	&0.095	&0.031	&3.06	\\	\cline{2-6}
+																			&H	&213	&0.024	&0.113	&0.21	\\	\cline{2-6}
+																			&C	&386	&0.044	&0.157	&0.28	\\	\cline{2-6}
+																			&CH	&352	&0.04	&0.236	&0.17	\\	\hline
+							\multirow{2}{*}{Director}	&-	&68	&0.008	&0.003	&2.67	\\	\cline{2-6}
+																				&H	&29	&0.003	&0.034	&0.09	\\	\hline
+							\multirow{2}{*}{Genre}	&-	&43	&0.005	&0.002	&2.5	\\	\cline{2-6}
+																			&H	&39	&0.004	&0.02	&0.2	\\	\hline
+								\multicolumn{2}{ |c| }{Total}&8844	&1	&1	&1	\\
 	\hline
 
 		\end{tabular}
 	%\caption*{(b)Transitions from Actors}
 	\smallskip
 	
-	\begin{tabular}{|c|c|c|c|c|}
+	\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
-			 \multicolumn{2}{ |c| }{Director to}   &\shortstack{No. of\\transitions} 	&\shortstack{ Raw\\transition\\probability }	&\shortstack{	 Real\\transition\\probability}\\ \hline
-       \multirow{2}{*}{Actor}	&-	&71	&0.042	&0.001	\\	\cline{2-5}
-															&H	&24	&0.014	&0.011	\\	\hline
-			\multirow{4}{*}{Movie}	&-	&271	&0.162	&0.031	\\	\cline{2-5}
-														&H	&55	&0.033	&0.121	\\	\cline{2-5}
-														&C	&130	&0.077	&0.108	\\	\cline{2-5}
-														&CH	&93	&0.055	&0.139	\\	\hline
-			\multirow{2}{*}{Director}	&-	&384	&0.229	&0.054	\\	\cline{2-5}
-																&H	&160	&0.095	&0.299	\\	\hline
-			\multirow{2}{*}{Genre}	&-	&256	&0.153	&0.026	\\	\cline{2-5}
-															&H	&234	&0.139	&0.211	\\	\hline
-				\multicolumn{2}{ |c| }{Total}	&1678	&1	&1	\\	
+			 \multicolumn{2}{ |c| }{Director to}   &\shortstack{No. of\\transitions} 	&\shortstack{ Observed \\transition\\probability }	&\shortstack{	 Unbiased\\transition\\probability} & \shortstack{Ratio \\$\frac{\text{Observed}}{\text{Unbiased}}$}\\ \hline
+       \multirow{2}{*}{Actor}	&-	&71	&0.042	&0.001	&42	\\	\cline{2-6}
+															&H	&24	&0.014	&0.011	&1.27	\\	\hline
+			\multirow{4}{*}{Movie}	&-	&271	&0.162	&0.031	&5.23	\\	\cline{2-6}
+															&H	&55	&0.033	&0.121	&0.27	\\	\cline{2-6}
+															&C	&130	&0.077	&0.108	&0.71	\\	\cline{2-6}
+															&CH	&93	&0.055	&0.139	&0.4	\\	\hline
+			\multirow{2}{*}{Director}	&-	&384	&0.229	&0.054	&4.24	\\	\cline{2-6}
+																&H	&160	&0.095	&0.299	&0.32	\\	\hline
+			\multirow{2}{*}{Genre}	&-	&256	&0.153	&0.026	&5.88	\\	\cline{2-6}
+															&H	&234	&0.139	&0.211	&0.66	\\	\hline
+				\multicolumn{2}{ |c| }{Total}	&1678	&1	&1	&1	\\
 				\hline
 		\end{tabular}
 		%\caption*{(c)Transitions from Director}
 		\smallskip
 		
-		\begin{tabular}{|c|c|c|c|c|}
+		\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
-			 \multicolumn{2}{ |c| }{Genre to}   &\shortstack{No. of\\transitions} 	&\shortstack{ Raw\\transition\\probability }	&\shortstack{	 Real\\transition\\probability}\\ \hline
-       \multirow{2}{*}{Actor}	&-	&61	&0.03	&0	\\	\cline{2-5}
-															&H	&32	&0.016	&0.011	\\	\hline
-				\multirow{4}{*}{Movie}	&-	&229	&0.113	&0.012	\\	\cline{2-5}
-																&H	&46	&0.023	&0.077	\\	\cline{2-5}
-																&C	&172	&0.085	&0.024	\\	\cline{2-5}
-																&CH	&138	&0.068	&0.135	\\	\hline
-				\multirow{2}{*}{Director}	&-	&282	&0.139	&0.015	\\	\cline{2-5}
-																	&H	&195	&0.096	&0.383	\\	\hline
-				\multirow{2}{*}{Genre}	&-	&348	&0.172	&0.013	\\	\cline{2-5}
-																&H	&526	&0.259	&0.328	\\	\hline
-					\multicolumn{2}{ |c| }{Total}	&2029	&1	&1	\\	
+			 \multicolumn{2}{ |c| }{Genre to}   &\shortstack{No. of\\transitions} 	&\shortstack{ Observed \\transition\\probability }	&\shortstack{	 Unbiased\\transition\\probability} & \shortstack{Ratio \\$\frac{\text{Observed}}{\text{Unbiased}}$}\\ \hline
+       \multirow{2}{*}{Actor}	&-	&61	&0.03	&0.0005	&60	\\	\cline{2-6}
+															&H	&32	&0.016	&0.011	&1.45	\\	\hline
+				\multirow{4}{*}{Movie}	&-	&229	&0.113	&0.012	&9.42	\\	\cline{2-6}
+																&H	&46	&0.023	&0.077	&0.3	\\	\cline{2-6}
+																&C	&172	&0.085	&0.024	&3.54	\\	\cline{2-6}
+																&CH	&138	&0.068	&0.135	&0.5	\\	\hline
+				\multirow{2}{*}{Director}	&-	&282	&0.139	&0.015	&9.27	\\	\cline{2-6}
+																	&H	&195	&0.096	&0.383	&0.25	\\	\hline
+				\multirow{2}{*}{Genre}	&-	&348	&0.172	&0.013	&13.23	\\	\cline{2-6}
+																&H	&526	&0.259	&0.328	&0.79	\\	\hline
+					\multicolumn{2}{ |c| }{Total}	&2029	&1	&1	&1	\\
 			\hline
 		\end{tabular}
 		%\caption*{(d)Transitions from Genres}\smallskip
