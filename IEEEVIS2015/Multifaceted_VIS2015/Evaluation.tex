@@ -88,6 +88,7 @@ Figure~\ref{fig:RelevanceDiagram} facilitates several insights. First, even thou
 
 \begin{figure}[!htb]
   \centering
+	\includegraphics[width=0.45\linewidth]{images/Legends.eps}
   \includegraphics[width=0.9\linewidth]{images/RelevanceDiagramTask1.eps}
 	
 	\includegraphics[width=0.61\linewidth]{images/RelevanceDiagramTask2.eps}
@@ -95,6 +96,7 @@ Figure~\ref{fig:RelevanceDiagram} facilitates several insights. First, even thou
 	\includegraphics[width=0.71\linewidth]{images/RelevanceDiagramTask3.eps}
 	
 	\includegraphics[width=\linewidth]{images/RelevanceDiagramTask4.eps}
+	\includegraphics[width=0.45\linewidth]{images/Legends.eps}
 	
   \captionof{figure}{Users' interest in data objects, in relation to each objects' relevance to a task, for twelve tasks of four types. Each individual task is plotted in its type's corresponding chart as a subdivision across multiple relevance categories. Relevance was computed as described in Section~\ref{sec:EvalDataCollected}, and plotted for all objects that were visible to subjects during each task. The average interest in objects with the same task relevance are linked by separate polylines for each individual task; errors bars extend from the averages by one standard error.}
 	\label{fig:RelevanceDiagram}
@@ -105,21 +107,20 @@ Figure~\ref{fig:RelevanceDiagram} facilitates several insights. First, even thou
 		\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
 			 \multicolumn{2}{ |c| }{Movie to}  &\shortstack{No. of\\transitions} 	&\shortstack{ Observed \\transition\\probability }	&\shortstack{	 Unbiased\\transition\\probability} & \shortstack{Ratio \\$\frac{\text{Observed}}{\text{Unbiased}}$}\\ \hline
-      \multirow{4}{*}{Actor}	&-	&793	&0.076	&0.004& 19	\\	\cline{2-6}
-															&H	&147	&0.014	&0.032	&0.44	\\	\cline{2-6}
-															&C	&228	&0.022	&0.019	&1.16	\\	\cline{2-6}
-															&CH	&616	&0.059	&0.089	&0.66	\\	\hline
-				\multirow{2}{*}{Movie}	&-	&5727	&0.548	&0.131	&4.18	\\	\cline{2-6}
-																&H	&1798	&0.172	&0.368	&0.47	\\	\hline
-				\multirow{4}{*}{Director}	&-	&304	&0.029	&0.01	&2.9	\\	\cline{2-6}
-																	&H	&37	&0.004	&0.051	&0.08	\\	\cline{2-6}
-																	&C	&51	&0.005	&0.027	&0.19	\\	\cline{2-6}
-																	&CH	&174	&0.017	&0.135	&0.13	\\	\hline
-				\multirow{4}{*}{Genre}	&-	&193	&0.018	&0.005	&3.6	\\	\cline{2-6}
-															&H	&40	&0.004	&0.027	&0.15	\\	\cline{2-6}
-															&C	&69	&0.007	&0.015	&0.47	\\	\cline{2-6}
-															&CH	&282	&0.027	&0.087	&0.31	\\	\hline
-					\multicolumn{2}{ |c| }{Total}	&10459	&1	&1	&1	\\
+      \multirow{4}{*}{Actor}	&-	&793	&0.445	&0.898	&0.495	\\	\cline{2-6}
+															&H	&147	&0.082	&0.02	&4.081	\\	\cline{2-6}
+															&C	&228	&0.128	&0.052	&2.473	\\	\cline{2-6}
+															&CH	&616	&0.345	&0.03	&11.484	\\	\hline
+				\multirow{2}{*}{Movie}	&-	&5727	&0.761	&0.899	&0.846	\\	\cline{2-6}
+																&H	&1798	&0.239	&0.101	&2.376	\\	\hline
+				\multirow{4}{*}{Director}	&-	&304	&0.537	&0.887	&0.606	\\	\cline{2-6}
+																	&H	&37	&0.065	&0.021	&3.088	\\	\cline{2-6}
+																	&C	&51	&0.09	&0.055	&1.647	\\	\cline{2-6}
+																	&CH	&174	&0.307	&0.038	&8.176	\\	\hline
+				\multirow{4}{*}{Genre}	&-	&193	&0.33	&0.792	&0.417	\\	\cline{2-6}
+																&H	&40	&0.068	&0.033	&2.045	\\	\cline{2-6}
+																&C	&69	&0.118	&0.102	&1.159	\\	\cline{2-6}
+																&CH	&282	&0.483	&0.072	&6.693	\\	
 				\hline
 		\end{tabular}		
 		%\caption*{(a)Transitions from Movies}
@@ -128,19 +129,17 @@ Figure~\ref{fig:RelevanceDiagram} facilitates several insights. First, even thou
 		\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
 			 \multicolumn{2}{ |c| }{Actor to}    &\shortstack{No. of\\transitions} 	&\shortstack{ Observed \\transition\\probability }	&\shortstack{	 Unbiased\\transition\\probability} & \shortstack{Ratio \\$\frac{\text{Observed}}{\text{Unbiased}}$}\\ \hline
-						 \multirow{2}{*}{Actor}	&-	&4711	&0.533	&0.032	&16.66	\\	\cline{2-6}
-																		&H	&2164	&0.245	&0.372	&0.66	\\	\hline
-							\multirow{4}{*}{Movie}	&-	&839	&0.095	&0.031	&3.06	\\	\cline{2-6}
-																			&H	&213	&0.024	&0.113	&0.21	\\	\cline{2-6}
-																			&C	&386	&0.044	&0.157	&0.28	\\	\cline{2-6}
-																			&CH	&352	&0.04	&0.236	&0.17	\\	\hline
-							\multirow{2}{*}{Director}	&-	&68	&0.008	&0.003	&2.67	\\	\cline{2-6}
-																				&H	&29	&0.003	&0.034	&0.09	\\	\hline
-							\multirow{2}{*}{Genre}	&-	&43	&0.005	&0.002	&2.5	\\	\cline{2-6}
-																			&H	&39	&0.004	&0.02	&0.2	\\	\hline
-								\multicolumn{2}{ |c| }{Total}&8844	&1	&1	&1	\\
-	\hline
-
+						 \multirow{2}{*}{Actor}	&-	&4711	&0.685	&0.962	&0.713	\\	\cline{2-6}
+																		&H	&2164	&0.315	&0.038	&8.207	\\	\hline
+							\multirow{4}{*}{Movie}	&-	&839	&0.469	&0.82	&0.572	\\	\cline{2-6}
+																			&H	&213	&0.119	&0.058	&2.046	\\	\cline{2-6}
+																			&C	&386	&0.216	&0.076	&2.843	\\	\cline{2-6}
+																			&CH	&352	&0.197	&0.046	&4.284	\\	\hline
+							\multirow{2}{*}{Director}	&-	&68	&0.701	&0.959	&0.731	\\	\cline{2-6}
+																				&H	&29	&0.299	&0.041	&7.271	\\	\hline
+							\multirow{2}{*}{Genre}	&-	&43	&0.524	&0.931	&0.563	\\	\cline{2-6}
+																			&H	&39	&0.476	&0.069	&6.918	\\	
+				\hline
 		\end{tabular}
 	%\caption*{(b)Transitions from Actors}
 	\smallskip
@@ -148,17 +147,16 @@ Figure~\ref{fig:RelevanceDiagram} facilitates several insights. First, even thou
 	\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
 			 \multicolumn{2}{ |c| }{Director to}   &\shortstack{No. of\\transitions} 	&\shortstack{ Observed \\transition\\probability }	&\shortstack{	 Unbiased\\transition\\probability} & \shortstack{Ratio \\$\frac{\text{Observed}}{\text{Unbiased}}$}\\ \hline
-       \multirow{2}{*}{Actor}	&-	&71	&0.042	&0.001	&42	\\	\cline{2-6}
-															&H	&24	&0.014	&0.011	&1.27	\\	\hline
-			\multirow{4}{*}{Movie}	&-	&271	&0.162	&0.031	&5.23	\\	\cline{2-6}
-															&H	&55	&0.033	&0.121	&0.27	\\	\cline{2-6}
-															&C	&130	&0.077	&0.108	&0.71	\\	\cline{2-6}
-															&CH	&93	&0.055	&0.139	&0.4	\\	\hline
-			\multirow{2}{*}{Director}	&-	&384	&0.229	&0.054	&4.24	\\	\cline{2-6}
-																&H	&160	&0.095	&0.299	&0.32	\\	\hline
-			\multirow{2}{*}{Genre}	&-	&256	&0.153	&0.026	&5.88	\\	\cline{2-6}
-															&H	&234	&0.139	&0.211	&0.66	\\	\hline
-				\multicolumn{2}{ |c| }{Total}	&1678	&1	&1	&1	\\
+       \multirow{2}{*}{Actor}	&-	&71	&0.747	&0.958	&0.78	\\	\cline{2-6}
+															&H	&24	&0.253	&0.042	&5.964	\\	\hline
+			\multirow{4}{*}{Movie}	&-	&271	&0.494	&0.792	&0.623	\\	\cline{2-6}
+															&H	&55	&0.1	&0.04	&2.478	\\	\cline{2-6}
+															&C	&130	&0.237	&0.108	&2.198	\\	\cline{2-6}
+															&CH	&93	&0.169	&0.06	&2.841	\\	\hline
+			\multirow{2}{*}{Director}	&-	&384	&0.706	&0.93	&0.759	\\	\cline{2-6}
+																&H	&160	&0.294	&0.07	&4.216	\\	\hline
+			\multirow{2}{*}{Genre}	&-	&256	&0.522	&0.899	&0.581	\\	\cline{2-6}
+															&H	&234	&0.478	&0.101	&4.708	\\	
 				\hline
 		\end{tabular}
 		%\caption*{(c)Transitions from Director}
@@ -167,18 +165,17 @@ Figure~\ref{fig:RelevanceDiagram} facilitates several insights. First, even thou
 		\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
 			 \multicolumn{2}{ |c| }{Genre to}   &\shortstack{No. of\\transitions} 	&\shortstack{ Observed \\transition\\probability }	&\shortstack{	 Unbiased\\transition\\probability} & \shortstack{Ratio \\$\frac{\text{Observed}}{\text{Unbiased}}$}\\ \hline
-       \multirow{2}{*}{Actor}	&-	&61	&0.03	&0.0005	&60	\\	\cline{2-6}
-															&H	&32	&0.016	&0.011	&1.45	\\	\hline
-				\multirow{4}{*}{Movie}	&-	&229	&0.113	&0.012	&9.42	\\	\cline{2-6}
-																&H	&46	&0.023	&0.077	&0.3	\\	\cline{2-6}
-																&C	&172	&0.085	&0.024	&3.54	\\	\cline{2-6}
-																&CH	&138	&0.068	&0.135	&0.5	\\	\hline
-				\multirow{2}{*}{Director}	&-	&282	&0.139	&0.015	&9.27	\\	\cline{2-6}
-																	&H	&195	&0.096	&0.383	&0.25	\\	\hline
-				\multirow{2}{*}{Genre}	&-	&348	&0.172	&0.013	&13.23	\\	\cline{2-6}
-																&H	&526	&0.259	&0.328	&0.79	\\	\hline
-					\multicolumn{2}{ |c| }{Total}	&2029	&1	&1	&1	\\
-			\hline
+			 \multirow{2}{*}{Actor}	&-	&61	&0.656	&0.9791	&0.67	\\	\cline{2-6}
+															&H	&32	&0.344	&0.021	&16.47	\\	\hline
+				\multirow{4}{*}{Movie}	&-	&229	&0.118	&0.261	&0.453	\\	\cline{2-6}
+																&H	&46	&0.024	&0.008	&3.001	\\	\cline{2-6}
+																&C	&172	&0.089	&0.093	&0.956	\\	\cline{2-6}
+																&CH	&138	&0.071	&0.013	&5.288	\\	\hline
+				\multirow{2}{*}{Director}	&-	&282	&0.591	&0.973	&0.608	\\	\cline{2-6}
+																	&H	&195	&0.409	&0.027	&15.174	\\	\hline
+				\multirow{2}{*}{Genre}	&-	&348	&0.398	&0.943	&0.422	\\	\cline{2-6}
+																&H	&526	&0.602	&0.057	&10.627	\\	
+				\hline
 		\end{tabular}
 		%\caption*{(d)Transitions from Genres}\smallskip
 	\captionof{table}{Transitions from a source object to a target object, divided by: (i) type of source and target; (ii) whether the target was highlighted (H); (iii) whether the target was highlighted and connected to the source (HC); (iv) and whether source and target were neither highlighted nor connected. Columns show: (i) the number of direct transitions for the source/target combination; (ii) the observed transition probability from the source to that target; (iii) the (unbiased) probability of transition between source and target if all elements had equal probability to be viewed; (iv) the ratio between observed and unbiased transition probabilities.}
@@ -189,7 +186,7 @@ Figure~\ref{fig:RelevanceDiagram} facilitates several insights. First, even thou
 
 \subsubsection{Assumptions about viewing transition patterns hold}
 \label{sec:EvalAssumptionAboutViewingTransition}
-In an effort to test whether the viewing transitions we assumed informally when instrumenting our visualization using the predictive algorithm (Section~\ref{sec:MehthodsIntelligentAlgorithm}), we performed a qunatitative analysis of our subjects’ viewing-transition patterns, using the data we collected during our study. The results of our analysis are summarized in Table~\ref{tab:TransitionFromMovie}, and show that our informal assumptions were correct in nature, if not in magnitude. Specifically, users showed strong preferences to view objects that were hilighted or connected to previously viewed objects. For example, the first panel in Table~\ref{tab:TransitionFromMovie} shows that after looking at a movie, users were five times more likely to look at an actor connected to that movie ($Ratio = X$), twently times more likely to look at an actor that was both connected to the movie and highlighted ($Ratio = X$), and signficantly less likely to view and a random other actor ($Ratio = X$), than the default case in which users had no particular viewing preferences.   Moreover, this type of analysis can be useful in helping us understand how visualizations are used and how users approach visualization tasks.
+In an effort to test whether the viewing transitions we assumed informally when instrumenting our visualization using the predictive algorithm (Section~\ref{sec:MehthodsIntelligentAlgorithm}), we performed a qunatitative analysis of our subjects’ viewing-transition patterns, using the data we collected during our study. The results of our analysis are summarized in Table~\ref{tab:TransitionFromMovie}, and show that our informal assumptions were correct in nature, if not in magnitude. Specifically, users showed strong preferences to view objects that were hilighted or connected to previously viewed objects. For example, the first panel in Table~\ref{tab:TransitionFromMovie} shows that after looking at a movie, users were five times more likely to look at an actor connected to that movie ($Ratio = 2.473$), twently times more likely to look at an actor that was both connected to the movie and highlighted ($Ratio = 11.484$), and signficantly less likely to view and a random other actor ($Ratio = 0.495$), than the default case in which users had no particular viewing preferences.   Moreover, this type of analysis can be useful in helping us understand how visualizations are used and how users approach visualization tasks.
 
 
 To reach these results, we first discarded the prediction component from the data we collected, since the prediction represents exactly the assumption we seeked to evaluate. We then counted direct viewing transitions between all types of objects (sources) to all other types of objects (targets), and, as seen in the first column of Table~\ref{tab:TransitionFromMovie}, divided them into categories based on whether the target objects were highlighted, connected to the source object, or both.  For example, after looking at a movie title, our users looked at an actor that was unconnected to that movie and unhighligted $793$ times; they looked at an actor that was connect to the movie and highlighted $616$ times. It is important to note that in our viusalization only movies were connected to actors, genres, and directors, while these in turn were not connected to each other. Thus, transitioning to a connected or highlighted and connected target was only possible when tranisitoning to and from movies.
