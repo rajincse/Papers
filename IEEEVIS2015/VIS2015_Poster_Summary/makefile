@@ -1,3 +1,4 @@
+# $Id: makefile 11 2007-04-03 22:25:53Z jpeltier $
 # This file seems to originate from something called 'the ultimate
 # latex makefile' that different authors worked on. Find original
 # versions at:
@@ -6,19 +7,9 @@
 # http://www.acoustics.hut.fi/u/mairas/UltimateLatexMakefile/ 
 # (c) by Matti Airas
 #
-# This file has been assembled and adjusted by Steven Bergner, Nov 2005
-#  - support for multiple sub-texfiles
-#  - fixed '=' '#' problem in mingw/msys environment (see E variable)
-#  - PS compilation uses VGTC recommended settings
-#  - targets restructured to make PDF by default
-#
 # Call 'make dvi' for minimal compilation, to check for proper latex
 # syntax. This can be much faster than a full PDF generation when big
 # figures are involved.
-#
-# Call 'make pdf' for direct compilation to PDF using pdfTeX. Note that this
-# requires you to use .pdf files. pdfTeX can not use .ps or .eps graphics.
-# use epstopdf to convert such files to .pdf files.
 #
 #----------------------------------------------------------------------------
 #adjust the following for your purpose
@@ -46,7 +37,6 @@ LATEX = latex
 BIBTEX = bibtex
 L2H = latex2html
 PDFLATEX = ps2pdf
-PDFTEX = pdflatex
 DVIPS = dvips 
 
 RERUN = "(There were undefined references|Rerun to get (cross-references|the bars) right)"
@@ -57,8 +47,6 @@ PSFILES  = $(DVIFILES:.dvi=.ps)
 PDFFILES7 = $(DVIFILES:.dvi=.pdf7) 
 PDFFILES8 = $(DVIFILES:.dvi=.pdf8) 
 
-PDFTEXFILES = $(DVIFILES:.dvi=.pdftex)
-
 COPY = if test -r $*.toc; then cp $*.toc $*.toc.bak; fi 
 #RM = /usr/bin/rm -f 
 RM = rm -f 
@@ -66,13 +54,9 @@ RM = rm -f
 all:	msg gs8
 
 msg:
-	@echo "  This script defaults to GhostScript 8.  If you are using GhostScipt 7 please type"
-	@echo "  make gs7 instead.  If unsure type gs -v from the command line"
-	@echo "  To use pdflatex/pdftex, type make pdf"
-	@echo ""
-
-
-pdf:     clean pdftex 
+	@echo "  You must define gs7 for GhostScript 7 or gs8 for GhostScript 8"
+	@echo "  If you are not sure which to run please type gs -v to get your version"
+	@echo "  i.e. make gs7"
 
 gs7:        clean dvi ps pdf7
 
@@ -86,8 +70,6 @@ pdf7:           $(PDFFILES7)
 
 pdf8:           $(PDFFILES8)
 
-pdftex:         $(PDFTEXFILES)
-
 $(MAINTEXFILE) : $(SUBTEXFILES) $(BIBFILES)
 
 %.dvi:			%.tex
@@ -100,23 +82,11 @@ $(MAINTEXFILE) : $(SUBTEXFILES) $(BIBFILES)
 # Display relevant warnings
 				egrep -i "(Reference|Citation).*undefined" $*.log ; true
 
-%.pdftex:			%.tex
-				echo "wir sind da"
-				$(COPY);$(PDFTEX) $<
-				egrep -c $(RERUNBIB) $*.log && ($(BIBTEX) $*;$(COPY);$(PDFTEX) $<) ; true
-				egrep $(RERUN) $*.log && ($(COPY);$(PDFTEX) $<) ; true
-				egrep $(RERUN) $*.log && ($(COPY);$(PDFTEX) $<) ; true
-				if cmp -s $*.toc $*.toc.bak; then . ;else $(PDFTEX) $< ; fi
-				$(RM) $*.toc.bak
-# Display relevant warnings
-				egrep -i "(Reference|Citation).*undefined" $*.log ; true
-
 %.ps:			%.dvi
 #				dvips -T 7.875in,10.75in -Ppdf -G0 $< -o $@  #use tvcgpapersize
 #				dvips -Ppdf -G0 $< -o $@
 				dvips $(DVIPSPAPERSIZE) -Pdownload35 -Ppdf -G0 $< -o $@
 #				dvips $< -o $@
-
 
 %.pdf7:			%.ps
 	$(PDFLATEX) \

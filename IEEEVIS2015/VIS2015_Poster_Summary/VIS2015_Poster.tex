@@ -1,8 +1,10 @@
-\documentclass[journal]{vgtc}                % final (journal style)
-%\documentclass[review,journal]{vgtc}         % review (journal style)
+% $Id: template.tex 11 2007-04-03 22:25:53Z jpeltier $
+
+\documentclass{vgtc}                          % final (conference style)
+%\documentclass[review]{vgtc}                 % review
 %\documentclass[widereview]{vgtc}             % wide-spaced review
-%\documentclass[preprint,journal]{vgtc}       % preprint (journal style)
-%\documentclass[electronic,journal]{vgtc}     % electronic version, journal
+%\documentclass[preprint]{vgtc}               % preprint
+%\documentclass[electronic]{vgtc}             % electronic version
 
 %% Uncomment one of the lines above depending on where your paper is
 %% in the conference process. ``review'' and ``widereview'' are for review
@@ -15,41 +17,15 @@
 %% review process. Some conferences, like IEEE Vis and InfoVis, have NOT
 %% in the past.
 
-%% Please note that the use of figures other than the optional teaser is not permitted on the first page
-%% of the journal version.  Figures should begin on the second page and be
-%% in CMYK or Grey scale format, otherwise, colour shifting may occur
-%% during the printing process.  Papers submitted with figures other than the optional teaser on the
-%% first page will be refused.
+%% Figures should be in CMYK or Grey scale format, otherwise, colour 
+%% shifting may occur during the printing process.
 
-%% These three lines bring in essential packages: ``mathptmx'' for Type 1
+%% These three lines bring in essential packages: ``mathptmx'' for Type 1 
 %% typefaces, ``graphicx'' for inclusion of EPS figures. and ``times''
 %% for proper handling of the times font family.
 \usepackage{mathptmx}
 \usepackage{graphicx}
 \usepackage{times}
-
-
-
-%% We encourage the use of mathptmx for consistent usage of times font
-%% throughout the proceedings. However, if you encounter conflicts
-%% with other math-related packages, you may want to disable it.
-
-%% This turns references into clickable hyperlinks.
-\usepackage[bookmarks,backref=true,linkcolor=black]{hyperref} %,colorlinks
-\hypersetup{
-  pdfauthor = {},
-  pdftitle = {},
-  pdfsubject = {},
-  pdfkeywords = {},
-  colorlinks=true,
-  linkcolor= black,
-  citecolor= black,
-  pageanchor=true,
-  urlcolor = black,
-  plainpages = false,
-  linktocpage
-}
-
 
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
@@ -57,6 +33,10 @@
 \DeclareMathOperator*{\argmax}{argmax}
 \usepackage{multirow}
 \usepackage{caption}
+%% We encourage the use of mathptmx for consistent usage of times font
+%% throughout the proceedings. However, if you encounter conflicts
+%% with other math-related packages, you may want to disable it.
+
 %% If you are submitting a paper to a conference for review with a double
 %% blind reviewing process, please replace the value ``0'' below with your
 %% OnlineID. Otherwise, you may safely leave it at ``0''.
@@ -69,7 +49,7 @@
 \vgtcinsertpkg
 
 %% In preprint mode you may define your own headline.
-%\preprinttext{To appear in IEEE Transactions on Visualization and Computer Graphics.}
+%\preprinttext{To appear in an IEEE VGTC sponsored conference.}
 
 %% Paper title.
 
@@ -78,22 +58,22 @@
 %% This is how authors are specified in the journal style
 
 %% indicate IEEE Member or Student Member in form indicated below
-%\author{Submission 363}
-\author{Sayeed Safayet Alam \textit{Student Member, IEEE}, and Radu Jianu \textit{Member, IEEE}}
-\authorfooter{
+\author{Submission 230}
+%\author{Sayeed Safayet Alam \textit{Student Member, IEEE}, and Radu Jianu \textit{Member, IEEE}}
+%\authorfooter{
 %% insert punctuation at end of each item
-\item
- Sayeed Safayet Alam. E-mail: salam011@cis.fiu.edu.
-\item
- Radu Jianu. E-mail: rdjianu@cis.fiu.edu.
-}
+%\item
+ %Sayeed Safayet Alam. E-mail: salam011@cis.fiu.edu.
+%\item
+ %Radu Jianu. E-mail: rdjianu@cis.fiu.edu.
+%}
 
 %other entries to be set up for journal
 %\shortauthortitle{Alam \MakeLowercase{\textit{et al.}}: Analyzing Eye-Tracking Information in Visualization and Data Space:  from Where on the Screen to What on the Screen}
 %\shortauthortitle{Firstauthor \MakeLowercase{\textit{et al.}}: Paper Title}
 
 %% Abstract section.
-\abstract{We demonstrate the feasibility of analyzing eye-tracking data captured from  multiple people concurrently using an interactive visualization, in real-time . We leverage the Data of Interest (DOI) approach, in which gaze coordinates are related to a visualization's content as it is rendered, to produce a granular list of data objects that users are interested in at any given time. Unlike traditional eye-tracking analyses, which rely heavily on manual annotation and require the display of visual stimuli used in data collection, the DOI approach allows us to collect data that is readily meaningful and can be visualized and analyzed for multiple users at the same time.  We show in a controlled user study that analysts were able to interpret real-time DOI streams from five users concurrently, to determine what tasks those users were doing. We discuss potential applications of our methods in teaching and in developing gaze-contingent visualizations. 
+\abstract{We demonstrate the feasibility of real-time analysis of eye-tracking data captured from  multiple people concurrently using an interactive visualization. We leverage the Data of Interest (DOI) approach, in which gaze coordinates are related to a visualization's content as it is rendered, to output data objects that users are interested in at any given time. We show in a controlled user study that subjects could interpret real-time DOI streaming from multiple users concurrently, to determine in real time what tasks those users were doing. We briefly discuss potential applications of our methods in teaching and in developing gaze-contingent visualizations. 
 } % end of abstract
 
 %% Keywords that describe your work. Will show as 'Index Terms' in journal
