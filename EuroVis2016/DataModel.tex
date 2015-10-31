@@ -1,0 +1,34 @@
+\section{The DOI Data Model}
+
+We define the notion of DOI in object oriented concepts which is similar to Lecluse et al. \cite{lecluse1988o2} object oriented model. 
+We define data for generating stimulus consists of the following items:
+\begin{itemize}
+	\item A finite set domains $D_1, D_2, \ldots, D_n$ where $n \geq 1$. We indicate $D$ is the set of all domains. $D = \{D_1, D_2, \ldots, D_n\}$. E.g. in IMDB movie data, Actor, Directors, Movies, Genre each of them are considered as domains.
+	\item A countably infinite set of attributes $A$. E.g. for IMDB data, name is an attribute to a actor. Moreover, whether a movie is considered to be an 80s movie is also an attribute. 
+	\item A countably infinite set $ID$ of symbols labeled identifier. 
+\end{itemize}
+
+A DOI can be a m-tuple $<d_i, a_1 , a_2, \ldots, a_k>$ where $d_i$ is a data element from a query of outer join of given domains $D_{i_1}, D_{i_2}, \ldots D_{i_n}$ on condition $C$. Hence, $d_i \in \sigma _{C} (D_{i_1} \times D_{i_2} \times \ldots D_{i_n})$, and $a_j$ is an element of finite set of attributes. E.g. for IMDB data, suppose we want to define a DOI for a movie. So we take domain $M$ for movies and $R$ for ratings. We get a data element $d \in M \times R$. Now we inject attributes such as movie title ($a_1$), release date ($a_2$), and rating ($a_3$). We set the condition $C= \text{rating} \geq 5.0$. So we have a movie DOI set $\text{DOI}_{movie} = \sigma_{\text{rating} \geq 5.0} M \times R$. Thus, an element $doi \in \text{DOI}_{movie}$ would be a tuple : $<d, a_1, a_2, a_3>$. 
+
+\subsection{AOI vs DOI}
+
+DOIs are defined over the data used to generate visual stimuli. The granularity of collected DOI depends on the unit of data chosen for instrumentation. In a network visualization for example, DOIs can be defined either for individual nodes, or for cliques or groups of nodes. DOIs can have multiple attributes based on the underlying data. 
+In a typical AOI-based analysis, human analysts divide a stimuli into segments or regions which are critical to support a hypothesis. In a DOI analysis, instrumenters divide a data model into data segments that they wish to collect data for. Some of the difference between AOI and DOI is provided below: 
+
+\textbf{\underline{Definition:}}Analysts can define AOIs over stimuli either before the experiment or during the analysis phase. The AOIs are defined in stimulus or image space. (e.g.: an image region with particular semantic meaning or that is relevant for a task). Conversely, DOIs are defined over the data model by instrumenting the code that translates data into visualization.   (e.g., in a graph visualization DOIs could be defined for each node, for edges, or for groups of nodes (i.e., nodes that satisfy a certain condition over their attributes).
+
+
+\textbf{\underline{Data scale and granularity:}}AOIs tend to be large and sparse, and AOI analysis work with a small number of AOIs. Conversely, DOIs are many, small, and because collection doesn't rely on manual coding, can be collected over long periods of time. Thus, a DOI analysis can involve thousands of DOIs that a user looked at during a one hour analysis.
+
+\textbf{\uline{DOIs have explicit properties derived from the underlying data:}} AOIs have implicit properties known to the analyst but generally not expressed explicitly. For example, in a node-link visualization of movie data, a cluster of nodes can an AOI where that cluster may represent a group movie which are only of action genre. Instead, DOIs properties are explicit and are automatically derived the underlying/instrumented data. For the same example given above, each node may represent a movie and each movie may have been categorized under multiple genres. 
+
+\textbf{\underline{Time requirement of analysis sessions:}} AOI analysis generally requires longer sessions of analysis. DOI analysis is relatively much shorter than AOI-based analysis.
+
+\textbf{\underline{Requirement of instrumentations:}} AOI analyses generally do to require instrumentations into the source code. Moreover, instrumentation over source is prerequisite for DOI analyses. 
+
+\textbf{\underline{DOI data is probabilistic:}}  Gazes on AOIs are generally concrete. We can certainly report which AOIs received how many gaze points. On the contrary, gazes on DOIs are generally in fractions. Different algorithms or scoring methods yield different fractional scores to DOIs. Eye-trackers are generally imprecise and produces low-resolution data. Considering the node-link visualization example, if a gaze point lands in between two or more graph-nodes then, segregation among graph-nodes to relate with that gaze point becomes a challenge. 
+DOIs can be defined hierarchically or in groups: Each node in a graph can have its own DOI, but groups of nodes can have their own DOI as well, etc.
+
+
+
+
