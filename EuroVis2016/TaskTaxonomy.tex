@@ -1,4 +1,5 @@
 \section{Task Taxonomy on DOI Timeline Visualization}
+\label{sec:Taxonomy}
 
 In this section, we define an exhaustive set of 31 tasks possible on  DOI Visualization. The tasks are inspired from Shneiderman's data type taxonomy~\cite{shneiderman1996eyes} and Amar et al.'s low-level visual analytic tasks~\cite{amar2005low}. We classify each of 31 tasks into six categories which we propose. Our proposed categories are in context of a eye-tracking user study scenario. 
 \begin{itemize}
@@ -18,15 +19,4 @@ In this section, we define an exhaustive set of 31 tasks possible on  DOI Visual
            31 task taxonomy list for DOI-based analysis. }
 \end{figure*}
 
-\subsection{Visual Encoding}
-The visual encoding is the way in which data is mapped into visual structures, upon which we build the images on a screen~\cite{VEncodingDubakov}. Data type and visual channel type is required to be defined apriori building a visualization. Data types can be tabular, relational or spatial. Visual channels are construction of graphical element using geometric primitives varying its properties such as size, color and positions~\cite{munzner2011visualization}. 
-
-DOI data is a combination of tabular and relational. Each of the domain described in Section~\ref{sec:DataModel} contains tabular data and connection between domains are relational data. For example, movie-data doi tuple is $<\text{Movie Title},\text{Release Date}, \text{Rating}>$. Movie titles are categorical data, release data and ratings are quantitative data types. Suppose we have three sets of such tuples: $<\text{Star Wars}, 1977, 8.7>, <\text{Alien}, 1979, 8.5>, <\text{Raging Bull}, 1980, 8.3>$. Now as release date and ratings are ordered data we can create a circle for the tuple and the position of the circle will depend on release date and ratings. We define release years to be in the X-axis and ratings in Y-axis. We end up creating a scatter plot as depicted in Figure~\ref{fig:ExampleVisualEncoding}.
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[width=\linewidth]{images/ExampleVisualEncoding.eps}
-  \caption{\label{fig:ExampleVisualEncoding}%
-           An example visual encoding for movie-data. }
-\end{figure}
 
