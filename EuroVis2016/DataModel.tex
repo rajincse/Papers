@@ -1,45 +1,6 @@
 \section{The DOI Data Model}
 \label{sec:DataModel}
-
-We define the notion of DOI in object oriented concepts which is similar to Lecluse et al. \cite{lecluse1988o2} object oriented model. 
-We define data for generating stimulus consists of the following items:
-\begin{itemize}
-	\item A finite set domains $D_1, D_2, \ldots, D_n$ where $n \geq 1$. We indicate $D$ is the set of all domains. $D = \{D_1, D_2, \ldots, D_n\}$. E.g. in IMDB movie data, Actor, Directors, Movies, Genre each of them are considered as domains.
-	\item A countably infinite set of attributes $A$. E.g. for IMDB data, name is an attribute to a actor. Moreover, whether a movie is considered to be an 80s movie is also an attribute. 
-	\item A countably infinite set $ID$ of symbols labeled identifier. 
-\end{itemize}
-
-A DOI can be a m-tuple $d_i= <a_1 , a_2, \ldots, a_k>$ where $d_i$ is a data element from a query of outer join of given domains $D_{i_1}, D_{i_2}, \ldots D_{i_n}$ on condition $C$. Hence, $d_i \in \prod_{A} \sigma _{C} (D_{i_1} \times D_{i_2} \times \ldots D_{i_n})$, and $a_j$ is an element of finite set of attributes. 
-
-\subsection{Examples of DOI}
-We give examples DOIs in four research domains: movie-data, education, construction-data and proteomics-data. Examples are illustrated in Table~\ref{tab:ExampleDOI}.
-
-\subsubsection{Movie-Data DOI}
-
-For movie-data, suppose we want to define a DOI for a movie. So we take domain $M$ for movies and $R$ for ratings. We get a data element $d \in M \times R$. Now we inject attributes such as movie title ($a_1$), release date ($a_2$), and rating ($a_3$). We set the condition $C= \text{rating} \geq 5.0$. So we have a movie DOI set $\text{DOI}_{movie} = \prod_{a_1,a_2,a_3}\sigma_{\text{rating} \geq 5.0} M \times R$. Thus, an element $d_i \in \text{DOI}_{movie}$ would be a tuple : $d_i =< a_1, a_2, a_3>$. 
-
-\subsubsection{Education Domain DOI}
-We demonstrate DOI definition for education domain. We consider a scenario where a student is learning from many learning materials such as books, articles, lectures in possible two formats: visual and auditory. For simplicity we avoid auditory formats. Visual learning elements can be static or dynamic. Static elements include textual descriptions and images. Dynamic elements are videos or animated versions of static diagrams. For instance, a scientific paper can have domains such as abstract ($T_{Abs}$), introduction ($T_{Intro}$, conclusions ($T_{Concl}$), images ($I$), tables ($Tab$), equations ($Eq$). An example DOI can be title of image which is referenced in the introduction. In this case, the condition is $C=$referenced and the attributes might be title and word count. So we get $\text{DOI} = \prod_{(title, wordcount)} \sigma_{(\text{referenced})} I \times T_{Intro}$. 
-
-\subsubsection{Construction-Data DOI}
-Construction-data consists of shop drawings, material-data, samples and product-data used by architectures and engineers to verify feasibility of any architectural project. A shop drawing may contain a design of a building from multiple perspectives. For a particular perspective, there might be labels indicating part to the buildings and what materials are used. For example, we denote such shop drawing as $S$ and perspectives as $P$. Now we define a DOI which contains attributes $A$ with compartment names $a_1$ and materials names $a_2$. Then we inject the condition $C=$ top view of the design. So we get a $DOI_{construction} = \prod_{a_1,a_2} \sigma_{topview} S \times P$ which will produce compartment of the design DOIs with compartment names and materials used. 
-
-\subsubsection{Proteomics DOI}
-
-
-\begin{table*}[htbp]
-	\centering
-		\begin{tabular}{|c|c|c|l|l|}
-			\hline
-	Example Model & Domains & Attributes & Condition& DOI-tuple\\\hline
-	Movie-Data & \shortstack{Movies,\\ Actors} & \shortstack{Movie title,\\ release date,\\ ratings}& $rating \geq 5.0$& $<\text{Star Wars}, 1977, 8.7>$ \\\hline
-	Education & \shortstack{Article sections,\\ images} & \shortstack{Section title,\\ word count} & $image_i \in paragraph_p$& $<\text{Introduction}, 379>$ \\\hline
-	Construction-Data & \shortstack{Shop drawings,\\ perspectives} & \shortstack{Drawing section name,\\ materials used} & $perspective_i =topview$& $<\text{Bat-cave}, \text{limestone}>$ \\\hline
-	Proteomics & X& X& X& X \\\hline
-		\end{tabular}
-		\caption{Examples of DOIs.}
-		\label{tab:ExampleDOI}
-\end{table*}
+In this section, we formally define DOI. First, we compare DOI with AOI. Second, we provide a formal data model for DOI. Finally, we give some examples of DOIs in different research domains. 
 
 \subsection{AOI vs DOI}
 \label{sec:AOIvDOI}
@@ -60,6 +21,47 @@ In a typical AOI-based analysis, human analysts divide a stimuli into segments o
 
 \textbf{\underline{DOI data is probabilistic:}}  Gazes on AOIs are generally concrete. We can certainly report which AOIs received how many gaze points. On the contrary, gazes on DOIs are generally in fractions. Different algorithms or scoring methods yield different fractional scores to DOIs. Eye-trackers are generally imprecise and produces low-resolution data. Considering the node-link visualization example, if a gaze point lands in between two or more graph-nodes then, segregation among graph-nodes to relate with that gaze point becomes a challenge. 
 DOIs can be defined hierarchically or in groups: Each node in a graph can have its own DOI, but groups of nodes can have their own DOI as well, etc.
+
+\subsection{Formal DOI Model}
+
+We define the notion of DOI in object oriented concepts which is similar to Lecluse et al. \cite{lecluse1988o2} object oriented model. 
+We define data for generating stimulus consists of the following items:
+\begin{itemize}
+	\item A finite set domains $D_1, D_2, \ldots, D_n$ where $n \geq 1$. We indicate $D$ is the set of all domains. $D = \{D_1, D_2, \ldots, D_n\}$. E.g. in IMDB movie data, Actor, Directors, Movies, Genre each of them are considered as domains.
+	\item A countably infinite set of attributes $A$. E.g. for IMDB data, name is an attribute to a actor. Moreover, whether a movie is considered to be an 80s movie is also an attribute. 
+	\item A countably infinite set $ID$ of symbols labeled identifier. 
+\end{itemize}
+
+A DOI can be a m-tuple $d_i= <a_1 , a_2, \ldots, a_k>$ where $d_i$ is a data element from a query of outer join of given domains $D_{i_1}, D_{i_2}, \ldots D_{i_n}$ on condition $C$. Hence, $d_i \in \prod_{A} \sigma _{C} (D_{i_1} \times D_{i_2} \times \ldots D_{i_n})$, and $a_j$ is an element of finite set of attributes. 
+
+\subsection{DOI Exemplification}
+We give examples DOIs in four research domains: movie-data, education, construction-data and proteomics-data. Examples are illustrated in Table~\ref{tab:ExampleDOI}. 
+
+For movie-data, suppose we want to define a DOI for a movie. So we take domain $M$ for movies and $R$ for ratings. We get a data element $d \in M \times R$. Now we inject attributes such as movie title ($a_1$), release date ($a_2$), and rating ($a_3$). We set the condition $C= \text{rating} \geq 5.0$. So we have a movie DOI set $\text{DOI}_{movie} = \prod_{a_1,a_2,a_3}\sigma_{\text{rating} \geq 5.0} M \times R$. Thus, an element $d_i \in \text{DOI}_{movie}$ would be a tuple : $d_i =< a_1, a_2, a_3>$. 
+
+
+We demonstrate DOI definition for education domain. We consider a scenario where a student is learning from many learning materials such as books, articles, lectures in possible two formats: visual and auditory. For simplicity we avoid auditory formats. Visual learning elements can be static or dynamic. Static elements include textual descriptions and images. Dynamic elements are videos or animated versions of static diagrams. For instance, a scientific paper can have domains such as abstract ($T_{Abs}$), introduction ($T_{Intro}$, conclusions ($T_{Concl}$), images ($I$), tables ($Tab$), equations ($Eq$). An example DOI can be title of image which is referenced in the introduction. In this case, the condition is $C=$referenced and the attributes might be title and word count. So we get $\text{DOI} = \prod_{(title, wordcount)} \sigma_{(\text{referenced})} I \times T_{Intro}$. 
+
+
+Construction-data consists of shop drawings, material-data, samples and product-data used by architectures and engineers to verify feasibility of any architectural project. A shop drawing may contain a design of a building from multiple perspectives. For a particular perspective, there might be labels indicating part to the buildings and what materials are used. For example, we denote such shop drawing as $S$ and perspectives as $P$. Now we define a DOI which contains attributes $A$ with compartment names $a_1$ and materials names $a_2$. Then we inject the condition $C=$ top view of the design. So we get a $DOI_{construction} = \prod_{a_1,a_2} \sigma_{topview} S \times P$ which will produce compartment of the design DOIs with compartment names and materials used. 
+
+
+\begin{table*}[htbp]
+	\centering
+		\begin{tabular}{|c|c|c|l|l|}
+			\hline
+	Example Model & Domains & Attributes & Condition& DOI-tuple\\\hline
+	Movie-Data & \shortstack{Movies,\\ Actors} & \shortstack{Movie title,\\ release date,\\ ratings}& $rating \geq 5.0$& $<\text{Star Wars}, 1977, 8.7>$ \\\hline
+	Education & \shortstack{Article sections,\\ images} & \shortstack{Section title,\\ word count} & $image_i \in paragraph_p$& $<\text{Introduction}, 379>$ \\\hline
+	Construction-Data & \shortstack{Shop drawings,\\ perspectives} & \shortstack{Drawing section name,\\ materials used} & $perspective_i =topview$& $<\text{Bat-cave}, \text{limestone}>$ \\\hline
+	Proteomics & X& X& X& X \\\hline
+		\end{tabular}
+		\caption{Examples of DOIs. i)}
+		\label{tab:ExampleDOI}
+\end{table*}
+
+
+
 
 
 
