@@ -3,7 +3,7 @@
 % D.Fellner, v1.17, Sep 23, 2010
 
 
-\title{Data of Interest (DOI)-Based Visualization Techniques: Visualizing Eye-Tracking Information in Visualization and Data Spaces}
+\title{A Taxonomy of Tasks and Visual Solutions for Data of Interest (DOI) Eye-Tracking Analyses}
 
 % for anonymous conference submission please enter your SUBMISSION ID
 % instead of the author's name (and leave the affiliation blank) !!
@@ -18,7 +18,7 @@
 %%        $^2$ Another Department to illustrate the use in papers from authors
 %%             with different affiliations
        %}
-\author{Submission XXX}
+\author{Submission 310}
 % ------------------------------------------------------------------------
 
 % if the Editors-in-Chief have given you the data, you may uncomment
