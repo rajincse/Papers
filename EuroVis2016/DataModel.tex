@@ -26,52 +26,53 @@ Finally, we note that Bernhard et al. also provide a description of data that ga
 
 \begin{table*}[htbp]
 	\centering
-		\begin{tabular}{|l|l|l|l|}
+		\begin{tabular}{|l|l|l|}
 			\hline
-	Data Model/Visualization & Data Instance &DOIs& DOI output\\\hline
-			\shortstack[l]{
-							IMDB.org movie data shown\\as a PivotPaths\\diagrams~\cite{alam15analyzing}:\\movies, actors, genres, and\\directors are displayed as\\glyphs and connected by\\links if they are related}
-		& \shortstack[l]{
-							$m_1=$\{type:`movie', \\label:`Dark Knight', rating:9\} \\
-							$m_2=$\{type:`movie', \\label:`Big Fish', rating:7\}\\
-							$a_1=$\{type:`actor', \\label:`Al Pacino', gender:`male'\}}
-		& \shortstack[l]{
+			\multicolumn{3}{|l|}
+			{\shortstack[l]{
+			\textbf{Data Model :}IMDB.org movie data shown as a PivotPaths diagrams~\cite{alam15analyzing}: movies, actors, genres, and directors are\\ displayed as glyphs and connected by links if they are related}
+			}\\\hline
+		 \shortstack[l]{\textbf{Data Instance :}\\
+							$m_1=$\{type:`movie', label:`Dark Knight',rating:9\} \\
+							$m_2=$\{type:`movie', label:`Big Fish', rating:7\}\\
+							$a_1=$\{type:`actor', label:`Al Pacino', gender:`male'\}}
+		& \shortstack[l]{\textbf{DOIs :}\\
 									$DOI_1 = \{m_1\}$\\
 									$DOI_2 = \{m_2\}$\\
 									$DOI_3 = \{a_1\}$}
-		&\shortstack[l]{
-							$f_1=\{(DOI_1, 0.9),$\\$ (DOI_2, 0.5)\}$\\
+		&\shortstack[l]{\textbf{DOI Output :}\\
+							$f_1=\{(DOI_1, 0.9),$\\$(DOI_2, 0.5)\}$\\
 							$f_2 = \{(DOI_3,1.0)\}$}
 		\\\hline
-		\shortstack[l]{
-							Learning content (e.g.,\\architecture concepts)\\ shown in a visual learning\\ environment}
-		& \shortstack[l]{
-							$d_1=$\{type:`definition',format:`text',\\concept:`structure', level:`intro'\}\\
-							$e_1=$\{type:`example',format:`image',\\concept:`structure', level:`intro'\}\\
-							$f_1=$\{type:`formula',\\concept:`structure', level:`intro', partOf:$e_1$\}\\
-							$l_1=$\{type:`legend',\\concept:`structure', level:`intro', partOf:$e_1$\}}					
-		& \shortstack[l]{
+		\multicolumn{3}{|l|}
+		{\textbf{Data Model :}	Learning content (e.g., architecture concepts) shown in a visual learning environment}\\\hline
+		\shortstack[l]{\textbf{Data Instance :}\\
+							$d_1=$\{type:`definition',format:`text', concept:`structure',level:`intro'\}\\
+							$e_1=$\{type:`example',format:`image',concept:`structure',level:`intro'\}\\
+							$f_1=$\{type:`formula', concept:`structure', level:`intro', partOf:$e_1$\}\\
+							$l_1=$\{type:`legend', concept:`structure', level:`intro', partOf:$e_1$\}}					
+		& \shortstack[l]{\textbf{DOIs :}\\
 							$DOI_1 = \{d_1\}$\\
 							$DOI_2 = \{e_1\}$\\
 							$DOI_3 = \{f_1\}$\\
 							$DOI_4 = \{l_1\}$
 		}									
-		&\shortstack[l]{
+		&\shortstack[l]{\textbf{DOI Output :}\\
 							$f_1 = \{(DOI_1,0.8)\}$\\
-							$f_2=\{(DOI_2, 1),$\\ $(DOI_3, 0.8)\}$\\
-							$f_3=\{(DOI_2, 1), $\\$(DOI_3, 0.7)\}$
+							$f_2=\{(DOI_2, 1),$\\$(DOI_3, 0.8)\}$\\
+							$f_3=\{(DOI_2, 1),$\\$(DOI_3, 0.7)\}$
 							}
 		\\\hline
-		\shortstack[l]{
-							A 3D scene (e.g., a\\construction scene used in\\studying construction-safety\\designs)}
-		& \shortstack[l]{
-							$w_1=$\{type:`worker',helmet:yes,\\vest:yes, boots:yes\}\\
-							$w_2=$\{type:`worker',helmet:no,\\vest:yes, boots:yes\}\\
-							$m_1 =$ \{type:`material',\\ category:`concrete\_block'\}\\						
-							$o_1 =$ \{type:`machinery', \\category:`crane', load:$m_1$\}\\
-							$o_2 =$ \{type:`machinery', \\category:`bulldozer'\}
+		\multicolumn{3}{|l|}
+		{\textbf{Data Model :}A 3D scene (e.g., a construction scene used in studying construction-safety designs)}\\\hline
+		 \shortstack[l]{\textbf{Data Instance :}\\
+							$w_1=$\{type:`worker',helmet:yes,vest:yes,boots:yes\}\\
+							$w_2=$\{type:`worker',helmet:no,vest:yes,boots:yes\}\\
+							$m_1 =$ \{type:`material',category:`concrete\_block'\}\\						
+							$o_1 =$ \{type:`machinery',category:`crane',load:$m_1$\}\\
+							$o_2 =$ \{type:`machinery',category:`bulldozer'\}
 							}
-		& \shortstack[l]{
+		& \shortstack[l]{\textbf{DOIs :}
 							$DOI_1 = \{w_1\}$\\
 							$DOI_2 = \{w_2\}$\\
 							$DOI_3 = \{w_1, w_2\}$\\
@@ -80,11 +81,11 @@ Finally, we note that Bernhard et al. also provide a description of data that ga
 							$DOI_6 = \{o_2\}$\\
 							$DOI_7 = \{o_1,o_2\}$
 		}									
-		&\shortstack[l]{
+		&\shortstack[l]{\textbf{DOI Output :}\\
 							$f_1 = \{(DOI_2,0.75)\}$\\
 							$f_2 = \{(DOI_3,0.9)\}$\\
-							$f_3=\{(DOI_5, 0.9), $\\$(DOI_4, 0.7)\}$\\
-							$f_3=\{(DOI_7, 1), $\\$(DOI_4, 0.65)\}$
+							$f_3=\{(DOI_5, 0.9),$\\$(DOI_4, 0.7)\}$\\
+							$f_3=\{(DOI_7, 1),$\\$(DOI_4, 0.65)\}$
 							}
 		\\\hline
 		\end{tabular}
