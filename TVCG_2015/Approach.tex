@@ -1,0 +1,124 @@
+﻿\section{Approach}\label{sec:Approach}
+
+\subsection{Overview}
+Our general approach is illustrated in Figure~\ref{fig:systemBlockDiagram}. For visualizations with accessible code, gaze coordinates from an eye-tracker can be mapped to visual objects displayed on the screen automatically, since the layout of the visual content is known during rendering.  A visualization instrumented with our approach will not only draw visual objects on the screen (e.g., nodes in a graph), but will also inform a viewed-object detection algorithm about the position and shape of such objects. The detection algorithm uses this information to map 2D gaze coordinates to visualization objects rendered on the screen. Since interactive visualizations change dynamically at run-time, should the visualization be transformed (e.g., zoomed, panned), its content altered (e.g., visual objects added or removed), or individual visualization components moved (e.g., dragging a node), the detection algorithm is informed about these changes as soon as the visualization is redrawn, so it can map subsequent gaze samples to the new visual layout.
+
+Next, we describe an algorithm for mapping gaze samples to objects that users are viewing. As shown in Figure~\ref{fig:systemBlockDiagram}, we will assume that gaze samples have already been transformed from screen space into model space. As such, the basic input of our algorithm is a stream of gaze samples in model space, and a list of visual primitives drawn on the screen, together with their shape and position. The algorithm outputs a stream of viewed visualization and data primitives (e.g., nodes, labels) in real-time, as users are viewing them in the instrumented visualization. Our approach is limited in that it cannot be applied to already rendered images or videos and requires that the visualization's source code be altered. We discuss these limitations in Section~\ref{sec:Limitations}.
+
+We describe our algorithm incrementally in the following three sections, starting from a na\"{\i}ve approach that simply draws AOIs dynamically around visualization objects, to a predictive one that detects objects more accurately by using knowledge about how specific visualizations are typically used.  A comparative evaluation of these detection algorithms is presented in Section~\ref{sec:EvalResults}.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.99\linewidth]{images/systemBlockDiagram.eps}
+  \caption{Real-time detection of viewed objects in generative visualizations.}
+	\label{fig:systemBlockDiagram}
+\end{figure}
+
+\subsection{AOI-based viewed object detection}
+\label{sec:AOIBasedViewedObjectDetection}
+
+A na\"{\i}ve approach is to treat object shapes as dynamic AOIs and determine that a viewed object is that with the most recent fixation landing in its AOI. Manually drawn AOIs are typically used in the same manner in offline eye-tracking data analysis, and the similar concept of objects of interest (OOIs) has been proposed already by Stellmach et al.~\cite{stellmach20103d} for generative 3D content.
+
+The problem with this approach is that for highly granular visual content, such as individual nodes or labels, users often fixate in the vicinity of the object rather than on the object itself. A potential solution is to pad object AOIs to be slightly larger than the objects. However, larger AOIs may lead to overlap in cluttered visualizations. We demonstrate and quantify these observations in Section~\ref{sec:Evaluation}. Ultimately, the problem lies with an inability to determine with absolute certainty what a user is looking at, and is described in more detail in the next section.
+
+\subsection{A probabilistic approach to viewed object detection}
+\label{sec:ProbabilisticObjectDetection}
+
+Unlike mouse input, eye-tracking can only indicate a small screen region that a user is fixating, rather than a particular pixel. Typically, such regions are about one inch in diameter, though specific values depend on viewing conditions. As such, it is generally impossible to tell with certainty which object a user is viewing, if the user is fixating in the vicinity of multiple close objects (Figure~\ref{fig:discreminateFig4}(a)). This is not a significant problem for traditional AOI analyses, which generally use large AOIs. Conversely, we aim to detect the viewing of granular visual content, such as network nodes or glyphs, in cluttered visualizations.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=\linewidth]{images/discreminateFig4.eps}
+  \caption{(a) A real visualization example in which a user fixates in the vicinity of multiple close object groups (red dot). (b) predictive method: even though the latest gaze sample falls equidistantly between visual objects $O_3$ and $O_4$, we suspect that $O_3$ is the more likely viewing target given that it is highlighted and connected to $O_1$, which is likely to have been the object that the user viewed previously ($vs_1=0.6 > vs_2 = 0.4$). }
+	\label{fig:discreminateFig4}
+\end{figure}
+
+We advocate for a fuzzy interpretation of gaze data and detect likelihoods that objects are viewed rather than certainties. To this end, we can compute object gaze scores $gs$ (for all objects $i$ in a visualization, and at all times $t$) that range between zero- the object is not viewed, and one- the object is certainly viewed, as shown in Figure~\ref{fig:gazeScoreFig3} and Formula~\ref{eq:GS}. 
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.4\linewidth]{images/gazeScoreFig3.eps}
+  \caption{Calculating gaze score $gs$ for a gaze sample landing near an object. $d$ is the distance from the object to the gaze sample, and $R$ approximates the size of the user's foveated region.}
+	\label{fig:gazeScoreFig3}
+\end{figure}
+
+%Formula 1
+\begin{equation}
+gs_{i,t} = 1 - \min (1, (\frac{d}{R}))
+\label{eq:GS}
+\end{equation}
+
+The region of radius $R$ used in the formula is analogue to the user's foveated region, and as such needs to be constant in screen space. Thus, if the view is zoomed in or out, $R$ needs to be scaled accordingly in model space to remain constant in screen space.  A more detailed discussion about choosing an appropriate $R$ is given in Section~\ref{sec:Discussion}. Similar approaches were used by Salvucci et al.~\cite{salvucci2000intelligent} and Okoe et al.~\cite{okoe2014gaze}.
+
+Finally, we note that the object scores ($gs$) do not directly equate to probabilities. The distinction is important because our implementation can detect two objects as being viewed simultaneously ($gs_1 = 1$ and $gs_2=1$). We think this is appropriate since a person can in fact visually parse multiple objects at the same time if they fall within the user's foveated region, and even think of multiple objects as a unit for specific task purposes. We discuss this in more detail in Section~\ref{sec:DiscussionEvaluatingViewedObjectDetection}. 
+
+
+
+\subsection{A predictive algorithm for viewed object detection}
+\label{sec:MehthodsIntelligentAlgorithm}
+
+Salvucci and Anderson described the concept of ``intelligent gaze interpretation'' in the context of a gaze-activated interface ~\cite{salvucci2000intelligent}. They more accurately detected which interface control a user was gazing at, by integrating both the proximity of the gaze to the control, and the likelihood that the control was the target of a gaze-interaction, based on the current state and context of the interface. Formally, their algorithm identified the most likely currently viewed item $i_{viewed}$ by solving
+
+\begin{equation*}
+i_{viewed} = \displaystyle \argmax_{i\in I}[Pr(g|i)\cdot Pr(i)]
+\end{equation*}
+
+where $Pr(g|i)$ is the probability of producing a gaze at location $g$ given the intention of viewing item $i$, and $Pr(i)$ is the prior probability of an item $i$  being the target of a gaze-interaction. Salvucci and Anderson based these prior probabilities on assumptions about how an interface might be used, and hardcoded them into their system.  
+
+We adapt Salvucci and Anderson's paradigm to solve the ambiguous case when a gaze-sample lands close to multiple objects (e.g.,  Figure~\ref{fig:discreminateFig4}(a)). For example, in a network visualization we may assume that a user who has just viewed a node $n$ will more likely view one of $n$'s neighbors than a random other node, perhaps especially if the user previously highlighted node $n$ and its outgoing edges.  In Section~\ref{sec:Evaluation} we show quantitatively that this assumption holds for one tested visualization.  
+
+We consider the simplified scenario in Figure~\ref{fig:discreminateFig4}(b): four visual objects ($O_{1\ldots 4}$), two of which are connected ($O_1$ and $O_3$), and one of which is highlighted ($O_3$), are shown on the screen. A new gaze sample registers between $O_3$ and $O_4$ at time $t$. Intuitively, it is more likely that $O_3$ was viewed since it is highlighted. Moreover, if we knew that $O_1$ was viewed just before the current moment  and assume that users generally view neighboring nodes together, then this likelihood becomes stronger.         
+ 
+Formally, we compute $vs_{i,t}$  (i.e., the viewing score $vs$ of object $i$ at time $t$) by weighing the gaze score $gs_{i,t}$ described in Section~\ref{sec:ProbabilisticObjectDetection} by a prediction score $ps_{i,t}$ that object $i$ is a viewing target at time $t$:  
+%Formula 2
+\begin{equation}
+vs_{i,t} = gs_{i,t} \times ps_{i,t}
+\label{eq:VS}
+\end{equation}
+
+This prediction score is computed based on the likelihood that an object is viewed if another object (e.g.,  a node's neighbor) was viewed just before it. Specifically, $ps$ is derived from a viewing transition function $T$ between objects:  $T(j,i)$ gives the likelihood that object $i$ is viewed after object $j$ is viewed. We will assume that $T(j,i)$ is given as input to our algorithm. Concrete examples of what $T(j,i)$ could be linked to are whether objects $i$ and $j$ are somehow connected or related, or whether they are part of a special group (e.g., highlighted elements). Moreover, connections could be either visual, such as an explicit edge or leader line or an implicit sharing of similar visual attributes (e.g., color, shape), or semantic (e.g., both nodes are actors). More examples of $T(j,i)$ functions, and means of defining them, are described throughout the paper.
+
+To compute $ps$, we could consider $ps_{i,t} = T(j,i)$ but that would involve knowing $j$, the previously viewed object, with absolute certainty. As exemplified in Figure~\ref{fig:discreminateFig4}(b), we often cannot unequivocally determine which item was viewed at a given time: $O_1$'s previous viewing score ($vs_{1,t-1}=0.6$), is just slightly larger than $O_2$'s viewing score ($vs_{2,t-1}=0.4$), and thus an absolute choice of $O_1$ over $O_2$ as previously viewed element would be rather arbitrary.  In other words, we cannot say with absolute certainty which of the two objects was viewed before because the user fixated between them. 
+
+In more general terms, our computation of $ps_{i,t}$ must account for multiple items $j$ that may have been viewed before. These items $j$ are those with a previous visual score $vs_{j,t-1}$ that is greater than $0$.  As such, we compute $ps_{i,t}$ as a weighted average of all transition probabilities from objects $j$ with $vs_{j,t-1} > 0$ , to our current item $i$. The weights are given by the likelihood that an object $j$ was viewed before - in other words by its previous viewing score $vs_{j,t-1}$. This computation is captured by Formula~\ref{eq:ps}.  
+
+%Formula 4
+\begin{equation}
+ps_{i,t} = \frac{\displaystyle\sum_{j} {vs_{j,t-1} \times T(j,i)}}{\displaystyle\sum_{j} vs_{j,t-1}} \text{ , where  } \parbox{15em}{$0\leq i \leq n$ and $gs_{i,t} > 0$\\$0\leq j \leq n$ and $vs_{j,t-1} > 0 $\\ $0\leq j \leq n$ and $gs_{j,t} = 0$ }
+\label{eq:ps}
+\end{equation} 
+
+Finally, an important constraint needed to be added to Formula~\ref{eq:ps}. Intuitively, our approach means that previously viewed objects $j$ act as referees with varying degrees of influence (i.e., previous visual scores) in a competition between currently viewed items $i$. This analogy provides the intuition for the necessary constraint: an object should not referee a competition that it is part of. For example, in our simplified scenario, using $O_3$ as a previous element in a competition between itself and $O_4$ would result in an open feedback-loop and should be avoided. This restriction is reflected in Formula~\ref{eq:ps} by the 3rd inequality.  The algorithm pseudocode is provided below.
+
+\begin{algorithm}
+\caption{Viewed Object Detection Algorithm}
+\label{alg:ObjectDetection}
+\begin{algorithmic}[1]
+\State \textbf{Inputs: } 
+\Statex $O_{i, \ldots, n}$= tracked visualization objects (shapes, positions)
+\Statex $g(x,y) = $ gaze sample in model space (time $t$)
+\Statex $T(i,j) = $ viewing transition function ($T(i,j) \in [0,1]$)
+\State \textbf{Outputs:}
+\Statex $vs_{i,t} = $ momentary viewing scores of all objects ($i = 1, \ldots, n$). 
+\For{$i \gets 1 \text{ to } n$}
+	\State Compute $gs_{i,t}$	using Formula~\ref{eq:GS}
+\EndFor
+\State $max \gets 0$
+\For{$i \gets 1 \text{ to } n$}
+	\If{$gs_{i,t} > 0$} \label{algLine:PredictionScoreLines}
+		\State Compute $ps'_{i,t}$	using Formula~\ref{eq:ps}
+		\If{$ps'_{i,t} > max$}
+			\State $max \gets ps'_{i,t}$
+		\EndIf
+	\EndIf
+\EndFor
+\For{$i \gets 1 \text{ to } n$}
+	\State $vs_{i,t} \gets gs_{i,t} \times \frac{ps'_{i,t}}{max} $
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+Last, we note that to optimize for speed, we only compute prediction scores for objects with non-zero gazes (Algorithm~\ref{alg:ObjectDetection}, line~\ref{algLine:PredictionScoreLines}). Also, we compute viewing scores for every gaze sample, rather than every fixation. We believe that doing so leads to results that are less dependent on how fixations are computed and more robust. Since our eye-tracker's sampling rate is $60$Hz, the scores $vs_{j, t-1}$ were computed just $15$ms ago, an interval generally shorter than the time it takes for people to shift their attention to a new object. As such, instead of using the raw $vs_{j,t-1}$ score, we use an average of the last several viewing scores, and, for all practical purposes, the term $vs_{j,t-1}$ should be replaced in the previous formulas by $ \sum_{k=1}^{k=15}{vs_{j,t-1}}$, which, given our eye-tracker's 60Hz temporal resolution, averages samples over approximately 250ms, a time window we observed to be close to an average fixation duration.  However, we note that our algorithm can take as input fixations rather than individual gaze samples, in which case this step would not be necessary. Moreover, additional smoothing and filtering such as those summarized by Kumar et al.~\cite{kumar2008improving} could be used to clean gazes before feeding them into our algorithm. We tried removing gaze samples with high velocity as they are likely to be part of saccades, but observed no discernable improvement in our algorithm's output. 
+
+
+{\bf Performance analysis:} The algorithm swifts through all objects ($n$) to find those in the proximity of a gaze sample or fixation ($k_t$). Then, to compute $ps$ for each of the $k_t$ potentially viewed elements, the algorithm iterates over $k_{t-1}$ objects with non-zero viewing scores from the previous iteration. The algorithm is linear if we consider the number of objects that a user can view at any time to be a constant. This is not true for example if the visualization is zoomed out too much and falls entirely within the algorithm's $R$ radius. However, in such cases the output of the algorithm would be meaningless anyway and the algorithm should be aborded.
