@@ -1,0 +1,12 @@
+[FormatInfo]
+Type=TeXnicCenterProjectInformation
+Version=4
+
+[ProjectInfo]
+MainFile=EuroVis2016_short.tex
+UseBibTeX=1
+UseMakeIndex=0
+ActiveProfile=EuroVis
+ProjectLanguage=en
+ProjectDialect=US
+
