@@ -1,0 +1,158 @@
+\documentclass[journal]{vgtc}                % final (journal style)
+%\documentclass[review,journal]{vgtc}         % review (journal style)
+%\documentclass[widereview]{vgtc}             % wide-spaced review
+%\documentclass[preprint,journal]{vgtc}       % preprint (journal style)
+%\documentclass[electronic,journal]{vgtc}     % electronic version, journal
+
+%% Uncomment one of the lines above depending on where your paper is
+%% in the conference process. ``review'' and ``widereview'' are for review
+%% submission, ``preprint'' is for pre-publication, and the final version
+%% doesn't use a specific qualifier. Further, ``electronic'' includes
+%% hyperreferences for more convenient online viewing.
+
+%% Please use one of the ``review'' options in combination with the
+%% assigned online id (see below) ONLY if your paper uses a double blind
+%% review process. Some conferences, like IEEE Vis and InfoVis, have NOT
+%% in the past.
+
+%% Please note that the use of figures other than the optional teaser is not permitted on the first page
+%% of the journal version.  Figures should begin on the second page and be
+%% in CMYK or Grey scale format, otherwise, colour shifting may occur
+%% during the printing process.  Papers submitted with figures other than the optional teaser on the
+%% first page will be refused.
+
+%% These three lines bring in essential packages: ``mathptmx'' for Type 1
+%% typefaces, ``graphicx'' for inclusion of EPS figures. and ``times''
+%% for proper handling of the times font family.
+
+\usepackage{mathptmx}
+\usepackage{graphicx}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{ulem}
+
+%% We encourage the use of mathptmx for consistent usage of times font
+%% throughout the proceedings. However, if you encounter conflicts
+%% with other math-related packages, you may want to disable it.
+
+%% This turns references into clickable hyperlinks.
+\usepackage[bookmarks,backref=true,linkcolor=black]{hyperref} %,colorlinks
+\hypersetup{
+  pdfauthor = {},
+  pdftitle = {},
+  pdfsubject = {},
+  pdfkeywords = {},
+  colorlinks=true,
+  linkcolor= black,
+  citecolor= black,
+  pageanchor=true,
+  urlcolor = black,
+  plainpages = false,
+  linktocpage
+}
+
+%% If you are submitting a paper to a conference for review with a double
+%% blind reviewing process, please replace the value ``0'' below with your
+%% OnlineID. Otherwise, you may safely leave it at ``0''.
+\onlineid{0}
+
+%% declare the category of your paper, only shown in review mode
+\vgtccategory{Research}
+
+%% allow for this line if you want the electronic option to work properly
+\vgtcinsertpkg
+
+%% In preprint mode you may define your own headline.
+%\preprinttext{To appear in an IEEE VGTC sponsored conference.}
+
+%% Paper title.
+
+\title{A Taxonomy of Tasks and Visual Solutions for Data of Interest (DOI) Eye-Tracking Analyses}
+
+%% This is how authors are specified in the journal style
+
+%% indicate IEEE Member or Student Member in form indicated below
+% for anonymous conference submission please enter your SUBMISSION ID
+% instead of the author's name (and leave the affiliation blank) !!
+%\author[D. Fellner \& S. Behnke]
+       %{D.\,W. Fellner\thanks{Chairman Eurographics Publications Board}$^{1,2}$
+        %and S. Behnke$^{2}$
+%%        S. Spencer$^2$\thanks{Chairman Siggraph Publications Board}
+        %\\
+%% For Computer Graphics Forum: Please use the abbreviation of your first name.
+         %$^1$TU Darmstadt \& Fraunhofer IGD, Germany\\
+         %$^2$Institut f{\"u}r ComputerGraphik \& Wissensvisualisierung, TU Graz, Austria
+%%        $^2$ Another Department to illustrate the use in papers from authors
+%%             with different affiliations
+       %}
+\author{Submission XXX}
+%\authorfooter{
+%%% insert punctuation at end of each item
+%\item
+ %Roy G. Biv is with Starbucks Research. E-mail: roy.g.biv@aol.com.
+%\item
+ %Ed Grimley is with Grimley Widgets, Inc.. E-mail: ed.grimley@aol.com.
+%\item
+ %Martha Stewart is with Martha Stewart Enterprises at Microsoft
+ %Research. E-mail: martha.stewart@marthastewart.com.
+%}
+
+%other entries to be set up for journal
+%\shortauthortitle{Biv \MakeLowercase{\textit{et al.}}: Global Illumination for Fun and Profit}
+%\shortauthortitle{Firstauthor \MakeLowercase{\textit{et al.}}: Paper Title}
+
+%% Abstract section.
+\abstract{
+Eye-tracking data is traditionally analyzed by looking at where on a visual stimulus subjects fixate, or by using area-of-interests (AOI) defined onto visual stimuli to facilitate more advanced analyses. Recently, there is increasing interest in methods that capture what users are looking rather than where they are looking. By instrumenting visualization code that transforms a data model into visual content, gaze coordinates reported by an eye-tracker can be mapped directly to granular data shown on the screen, producing temporal sequences of data objects that subjects viewed in an experiment. Such data collection, which is called gaze to object mapping (GTOM) or data-of-interest analysis (DOI), can be done reliably with limited overhead and can facilitate research workflows not previously possible. Our paper contributes to establishing a foundation of DOI analyses by defining a DOI data model and highlighting its differences to AOI data in structure and scale; by defining and exemplifying a taxonomy of DOI enabled tasks; and by exploring the space of visual designs that can support this taxonomy.
+} % end of abstract
+
+%% Keywords that describe your work. Will show as 'Index Terms' in journal
+%% please capitalize first letter and insert punctuation after last keyword
+%\keywords{Radiosity, global illumination, constant time}
+
+%% ACM Computing Classification System (CCS). 
+%% See <http://www.acm.org/class/1998/> for details.
+%% The ``\CCScat'' command takes four arguments.
+
+%\CCScatlist{ % not used in journal version
+ %\CCScat{K.6.1}{Management of Computing and Information Systems}%
+%{Project and People Management}{Life Cycle};
+ %\CCScat{K.7.m}{The Computing Profession}{Miscellaneous}{Ethics}
+%}
+
+%% Uncomment below to include a teaser figure.
+  %\teaser{
+ %\centering
+ %\includegraphics[width=16cm]{CypressView}
+  %\caption{In the Clouds: Vancouver from Cypress Mountain.}
+  %}
+
+%% Uncomment below to disable the manuscript note
+%\renewcommand{\manuscriptnotetxt}{}
+
+%% Copyright space is enabled by default as required by guidelines.
+%% It is disabled by the 'review' option or via the following command:
+% \nocopyrightspace
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% START OF THE PAPER %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%% The ``\maketitle'' command must be the first command after the
+%% ``\begin{document}'' command. It prepares and prints the title block.
+
+%% the only exception to this rule is the \firstsection command
+%\firstsection{Introduction}
+
+\maketitle
+
+\input{Contents.tex}
+
+\bibliographystyle{abbrv}
+%%use following if all content of bibtex file should be shown
+%\nocite{*}
+\bibliography{bib}
+\end{document}
+
