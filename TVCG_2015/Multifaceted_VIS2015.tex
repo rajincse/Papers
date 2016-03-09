@@ -472,11 +472,10 @@
 \newcommand\MYhyperrefoptions{bookmarks=true,bookmarksnumbered=true,
 pdfpagemode={UseOutlines},plainpages=false,pdfpagelabels=true,
 colorlinks=true,linkcolor={black},citecolor={black},urlcolor={black},
-pdftitle={Bare Demo of IEEEtran.cls for Computer Society Journals},%<!CHANGE!
-pdfsubject={Typesetting},%<!CHANGE!
-pdfauthor={Michael D. Shell},%<!CHANGE!
-pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
-             template}}%<^!CHANGE!
+pdftitle={Analyzing Eye-Tracking Information in Visualization and Data Space:  from Where on the Screen to What on the Screen},%<!CHANGE!
+pdfsubject={Eye-tracking, Area of Interest Analysis, Usability Analyis, Evaluation },%<!CHANGE!
+pdfauthor={Sayeed S. Alam and Radu Jianu},%<!CHANGE!
+pdfkeywords={Eye-tracking, Area of Interest Analysis, Usability Analyis, Evaluation }}%<^!CHANGE!
 %\ifCLASSINFOpdf
 %\usepackage[\MYhyperrefoptions,pdftex]{hyperref}
 %\else
@@ -666,15 +665,15 @@ Eye-tracking data is currently analyzed in the image space that gaze-coordinates
 \end{abstract}
 }
 
-% Note that keywords are not normally used for peerreview papers.
-%\begin{IEEEkeywords}
-%Computer Society, IEEEtran, journal, \LaTeX, paper, template.
-%\end{IEEEkeywords}}
+
 
 
 % make the title area
 \maketitle
-
+% Note that keywords are not normally used for peerreview papers.
+\begin{IEEEkeywords}
+Eye-tracking, Area of Interest Analysis, Usability Analyis, Evaluation 
+\end{IEEEkeywords}
 
 % To allow for easy dual compilation without having to reenter the
 % abstract/keywords data, the \IEEEtitleabstractindextext text will
@@ -740,9 +739,13 @@ Eye-tracking data is currently analyzed in the image space that gaze-coordinates
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 % or if you just want to reserve a space for a photo:
 %
-%\begin{IEEEbiography}{Michael Shell}
-%Biography text here.
-%\end{IEEEbiography}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{images/biopic_sayeed}}]{Sayeed Safayet Alam}
+is a PhD candidate at Florida International University. He received B.Sc. in Computer Science and Engineering from Bangladesh University of Engineering and Technology. His research interests are in applications of eye-tracking to data visualization, and visual analytics. 
+\end{IEEEbiography}
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{images/biopic_radu}}]{Radu Jianu}
+received The PhD degree in computer science from Brown University. He is currently an Assistant Professor in the School of Computing and Information Sciences at Florida International University. His research interests are in visualization evaluation, applications of eye-tracking to data visualization, and applications of visualization to disaster management and mitigation.
+\end{IEEEbiography}
+\vfill
 %
 %% if you will not have a photo at all:
 %\begin{IEEEbiographynophoto}{John Doe}
@@ -763,10 +766,11 @@ Eye-tracking data is currently analyzed in the image space that gaze-coordinates
 % on the last page and whether or not the columns
 % are being equalized.
 
-%\vfill
+
 
 % Can be used to pull up biographies so that the bottom of the last one
-% is flush with the other column.
+% is flush with the other column.n
+
 %\enlargethispage{-5in}
 
 
