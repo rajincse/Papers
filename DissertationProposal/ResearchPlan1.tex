@@ -1,7 +1,9 @@
 \chapter{Research Plan}
+\label{chap:ResearchPlan}
 The main research problem of this dissertation is to determine if we can track automatically and reliably what visual objects, and implicitly what data, users are looking at when interacting with complex, interactive data visualizations (\underline{Contribution-1}); and to find effective ways in which we can interpret and analyze that behavioral data (\underline{Contribution-2}).
 
 \section{Contribution-1: Investigate the feasibility of collecting DOI data in a reliable way.}
+\label{sec:Contrib1}
 
 Many eye-tracking related studies generate visual stimuli using computer programs coded by visualization researchers. In such cases, since the structure and layout of the visual content in the stimuli is accessible at runtime, we can relate gaze positions supplied on the fly by an eye-tracker to the visual content of such visualizations.
 
@@ -22,7 +24,7 @@ For example, a network diagram depicting the characters from the novel Les Miser
 	\label{fig:MiserablesCompactness}
 \end{figure}
 
-Figure~\ref{fig:MiserablesSimple} is a smaller version of the original network diagram with the major characters only. Gazes collected from a user looking at Fantine and Cosette are shown. It is evident that the positions of these gaze samples could be matched to the two rectangles closest to them (i.e. the visual content). Hence, we label this eye-tracking analysis as being in ‘visualization space' (i.e., relating gazes to visual objects shown on the screen) rather than 'image space' (i.e., relating gazes to pixels in an image).
+Figure~\ref{fig:MiserablesSimple} is a smaller version of the original network diagram with the major characters only. Gazes collected from a user looking at Fantine and Cosette are shown. It is evident that the positions of these gaze samples could be matched to the two rectangles closest to them (i.e. the visual content). Hence, we label this eye-tracking analysis as being in `visualization space' (i.e., relating gazes to visual objects shown on the screen) rather than 'image space' (i.e., relating gazes to pixels in an image).
 
 \begin{figure}[htb]
   \centering
@@ -44,10 +46,11 @@ However, as described in Chapter~\ref{chap:Intro}, mapping gazes to individual d
 	\label{fig:MiserablesGaze}
 \end{figure}
 
-As part of our proposed first contribution, we will attempt to create automatic methods that can map gazes to objects more accurately than using this na\"{i}ve approach. Tentative plans for such methods are described below in section 3.1.1. We will test, and validate these methods, and the feasibility of the DOI approach to produce accurate data in general, by: (i) using the methods to instrument a concrete, representative visualization (described in section 3.1.3); (ii) gathering DOI data from human subjects using the visualization; and (iii) comparing the collected data to a ground-truth derived as discussed in section 3.1.2. 
+As part of our proposed first contribution, we will attempt to create automatic methods that can map gazes to objects more accurately than using this na\"{i}ve approach. Tentative plans for such methods are described below in Section~\ref{sec:Algorithm}. We will test, and validate these methods, and the feasibility of the DOI approach to produce accurate data in general, by: (i) using the methods to instrument a concrete, representative visualization (described in Section~\ref{sec:TestCase}); (ii) gathering DOI data from human subjects using the visualization; and (iii) comparing the collected data to a ground-truth derived as discussed in Section~\ref{sec:Validation}. 
 
 
 \subsection{Proposed Methodologies for Collecting DOI Data Accurately}
+\label{sec:Algorithm}
 Initially, we assume that our eye-tracking experiments will use visualizations which are accessible for instrumentation to programmers. Thus, graphical information (e.g. position, size, shape) of internal visualization primitives (e.g. circles representing nodes in a graph) are available at rendering time. 
 
 Our proposed methods will only operate over visualizations with open source-code. This is a limitation of our work. However, we claim that open source code libraries are gaining popularity over proprietary applications. Figure~\ref{fig:WebUsageChart} shows a comparison between two popular visualization libraries: d3JS (open source-code) and FusionChart (proprietary application).
@@ -92,12 +95,14 @@ In Equation~\ref{eq:vsit}, $ps_{i,t}$ represents a prediction score for object $
 
 
 \subsection{Validation Methodology for Collected DOI Data.}
+\label{sec:Validation}
 
 Determining the accuracy of detecting viewed DOIs automatically is non-trivial because obtaining the ground-truth (i.e., what objects users actually looked at) is difficult. The main reason is that human perceive scene subconsciously and cannot reliably self-report what objects they have viewed. Moreover, different users may view the same object differently. Thus, we aim to obtain an approximation of the ground truth by asking human annotators to perform an offline, manual viewed object detection. In this process, we will ask the annotators to analyze recorded screen videos overlaid with gaze samples, and manually record which object the user might have viewed at each moment in time. Then, we will compare our automatically collected DOI data to analyzers' data in order to evaluate the similarity between them.  In effect, we will investigate if the automated method can provide results that are comparable in terms of accuracy with the state-of-the-art: a human coders' ability to infer from raw eye-tracking data what visual objects a user has looked at, only with less overhead and much faster.
 
 The only other alternative would be to employ the `Think Aloud Protocol' (TAP) where users verbally say what they are looking at during their session. However, it is know that TAPs are unreliable because they distract users from their natural workflows. Also, information can be verbalized which can be actively processed in working memory~\cite{Jaa10}. Thus, TAP is unable to access full cognitive process. Moreover, TAP delays thought-process about 30 percent~\cite{Krings01}. User performance significantly differs comparing TAP and no TAP scenarios~\cite{Cooke05}. 
 
 \subsection{Test case}
+\label{sec:TestCase}
 
 We will test the feasibility of DOI collection and evaluation into the context of a PivotPaths visualization~\cite{Dor12} generated from IMDB movie data. Figure~\ref{fig:PivotPath} shows an example of the PivotPaths visualization, in which actors, directors, and genres are connected to movies. The visualization is integrated with interactions such as zooming, panning, hovering, and clicking. As such, the visualization is ever-changing, making it extremely difficult to analyze using manual gaze data analysis techniques (e.g., AOI) and thus an appropriate test case that can capture the benefits of automatic DOI detection as compared to manual AOI workflows. Moreover, the visualization uses visual and interactive paradigms that are representative of real visualizations, and its underlying movie data is familiar to users participating in our validation studies. 
 
