@@ -1,1 +1,51 @@
-\section{Contribution-2: }
+\section{Contribution-2: Formalizing DOI Data Collection, and Interpretation Process. }
+Due to the differences between DOI and AOI, methods for visualizing and analyzing AOI data are unsuited for the analysis of DOI data. The differences are due to two factors. First, DOIs can be more granular and DOI data much larger compared to AOIs. For example, an eye-tracking visualization instrumented with DOI can track 100 DOIs per frame. Conversely, experimenters are able to annotate only about 10-20 AOIs manually. Thus, AOI-based visualizations are not able to show the typically large volumes of DOI data. For example, Figure~\ref{fig:Scanpath} illustrates a scanpath, a typical AOI visualization,  build from a full DOI dataset including 108 tracked DOIs (Figure~\ref{fig:Scanpath}(a)) and one build from only twelve DOIs (Figure~\ref{fig:Scanpath}(b)), a count more typical of traditional AOI analyses. Both diagrams are generated from an eye-tracking session of ten minutes. It is evident that the scanpath diagram for the full DOI set is more complicated than that representative of AOI analyses. Thus, interpreting large DOI data from such diagram is difficult. 
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.99\linewidth]{images/Scanpath.eps}
+  \caption{: Two examples of scanpath visualization. Here, (a) displays scanpath with 108 DOIs. (b) displays scanpath with 12 AOIs. }
+	\label{fig:Scanpath}
+\end{figure}
+
+Second, since DOIs are derived from data, they have explicit attributes. Each DOI is described by a set of attributes that the visualization can access, display, and leverage. Instead, AOIs have implicit attributes that only experimenters that defined them know. Such attributes are inaccessible to visualizations and analysis software. For example, consider that in `The Les Miserables Visualization' example (Figure~\ref{fig:MiserablesSimple}), each character is described by attributes (Table~\ref{tab:LesMiserablesAttribute}) such as `Centrality', `Gender' and `Survives' (i.e. whether the character is alive at the end of the novel). Once they collect data about which objects subjects viewed, analyzers can answer a breadth of questions such as ``Are users more likely to view female characters rather than male characters?'', ``Are users more likely to view deceased characters rather than alive?'', or ``Do users tend to look at central characters?''. 
+
+In conclusion, DOI data interpretation is different than AOI data. Hence, we aim to formalize DOI data model and analysis tasks. Afterward, we will explore designs of visual solutions to support those analysis tasks. 
+
+\begin{table*}
+	\centering
+		\begin{tabular}{|c|c|c|c|}
+				\hline
+				\textbf{Character}	& \textbf{Survives} &	\textbf{Gender}	& \textbf{Centrality}\\\hline
+			
+				Valjean	& No	&Male	&1\\\hline
+Javert	&No&	Male&	3\\\hline
+Cosette 	&Yes	&Female&	2\\\hline
+Marius	&Yes	&Male&	6\\\hline
+Eponine	&No	&Female&	4\\\hline
+Fantine	&No	&Female	&5\\\hline
+Thanerdier	&Yes	&Male	&7\\\hline
+
+		\end{tabular}
+		\caption{Two attribute (isAlive,Gender, and Centrality) data for each character in the Les Miserables Data. }
+		\label{tab:LesMiserablesAttribute}
+\end{table*}
+
+\subsection{Formalizing DOI Data Model and Analysis Tasks.}
+
+We aim to create a formal model of DOI data and then analyze the analysis tasks and data questions that are possible on that formal model. We will ground this analysis into three concrete application areas: Data Science, Education Research, and Civil Engineering. 
+
+Since an AOI analysis task categorization is non-existent and the focus of our proposal, we aim to capitalize on available contributions regarding task taxonomies and frameworks and draw inspiration from the methods involved in their creation. We primarily focus on task taxonomies for spatio-temporal data by Andrienko et al.~\cite{And03}, and cartography and geo-visualization by Roth~\cite{Roth13}. Similar to these works, we aim to generate and categorize DOI tasks by considering data-derived goals (i.e., high-level, domain specific questions that analysts would like to answer), operands (i.e., the specification and answer of a data question), and objectives (i.e., low level analytic question on the data). 
+
+Previous efforts found it useful to define tasks in terms of their operands, data categories that can be used as inputs (i.e., task specification) and outputs (i.e., answer) to a task.  For example, in the context of geographical data, Andrienko et al defined three basic operands: space (where), time (when), and object (what). Using these operands, Andrienko et al.'s defined three basic kinds of possible questions, in terms of inputs and outputs, for spatio-temporal analyses: $when + where \rightarrow what$, $when + what \rightarrow where$, and $where + what \rightarrow when$. We aim to employ a similar analysis in the context of the formal DOI data model. Therefore, an example of a ($when + where \rightarrow what$) question in our particular domain could be ``Which character (What) was viewed in Time T (When) in `Fantine Cluster' (Where) in the Les Miserables Graph (Figure~\ref{fig:Miserables})?''. However, our data model is likely to differ from that of Andrienko (e.g., by including different types of operands), and as such the space of possible tasks will differ as well. 
+
+Additionally, existing work also found it useful to define tasks in terms of their objective primitives, or what type of cognitive task they involve. For example, Roth's five objective primitives include: identify (i.e., find a piece of information given some other piece of information), compare (i.e., compare two pieces of information of the same time), rank (i.e. determine order of information pieces), associate (i.e. capture relationships between different information pieces), and delineate (i.e. group or cluster information pieces)~\cite{Roth13}.  Roth's objective primitives are validated empirically and are thus well suited to categorize both loosely defined and specific objectives. We plan to combine these objectives with our operand models to define the possible range of possible DOI tasks. For example, a specific task involving these operands and this objective would be ``Which character was viewed most (objective: rank) by user A (operand: who)?''. 
+
+Finally, we will curate the space of all possible tasks, generated using the above method, to only those that are likely useful in the context of real DOI analyses. This means defining the goals of a task. To this end we will work with actual researchers in construction engineering. 
+
+\subsection{Design Visual Solutions to Support Analysis Tasks}
+We aim to develop visualization for DOI data to DOI analysis tasks. We aim to use existing AOI visualizations and try to adapt them to DOI data. However, such visualizations are required to facilitate three major supports. First, the visualizations should visualize DOIs which are viewed over long time periods, with attributes, and with multiple granularity levels. Basic visualizations such as scanpath, heatmaps, and scarfplot can handle AOI data with small amount. However, visualizing large scale DOI data is infeasible for such visualizations. Thus, we aim to leverage specific characteristics from different visualization to design novel visualization encodings. For example, scanpaths usually display labels clearly and scarfplots are compact. Hence, we can amalgamate these two visualizations to design a visualization with trade-off to clarity and compactness. Again, we may use glyphs to support additional attributes to DOIs. For, multiple level of granularities, heatmaps and AOI-rivers can show multiple DOIs within a single time-granule. Moreover, we aim to support aggregation and filtration over DOI data to visualize multiple level of granularities. Second, facilitation for comparison, and clustering. To facilitate comparisons, we aim to integrate Gleicher et al.’s comparison paradigm (i.e. juxtaposition, superposition, and relationship encodings)~\cite{Glei11}. Again, clustering was applied over AOI-sequences using a string-edit distance method~\cite{Kur14}. Third, support for interactions, and visual analytics. For example, Kurzhal et al. and Blascheck et al. employed visual analytics approach for AOI data~\cite{Kur14, Bla16}.
+
+Afterward, we will evaluate these adapted visualizations in degrees of supporting DOI formal tasks. We aim to employ visualization design validation paradigm by Munzner~\cite{Mun09}.  Munzner categorized the design validation process four nested categories. First, domain problem characterization (i.e. studying the wrong problem). Second, data and operation abstraction (i.e. showing wrong data). Third, visual encoding and interaction design (i.e. showing data in a wrong way). Fourth, algorithm design (i.e. slowness of algorithm).     
+
+
