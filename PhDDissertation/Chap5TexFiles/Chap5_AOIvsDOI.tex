@@ -1,0 +1,30 @@
+\section{A Comparison Between AOIs and DOIs}
+\label{sec:AOIvsDOI}
+
+
+While DOIs can been regarded as a mere extension of AOIs, there are significant differences that warrant their separate consideration, and highlight the benefits of a change in methodological paradigm.
+
+\noindent \textbf{Data collection :} AOIs exist in stimulus or image space, and need to be defined for each visual frame subjects see. AOI analyses can be used for any type of visual stimulus and drawing AOIs requires little expertise, given the right annotation software. 
+
+DOIs are defined over a visualization's underlying data by instrumenting code. Once a visualization instrumented, DOI data can be collected without added effort for any dataset the visualization can show. Since DOIs are defined over data, their collection is immune to a subject's interactions with a system and specific views they create. This means that data can be captured easily from interactive systems over long times~\cite{Ala16}. However, the code of the visualization needs to be open and expertise is required to instrument it.
+
+\vspace{2mm}
+
+\noindent \textbf{Data scale and granularity :} AOIs tend to be large and sparse (e.g., an entire interface panel), and analyses often involve few AOIs. Moreover, AOI analyses tend to be limited to static stimuli or short videos since defining AOIs is costly. Conversely, DOIs can be granular and many (e.g., individual data objects), and collected over long periods of time. As such, DOI analyses can involve hundreds of DOIs and thousands of focus switches between them. For example, in our first application area subjects viewed on average $75$ individual data objects per task.
+
+\vspace{2mm}
+
+\noindent \textbf{Experiment scale and ecological validity:} AOI analyses often explore key-hole, constrained scenarios. Data is generally captured for time scales of up to a few minutes, and only a handful of coarsely defined AOIs are tracked. Instead, DOI analyses can be used to track the behavior of many users, using interactive visual content (e.g., real-life visual analytics systems), over extended periods of time. The DOI methodology thus enables a type of in-vivo experimentation not previously explored.
+
+\vspace{2mm}
+
+\noindent \textbf{Data driven analyses: } AOIs have been mostly analyzed and interpreted in direct connection with the visual stimuli they were defined on. They have meaning that is known to those who create and use them, but which is rarely defined explicitly as attributes that can be visualized or mined computationally in an analysis.  
+
+Instead, DOIs are described explicitly by a rich set of attributes derived from the visualization's underlying data and visual encoding. This broadens the type of research questions that experimenters can ask. For example, the question "Did effective learners look at examples more than ineffective learners?" can be answered immediately by correlating the subjects' attributes to the types of DOIs they focused on. DOI attributes make it possible to refer to categories of data, rather than to individual DOIs.
+
+\vspace{2mm}
+
+\noindent \textbf{Range of research questions: } Eye-tracking in general, and the AOI method in particular, have been aimed at exploring low-level perceptual processes. Through its intrinsic connection to data, the DOI methodology can support novel questions about the types of data users are interested in, and how they might use this data to reason and hypothesize. Through its scale and semantic annotation, DOI data can support exploratory analyses not common in traditional eye-tracking experimentation.
+
+
+

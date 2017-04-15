@@ -1,0 +1,34 @@
+\section{Introduction}
+Due to the differences between DOI and AOI, methods for visualizing and analyzing AOI data are unsuited for the analysis of DOI data. The differences are due to two factors. First, DOIs can be more granular and DOI data much larger compared to AOIs. For example, an eye-tracking visualization instrumented with DOI can track 100 DOIs per frame. Conversely, experimenters are able to annotate only about 10-20 AOIs manually. Thus, AOI-based visualizations are not able to show the typically large volumes of DOI data. For example, Figure~\ref{fig:Scanpath} illustrates a scanpath, a typical AOI visualization,  build from a full DOI dataset including 108 tracked DOIs (Figure~\ref{fig:Scanpath}(a)) and one build from only twelve DOIs (Figure~\ref{fig:Scanpath}(b)), a count more typical of traditional AOI analyses. Both diagrams are generated from an eye-tracking session of ten minutes. It is evident that the scanpath diagram for the full DOI set is more complicated than that representative of AOI analyses. Thus, interpreting large DOI data from such diagram is difficult. 
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=0.99\linewidth]{images/Scanpath.eps}
+  \caption{: Two examples of scanpath visualization. Here, (a) displays scanpath with 108 DOIs. (b) displays scanpath with 12 AOIs. }
+	\label{fig:Scanpath}
+\end{figure}
+
+\begin{table}[htbp]
+	\centering
+		\begin{tabular}{|c|c|c|c|}
+				\hline
+				\textbf{Character}	& \textbf{Survives} &	\textbf{Gender}	& \textbf{Centrality}\\\hline
+			
+				Valjean	& No	&Male	&1\\\hline
+Javert	&No&	Male&	3\\\hline
+Cosette 	&Yes	&Female&	2\\\hline
+Marius	&Yes	&Male&	6\\\hline
+Eponine	&No	&Female&	4\\\hline
+Fantine	&No	&Female	&5\\\hline
+Thanerdier	&Yes	&Male	&7\\\hline
+
+		\end{tabular}
+		\caption{Two attribute (isAlive,Gender, and Centrality) data for each character in the Les Miserables Data. }
+		\label{tab:LesMiserablesAttribute}
+\end{table}
+
+Second, since DOIs are derived from data, they have explicit attributes. Each DOI is described by a set of attributes that the visualization can access, display, and leverage. Instead, AOIs have implicit attributes that only experimenters that defined them know. Such attributes are inaccessible to visualizations and analysis software. For example, consider that in `The Les Miserables Visualization' example (Figure~\ref{fig:MiserablesSimple}), each character is described by attributes (Table~\ref{tab:LesMiserablesAttribute}) such as `Centrality', `Gender' and `Survives' (i.e. whether the character is alive at the end of the novel). Once they collect data about which objects subjects viewed, analyzers can answer a breadth of questions such as ``Are users more likely to view female characters rather than male characters?'', ``Are users more likely to view deceased characters rather than alive?'', or ``Do users tend to look at central characters?''. 
+
+In conclusion, DOI data interpretation is different than AOI data. Hence, we aim to formalize DOI data model and analysis tasks. In this chapter, we discuss our contributions of a general data model in Section~\ref{sec:DOIDataModel} and list of analysis questions for DOI data in Section~\ref{sec:DOIAnalysisTasks}. Moreover, we discuss a comparison between AOI and DOI data in Section~\ref{sec:AOIvsDOI}. Finally, we conclude our discussion about this chapter in Section~\ref{sec:DOIAnalysisModelConclusion}.
+
+

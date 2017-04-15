@@ -1,0 +1,61 @@
+\chapter{INTRODUCTION}
+\label{chap:Intro}
+
+\section{Motivation}
+\label{sec:Motivation}
+Eye-tracking is a method of reporting eye activities using specialized hardware called ``eye-trackers''. Modern eye-trackers has several capabilities. Primarily, they can locate where a user is looking on a display device (e.g. computer screen, projection screen, hand-held, and wearable displays). Albeit several types of eye-tracking applications exist, we can divide them into two categories: interactive and diagnostic. For the former (interactive), eye-tracking is used to change an interface based on a user's visual attention. Such as using eye-tracking as an alternate to pointing devices ( e.g. mouse, touch interface) or text inputs. However, the latter  (diagnostic) is to describe a user's visual attention. In this dissertation, we will primarily focus on the diagnostic category of eye-tracking applications. 
+
+Usually, a diagnostic eye-tracking study serves the purpose of quantitatively measuring people's attentional process as they solve visual tasks. It plays a major role in research fields such as human-computer interactive, cognitive sciences, and information visualization. In a typical eye-tracking experiment of this type, an eye-tracker tracks a human subject who seats in front of a computer screen which shows a visual stimulus (i.e. image, video). The eye-tracker reports and records the subject's gaze-positions on the screen. Experimenters then test their hypotheses by analyzing the collected data using visual and statistical analytic techniques. 
+
+Presently, eye-tracking data, accumulated as a stream if 2D gaze-samples, is analyzed by one of two approaches: point-based and area of interests (AOI) -based analysis. In point-based methods, experimenters treat gaze-samples as individual points. Afterward, they related them to the 2D stimulus shown on the screen during the experiment. In AOI-based methods, experimenters first define certain regions or areas within the analyzed stimuli. Later, they aggregate recorded gaze samples into those AOIs, which then serve as a higher-level unit of analysis.
+
+A major limitation of these approaches is that both of them involve a significant overhead. That is, experimenters collect gaze samples as pixel coordinates and relate them to visual stimulus by either overlaying gaze-clouds on top of the stimulus image (e.g. heatmap) or by manually defined AOIs. However, if the stimulus is dynamic or interactive, then experimenters have to repeat these analysis actions for each frame of stimulus. Such scenario makes these approaches infeasible for dynamic or interactive stimuli.
+
+A solution presents itself with the realization that in data visualization the arrangement and layout of visual contents are known at rendering time. Hence, for visualizations with open source code, this can be instrumented so that gaze samples are related to visual contents automatically and in real-time. In other words, we can track what data objects users are viewing at each consecutive moment in time. For example, a network visualization may contain visual representations of nodes and edges. Since we know where the locations of these data object on the screen, we can map gaze samples provided by an eye-tracker to them. To exploit the analogy with the traditional AOI nomenclature, we call such eye-tracked data objects \textit{Data of Interest (DOI)}, and the entire detection and analysis process as \textit{DOI eye-tracking analysis}. 
+
+The particularity of DOI analysis is that we can perform it in data space rather than image space. In other words, we can couple DOIs with visualization data. Thus, DOIs intrinsically contain annotations with data attributes. As a result, we can analyze DOIs on its data-derived properties, independently from visual stimuli. Hence, it will eliminate manually relating gaze samples to visual stimuli process which traditional analysis methods (i.e. point-based and AOI-based) regularly perform. Moreover, DOI analysis will support experiments of significantly longer sessions than those possible using traditional analysis approaches. Again, operating in data space will leverage DOI analysis to answer many questions that traditional analysis approaches cannot. 
+
+\section{Problem Definition and Contributions}
+\label{sec:ProblemContribution}
+This dissertation makes two contributions. First, we demonstrate that collecting sufficiently accurate DOI analysis data is feasible. Second, we seek to create the foundation for DOI eye-tracking analysis (i.e. DOI analysis). The contributions are described in Section~\ref{sec:Contribution-1} and~\ref{sec:Contribution-2}. 
+
+\subsection{Contribution-1:Collection DOI Data is Feasible}
+\label{sec:Contribution-1}
+In Section~\ref{sec:Motivation}, we have introduced the idea of relating gazes with data entities as DOI data. However, we claim that such data collection is feasible. Moreover, we also claim to collect data with our method over long experimental sessions associated with dynamic and interactive stimuli, and open-ended tasks. 
+
+We have two assumptions on the eye-tracking experiments which we intend to collect DOI data. First, the experiments must use a visualization that has visual elements that are computer generated. Second, visualization generating code must be open source. Hence, experimenters can implement a part of DOI-producing code to the original code. 
+
+DOI data will consist collection of DOIs. Albeit DOIs are customizable, we assume they will contain certain information about visualization data entity, screen information, eye-tracking information, and user-specific data. However, for simplicity, we assume DOI data is time-annotated visual elements that participants viewed during such eye-tracking experiments. We call such visual elements as viewed objects. Thus, viewed objects detection is a critical aspect of DOI data collection.
+
+For detecting viewed objects, we can adopt a na\"{\i}ve method from AOI analyses. The AOI's method identifies a visual object as `detected' whenever a gaze point falls on it. However, in AOI analyses, annotated AOIs are usually large and non-overlapping. Albeit the na\"{\i}ve method is sufficient for such scenario, it will not work for complex and dense visualization. For example in a real-life visualization, hundreds of distinct visual objects may occupy the screen at the same time. Again, eye-trackers can indicate only a small screen regions (e.g. approximately one inch in diameter), which users are fixating (i.e., viewing). Since such regions are likely to intersect with multiple visual objects, mapping gazes to individual objects are compelled to be an imprecise process. Thus, we aim to investigate if DOI instrumentation can produce data that is sufficiently accurate for meaningful analyses in the context of real-life visualizations.
+
+As such, we aim to improve the na\"{\i}ve AOI detection approach. We aim to do so based on the hypothesis that users are more likely to view objects that are visually appealing (e.g. highlighted), or connected (physically or semantically) to previously viewed objects. If these were true, it would allow us to distinguish between potentially viewed objects, when eye-trackers detect gaze points in the vicinity of multiple objects. We aim to test this hypothesis, we have formalized the idea into a novel DOI detection algorithm, and evaluated its performance over the na\"{\i}ve AOI detection approach.  
+
+We contributed by developing a DOI detection algorithm incrementally. Moreover, we instrumented and applied the algorithm to collect DOI data from users solving real tasks in real-life visualization. Afterward, we will evaluate the reliability and effectiveness of the collected DOI data.
+
+\subsection{Contribution-2: Formalization of DOI Data Collection and Interpretation}
+\label{sec:Contribution-2}
+
+We claim that using DOI analysis will significantly reduce human effort on analyzing eye-tracking data. However, to harness its maximum potential, we need to formalize the process of DOI analysis. We can divide the DOI analysis process into two parts: collecting data and interpreting data. Again, formalizing the latter would require two steps. First, we will compile a list of questions that DOI data can answer. Second, we will create novel visual analytics support to answer them. 
+
+DOIs are closely related to AOIs. Moreover, using AOIs to analyze eye-tracking is well understood, and a plethora of visualization techniques exist to support such analyses. However, we claim that using these established AOI analysis methods to understand DOI data will not be effective due to two major challenges. First, we have proved that DOI is significantly more granular and larger than data collected in traditional eye-tracking experiments. For example, using the DOI approach, we could track hundreds or thousands of DOIs over hour-long experimental sessions. Such scenarios contrast with traditional AOI methods which typically track tens of AOIs over one or two minutes. AOI methods are unlikely to handle the significantly larger volumes of DOI data. Second, DOI data can be more useful in getting insights about the semantics of the data a user explores since DOIs couple them with data attributes. Such attributes are unavailable in AOI data, and AOI methods have not been designed to explore them. Thus, AOI methods will not be sufficiently flexible to answer the new questions that DOIs can answer. 
+
+We divide this contribution into three sub-contributions. The former sub-contribution addresses the formalization of collecting DOI data process. The latter two would address the two steps of interpreting DOI data.  
+
+\textbf{Sub-contribution 2.1:} We have contributed to \textbf{formalize the DOI data collection} process by providing guidelines to experimenters about how to instrument visualizations and collect DOI data. We claim that DOI data can be difficult to analyze if collected data is in a clumsy format. We also provided a DOI data model to enable experimenters producing adequately formatted DOI data. For example, in a network visualization, DOIs may be individual nodes or clusters of nodes. Usually,  links represent a single relationship among nodes. Thus, simple links are unable to represent multiple semantic relationships among DOIs. Hence, a representation of all essential relationships among DOIs to test intricate hypotheses afterward. On the other hand, testing hypotheses may become infeasible if collected DOI data is without any data model. Thus, we need a DOI data model to facilitate experimenters. 
+
+\textbf{Sub-contribution 2.2:} Generally, analyzers test their hypotheses by questioning their experimental data. We aim to \textbf{formalize the type and range of analysis queries that are askable to DOI data}. Such questions will allow researchers to understand the classes of scientific queries that the DOI methodology can support. Methodologically, we started from the formal data model devised as part of contribution $2.1$ and exhaustively identified the types of questions that the data model can support, an approach used with reliable results in the past to generate tasks-requirements for other categories of data (e.g. geographical data, temporal data). 
+
+\textbf{Sub-contribution 2.3:} Presently, visualization is an essential tool for data analysis. We aim to \textbf{explore designs of visual solutions that could facilitate DOI data analyses}. For this sub-contribution, We explored existing visual techniques for analyzing AOI data, implemented new visualizations based on them to support the interpretation of the larger and richer DOI data. We also explored these methods and their effectiveness while trying to help real-life researchers answer real-life scientific questions. Specifically, we asked design requirements and feedback from collaborators at FIU and incrementally modified our designs according to their suggestions. 
+
+\section{Related Publications}
+For the accomplishment of this dissertation, we have produced the following publications:
+
+$\bullet$ \bibentry{AJ17}.    
+
+$\bullet$ \bibentry{Ala16}.
+
+$\bullet$ \bibentry{Okoe14}.
+
+\section{Outline of the Dissertation}
+We discuss foundations of the research of this dissertation in Chapter~\ref{chap:Foundations}. 

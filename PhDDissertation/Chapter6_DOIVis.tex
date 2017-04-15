@@ -1,0 +1,62 @@
+\chapter{VISUAL SOLUTIONS FOR DOI INTERPRETATION}
+In this chapter we discuss the possible visual interpretations for DOI data. AOI is image-space counter part of DOI. Although plethora of visual solutions exist for AOI~\cite{Bla14}, three distinct properties of DOIs prohibit them to interpret DOI data. First, DOI data has volumes and multiple granularities. Second, DOI data deals with data attributes. Third, DOI data supports different range of analysis questions possible compared to AOI data. 
+
+\section{Existing Visualizations for Eye-tracking Data}
+\label{sec:ClassicVisualization}
+In this section, we discuss existing visualization techniques for eye-tracking data. Specifically, we will focus on three basic visualization techniques: Heatmap, Scanpath, and Scarfplot. %Moreover, we will briefly discuss about three advanced techniques : AOI-river, Transition Matrices, and Directed graphs.
+
+\subsection{Heatmap}
+Heatmap visualization contains a 2D matrix where each cell is assigned a color. The color used in the cell represent value of the cell. Multiple color schemes exist to represent color to value. The most popular color scheme is the 'Rainbow' color scheme. In rainbow color scheme, 'red' represents maximum and 'violet' represents minimum. Many heatmap visualizations also use green or blue for minimum. However, rainbow color scheme lacks perceptual ordering, and not sensitive small value changes~\cite{borland2007rainbow}. Hence, visualization researchers consider rainbow color scheme as misleading. Many heatmaps use color scales such as gray-scale, heated-object, and linearized optimal scale~\cite{silva2007there}. Figure~\ref{fig:heatmapsExample} depicts an example of heatmaps with three different color schemes. 
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{images/heatmapsExample.eps}
+  \caption{Heatmap visualization with three different color schemes: (a) rainbow, (b) gray-scale, and (c) heated object.}
+	\label{fig:heatmapsExample}
+\end{figure}
+
+
+
+\subsection{Scanpath}
+A scanpath visualization depicts transitions among multiple entities over time. Scanpath visualization either show temporal information in a linear scale or discard temporal information. For example, we encode transitions among five entities $e_1 \rightarrow e_2\rightarrow e_3\rightarrow e_4\rightarrow e_5\}$ with scanpath visualization. Figure~\ref{fig:scanpathExample}(a) portray all transitions among entity to entity. Such techniques require a layout with minimal crossing among transitions. However, it produces a compact visualization. Again, in Figure~\ref{fig:scanpathExample}(b), all entities lie vertically and are connected with a horizontal line to show temporal information. For depicting a transition between $e_1$ and $e_2$, we place transition markers (e.g. a circle) along their horizontal lines. Then, we connect the markers with transition encoding (e.g. an arrow). The latter technique is more suitable for following transitions. However, it takes more space than the former version. 
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{images/scanpathExample.eps}
+  \caption{Scanpath visualization (a) without explicit temporal information, (b) with temporal transitions.}
+	\label{fig:scanpathExample}
+\end{figure}
+
+\subsection{Scarfplot}
+In a scarplot technique, visual entities are joined as multiple tapes known as scarflines~\cite{richardson2005looking}. The entities may have different width in tapes. The width usually represent data value (e.g. intensity). Figure~\ref{fig:scarfplotExample} demonstrate an example of transitions viewing pattern for two users. $User_1$ viewed entities $e_1, e_2, e_3, e_4,e_5$ and $User_2$ viewed $e_6, e_7$. Scarfplot technique is useful for finding pattern among multiple sets of data. 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{images/ScarfplotExample.eps}
+  \caption{An example of Scarfplot visualization. }
+	\label{fig:scarfplotExample}
+\end{figure}
+
+\section{Enhancing Visualization for DOI Data}
+Visualization techniques discussed in Section~\ref{sec:ClassicVisualization} can interpret DOI data with several limitations. First, heatmap visualization dimension may exceed due to large data scale DOI data. The example depicted in Figure~\ref{fig:heatmapsExample} shows a 2D matrix of $5 \times 26$ dimensions. If we want to use heatmap for DOI data, then dimension may exceed $100 \times 100$. For example, a DOI data of time length 3 minute may produce a heatmap of $180 \times 75$ (i.e. 1 second per time cell and maximum 75 DOIs detected in 1 sec). Thus, we need filtration and sorting in such cases. Second, scanpath diagram have similar dimension related problem. However, with the increasing amount of DOIs will produce cluttering in transitions. Hence, the ordering DOI elements are vital in such cases. We can use clustering to solve this problem. Third, scarfplot are suitable for interpreting DOIs in a compact manner. However, labels are not clearly visible in a scarfplot. Thus, distinguishing DOI elements will be challenging. To solve this, we may use different textures and encoding for DOI data elements in scarflines. We discuss possible enchancement for DOI visualization below. 
+
+\subsection{Handling Large Data Scale and Multiple Granularity}
+Large data scale and multiple granularity of DOI data produces huge amount of distinct data elements. Thus, accommodating all the elements is challenging. We propose using focus+context technique for such scenario. 
+
+Focus+context is an interactive technique which is similar to a technique called overview+detail. Overview+detail have two views of the involving visualization: overview and detail. In the overview view, the whole visualization is viewed with minimal readability and the detail view shows a detail of a part of the context view. On the other hand, focus+context combines the two views in a single coherent view~\cite{spence1982data}. Using such technique will facilitate analyzers to navigate through DOI data. 
+
+\subsection{Handling Data Attributes}
+DOIs inherently contain data attributes. Thus, DOI visual interpretation require visual representations of data attributes. We propose using glyphs for DOIs in visualizations. 
+
+A glyph is a small visual object that is discretely placed in visualizations. It is useful to depict data attributes~\cite{borgo2013glyph}. Glyph designing often combines concepts of Gestalt psychology~\cite{kohler1970gestalt}, visual channel selection, and design criteria. For example, if we want to design a glyph for $O = {a_1, a_2}$ where $a_i$ is the $i$th attribute for object $O$. We assume that the attributes are sorted in descending order of importance(i.e. $a_1$ is the most important attribute and $a_2$ is the least). We can assign four visual channels for all the attributes: color, and size. According to pop-out effect of visual channel, color precedes size in importance. Thus, users will be able to detect whether a visual object is red or blue first than whether its big or small. 
+
+A suitable instance of glyph is star-plot. A star-plot contains radially arranged multiple axes (i.e. rays)~\cite{klippel2009star}. Each attribute of involving data element corresponds to a ray. Connecting data points of each ray creates a star-like shape to create such star-plot. Using star-plots for DOI data significantly facilitates handling data attribute. 
+
+\subsection{Supporting Analysis Questions}
+Rind et al.~\cite{Rind15}. 
+
+\section{Case Studies}
+Heatmap, Scarfplot. 
+
+\section{Evaluation}
+Construction
+\section{Conclusion}
