@@ -4,7 +4,7 @@
 We currently explore the use of the DOI methodology in three concrete projects. We report on the instrumentation process, the data collected, and the research goals of these projects as a means of exemplifying the research processes that the DOI approach can facilitate.  
 
 \section{Tracking data consumption in visualization systems}
-
+\label{sec:ExperimentIMDB}
 We study the degree to which the DOI approach can enable visualization researchers and analysts to track and understand what data users are foraging for, and what types of questions they are trying to answer while using interactive visualization systems. We showed that DOI data can reveal to an analyst, even in real-time, details about the tasks users are pursuing in an interactive visualization~\cite{Ala16, alam2015they}. We used this experiment to evaluate our first contributions (i.e. Section~\ref{sec:DOICollectionEvaluation}. 
 
 To drive this research we instrumented a Java-based PivotPath~\cite{Dor12} visualization of movie data from the Internet Movie Database (IMDB). The visualization showed actors, movies, directors, and genres as 2D nodes connected by curves and was interactive. It could be zoomed and panned, users could select and highlight data, and could change the subset of data shown at any given time. 
@@ -14,7 +14,7 @@ We instrumented the visualization by inserting instructions that mirrored its mo
 Typical questions we found that we were able to answer from DOI data were: "Did a user try to solve a given task, or did they focus on specific data?", "Did a tracked user switch their analysis focus?", "When did a tracked user start solving a specific task?", "What data did users focus on when asked to solve a particular task?". Such analyses can advance the visual analytics agenda by providing unprecedented insight into how users forage for and analyze data naturally, in interactive visual analytics systems and over extended periods of time. 
 
 \section{Understanding student learning}
-
+\label{sec:ExperimentArchitecture}
 We work with education researchers to understand how students learn architecture using visual, interactive instruction material. In a preliminary pilot study with six subjects, we found that we can collect detailed DOI data from students learning via an interactive learning environment, to reveal the type of content learners focus on, and the sequences and patterns in which they do so. 
 
 We explored an existing learning environment designed to teach architecture concepts related to facades and energy efficient building materials. This learning module was structured as an informational web application (HTML + javascript), contained primarily text and images, and was interactive in that students could navigate between learning concepts, collapse and expand sections, and obtain details on demand. 
@@ -37,7 +37,7 @@ This experimental setup and data collection process were designed to allow our c
 \end{figure}
 
 \section{Exploring how workers detect and assess hazardous situations on construction scenes}
-
+\label{sec:ExperimentConstruction}
 We collaborate with civil engineering researchers wishing to understand and model how construction workers identify and respond to safety hazards in construction scenes. Such research is important as the construction  industry  suffers  from the  highest  number  of  occupational  fatalities  among  all  the  industries. 
 
 Existing studies have explored the visual perception of workers on construction sites by tracking workers' gazes as they observe active sites for specific amounts of time~\cite{SafetyPerf}. However, simulating hazardous scenarios in-vivo is at best difficult, if not impossible. 

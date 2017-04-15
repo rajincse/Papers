@@ -36,6 +36,46 @@ In a scarplot technique, visual entities are joined as multiple tapes known as s
 	\label{fig:scarfplotExample}
 \end{figure}
 
+\section{Case Studies}
+In this section, we discuss our implementation of four DOI analysis visualizations: heatmap, scanpath, scarfplot, and stacked glyph-plot. We developed these visualizations based on collected DOI data from experiments in Chapter~\ref{chap:CaseStudies}. Specifically, we developed  for the experiment described in Section~\ref{sec:ExperimentIMDB}. Next, we developed another heatmap for experiment described in Section~\ref{sec:ExperimentArchitecture}, and a stacked glyph plot for the experiment described in Section~\ref{sec:ExperimentConstruction}. We discuss more about them below. 
+
+\subsection{DOI Vis for Tracking Data Consumption Experiment}
+We already discussed about the data collection and instrumentation methods about the tracking data consumption experiment in Section~\ref{sec:ExperimentIMDB}. To analyze the data collected from this experiment, we developed three visualizations: heatmap, scanpath, and scarfplot. 
+
+First, we developed a time-annotated heatmap (Figure~\ref{fig:HeatmapIMDB}) where each cell's color represents viewing score (i.e. viewing intensity). We chose the grayscale color scheme to render the heatmap where black represents maximum and white represents minimum. In our visualization, we facilitate interaction of panning to view time-based data. For facilitating comparison, we allowed rendering user data views side by side. 
+\begin{figure}[htb]
+  \centering
+	\includegraphics[width=0.6\linewidth]{images/HeatmapIMDB.eps}
+  \caption{Heatmap of real DOI data. User data is shown separately. DOI-rows are scaled vertically to make DOIs viewed often more salient. DOIs are ordered by viewing amount; those beyond a threshold are not shown.
+  A time-window (white section) helps prioritize which data is shown.}
+	\label{fig:HeatmapIMDB}
+\end{figure}
+
+Second, we have implemented a scanpath for the same experiment (Figure~\ref{fig:ScanpathsIMDB}). Unlike heatmap, we considered every DOI is viewed when its viewing score crossed a threshold value (e.g. 0.75). Then, we connected the DOI cell to render the scanpath. The scanpath rendering had two versions: juxtaposed (Figure~\ref{fig:ScanpathsIMDB}(left)) and superpositioned(Figure~\ref{fig:ScanpathsIMDB}(right)). We applied a string edit-distance clustering over the vertical sequence of DOIs to reduce cluttering. 
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=0.75\linewidth]{images/ScanpathsIMDB.eps}
+  \caption{Scanpaths of real DOI data. (left) Data is shown separately for each user. Depicted DOIs are the same for all four users, enabling the comparison of the scanpath profile; the top two users viewed simialr data. (right) Users' data are shown next to each other for each DOI; we notice that the four users cluster into two pairs, based on their interests.}
+	\label{fig:ScanpathsIMDB}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{images/ScarfsIMDB.eps}
+  \caption{Re-imagined scarfplots for movie DOI data, sketched for two users. DOI are labeled explicitly, and scaled according to how much they were viewed around particular time-points. Resizing a users' plot vertically would show less or more data. A selection for one user (Goodfellas) is highlighted in all data. }
+	\label{fig:ScarfsIMDB}
+\end{figure}
+
+Third, we modified the original scarfplot to enable DOI data visualization. We developed a scarfplot with clear labels (Figure~\ref{fig:ScarfsIMDB}. Moreover, the labels are connected with the scarf area on the scarflines. To support multiple granularities, we rendered multiple scarflines to render DOIs clearly. 
+%\begin{figure}[htb]
+  %\centering
+	%\includegraphics[width=0.5\linewidth]{images/MatrixGraphIMDB.eps}
+  %\caption{Transition matrix and graph of real DOI data. Both support multiple time-scales by allowing transitions to be defined flexibly, depending on the maximum time allowed to pass between when a first and second object are viewed. The graph shows often viewed objects larger.}
+	%\label{fig:MatrixGraphIMDB}
+%\end{figure}
+
+\subsection{DOI Vis for Student Learning Experiment}
+We developed an interactive heatmap visualization for the student learning experiment from the Section~\ref{sec:ExperimentArchitecture}.  
 \section{Enhancing Visualization for DOI Data}
 Visualization techniques discussed in Section~\ref{sec:ClassicVisualization} can interpret DOI data with several limitations. First, heatmap visualization dimension may exceed due to large data scale DOI data. The example depicted in Figure~\ref{fig:heatmapsExample} shows a 2D matrix of $5 \times 26$ dimensions. If we want to use heatmap for DOI data, then dimension may exceed $100 \times 100$. For example, a DOI data of time length 3 minute may produce a heatmap of $180 \times 75$ (i.e. 1 second per time cell and maximum 75 DOIs detected in 1 sec). Thus, we need filtration and sorting in such cases. Second, scanpath diagram have similar dimension related problem. However, with the increasing amount of DOIs will produce cluttering in transitions. Hence, the ordering DOI elements are vital in such cases. We can use clustering to solve this problem. Third, scarfplot are suitable for interpreting DOIs in a compact manner. However, labels are not clearly visible in a scarfplot. Thus, distinguishing DOI elements will be challenging. To solve this, we may use different textures and encoding for DOI data elements in scarflines. We discuss possible enhancements for DOI visualization below. 
 
@@ -97,8 +137,7 @@ Second, DOIs could be grouped by using attribute queries to define DOI categorie
 	
 \noindent \textbf{Filtering} enables users to change the set of data items being presented based on specific conditions, and should be possible on all selectable data categories previously mentioned. DOIs should be hidden or revealed based on their attributes, how often they are viewed, when they are viewed, and which users view them (e.g., ``Show only DOIs that both of two selected users viewed'').
 	
-\section{Case Studies}
-Heatmap, Scarfplot. 
+
 
 \section{Evaluation}
 Construction
