@@ -1,5 +1,10 @@
 \chapter{VISUAL SOLUTIONS FOR DOI INTERPRETATION}
+\label{chap:DOIVis}
 In this chapter we discuss the possible visual interpretations for DOI data. AOI is image-space counter part of DOI. Although plethora of visual solutions exist for AOI~\cite{Bla14}, three distinct properties of DOIs prohibit them to interpret DOI data. First, DOI data has volumes and multiple granularities. Second, DOI data deals with data attributes. Third, DOI data supports different range of analysis questions possible compared to AOI data. 
+
+Thus, DOI visualizations should allow analysts to explore DOI data at many levels of detail, including multiple temporal scales (e.g., seconds vs. minutes) and data granularities (e.g., individual vs. categories of DOIs).  DOI attributes should be shown visually and queried flexibly to allow analysts to detect correlations between a user's interest in data and that data's properties. Attributes should be used to deal with the scale of the data by allowing users to filter, highlight, and aggregate data with specific attribute values. Finally, visualizations need to support the DOI analysis tasks. 
+
+
 
 \section{Existing Visualizations for Eye-tracking Data}
 \label{sec:ClassicVisualization}
@@ -75,7 +80,7 @@ Third, we modified the original scarfplot to enable DOI data visualization. We d
 %\end{figure}
 
 \subsection{DOI Vis for Student Learning Experiment}
-We developed an interactive heatmap visualization for the student learning experiment from the Section~\ref{sec:ExperimentArchitecture}.  
+We developed an interactive heatmap visualization (Figure~\ref{fig:HeatmapArchitecture}) for the student learning experiment from the Section~\ref{sec:ExperimentArchitecture}. In Figure~\ref{fig:HeatmapArchitecture}, we lined up all detected DOIs on the left and their viewing timeline on the right. A sorting option for DOI lineup is also available where we can sort DOIs over first viewed, most viewed or by categories. We collected DOIs of three categories: text, navigation (i.e. buttons, links), and image AOIs. We added selection option where a pop up dialog appears whenever we select any DOI. The pop up dialog generally desribes DOI details and possible image section from the original stimuli. We also enabled the timeline panel to be dragged to have a better view of DOI data. 
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{images/architecture.eps}
@@ -84,26 +89,11 @@ We developed an interactive heatmap visualization for the student learning exper
 \end{figure}
 
 \subsection{DOI Vis for Construction Hazard Detection Experiment}
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{images/constructionAnalysis.eps}
-  \caption{Stacked Glyph plot for Construction}
-	\label{fig:constructionAnalysis}
-\end{figure}
-\section{Enhancing Visualization for DOI Data}
-Visualization techniques discussed in Section~\ref{sec:ClassicVisualization} can interpret DOI data with several limitations. First, heatmap visualization dimension may exceed due to large data scale DOI data. The example depicted in Figure~\ref{fig:heatmapsExample} shows a 2D matrix of $5 \times 26$ dimensions. If we want to use heatmap for DOI data, then dimension may exceed $100 \times 100$. For example, a DOI data of time length 3 minute may produce a heatmap of $180 \times 75$ (i.e. 1 second per time cell and maximum 75 DOIs detected in 1 sec). Thus, we need filtration and sorting in such cases. Second, scanpath diagram have similar dimension related problem. However, with the increasing amount of DOIs will produce cluttering in transitions. Hence, the ordering DOI elements are vital in such cases. We can use clustering to solve this problem. Third, scarfplot are suitable for interpreting DOIs in a compact manner. However, labels are not clearly visible in a scarfplot. Thus, distinguishing DOI elements will be challenging. To solve this, we may use different textures and encoding for DOI data elements in scarflines. We discuss possible enhancements for DOI visualization below. 
-
-\subsection{Handling Large Data Scale and Multiple Granularity}
-\label{sec:LargeDataSupport}
-Large data scale and multiple granularity of DOI data produces huge amount of distinct data elements. Thus, accommodating all the elements is challenging. We propose using focus+context technique for such scenario. 
+We implemented a glyph based visualization for hazard detection experiment discussed in Section~\ref{sec:ExperimentConstruction}. The visualization (Figure~\ref{fig:constructionAnalysis}) employs focus+context technique and glyph based solution to handle multiple granularities of DOI data and to handle data attributes. 
 
 Focus+context is an interactive technique which is similar to a technique called overview+detail. Overview+detail have two views of the involving visualization: overview and detail. In the overview view, the whole visualization is viewed with minimal readability and the detail view shows a detail of a part of the context view. On the other hand, focus+context combines the two views in a single coherent view~\cite{spence1982data}. Using such technique will facilitate analyzers to navigate through DOI data. 
 
-\subsection{Handling Data Attributes}
-\label{sec:DataAttributeSupport}
-DOIs inherently contain data attributes. Thus, DOI visual interpretation require visual representations of data attributes. We propose using glyphs for DOIs in visualizations. 
-
-A glyph is a small visual object that is discretely placed in visualizations. It is useful to depict data attributes~\cite{borgo2013glyph}. Glyph designing often combines concepts of Gestalt psychology~\cite{kohler1970gestalt}, visual channel selection, and design criteria. For example, if we want to design a glyph for $O = {a_1, a_2}$ where $a_i$ is the $i$th attribute for object $O$. We assume that the attributes are sorted in descending order of importance(i.e. $a_1$ is the most important attribute and $a_2$ is the least). We can assign four visual channels for all the attributes: color, and size. According to pop-out effect of visual channel, color precedes size in importance. Thus, users will be able to detect whether a visual object is red or blue first than whether its big or small. 
+On the other hand, a glyph is a small visual object that is discretely placed in visualizations. It is useful to depict data attributes~\cite{borgo2013glyph}. Glyph designing often combines concepts of Gestalt psychology~\cite{kohler1970gestalt}, visual channel selection, and design criteria. For example, if we want to design a glyph for $O = {a_1, a_2}$ where $a_i$ is the $i$th attribute for object $O$. We assume that the attributes are sorted in descending order of importance(i.e. $a_1$ is the most important attribute and $a_2$ is the least). We can assign four visual channels for all the attributes: color, and size. According to pop-out effect of visual channel, color precedes size in importance. Thus, users will be able to detect whether a visual object is red or blue first than whether its big or small. 
 
 A suitable instance of glyph is star-plot. A star-plot contains radially arranged multiple axes (i.e. rays)~\cite{klippel2009star}. Each attribute of involving data element corresponds to a ray. Connecting data points of each ray creates a star-like shape to create such star-plot. Using star-plots for DOI data significantly facilitates handling data attribute. 
 
@@ -115,9 +105,63 @@ In Figure~\ref{fig:StarplotExample}, we describe an example for star plot. Suppo
 	\label{fig:StarplotExample}
 \end{figure}
 
-\subsection{Supporting Comparison and Clustering}
-\label{sec:ComparisonSupport}
-To support analysis questions discussed in Section~\ref{sec:DOIAnalysisTasks}, DOIs must support comparisons. Gleicher et al. proposed three categories for visual analysis: juxtaposition, superposition, and explicit encoding~\cite{Glei11}. In juxtaposition, two visualization placing side by side facilitate comparison. Next, in superposition, we can render one visualization over another to aid similarity among them. Finally, in explicit encoding, we can describe explicit relationship visually by encoding two data in a single view.
+In Figure~\ref{fig:constructionAnalysis}, we show a glyph for what type of DOI (e.g. worker) it is alongside a star plot over it. We also enabled sorting option based on data attributes. Moreover, we enabled panning and filtering. Again, we used colors to detect whether any hazard was detected over a particular DOI and color coded the hazard. 
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{images/constructionAnalysis.eps}
+  \caption{Stacked Glyph plot for Construction}
+	\label{fig:constructionAnalysis}
+\end{figure}
+
+\section{A visual design space for DOI analysis}
+
+In this section, we analyze the design space for visual DOI analysis in more detail. Given the scale DOI data and the breadth of DOI tasks, visual encodings should be augmented with interaction capabilities. To ensure that our discussion captures all visual design dimensions, we ground it in Yi's taxonomy of interaction tasks~\cite{Yi07}, which includes seven categories of visual operations: Encoding, Selection, Reconfiguration, Exploration, Abstraction/Elaboration, Filtering, and Connection/Comparison~\cite{Yi07}. We will discuss novel visual solutions by starting from existing AOI visualizations and describing how they may be extended and redesigned to support DOI requirements. 
+
+\subsection{Encoding}
+\label{sec:Encoding}
+Encoding determines how data should be shown visually~\cite{Yi07}. Encoding design options and requirements of DOI visualizations are detailed below.
+
+\noindent \textbf{Show many DOIs :} AOI visualizations such as scarfplots identify specific AOIs via distinctive colors. This method does not scale to many DOIs, and methods that identify DOIs explicitly (e.g., through a label), such as scan-paths or transition matrices, are likely preferable. 
+
+Also, showing all DOIs viewed in an experiment is not always possible, especially when viewing data from many users. For example, a scanpath of ten users, each having viewed $100$ DOIs would have a thousand rows and be cluttered. One solution is to show only the most viewed DOIs, as done for visualizations shown in Figures~\ref{fig:ScanpathsIMDB},~\ref{fig:ScarfsIMDB},~\ref{fig:HeatmapIMDB},~\ref{fig:HeatmapArchitecture},~\ref{fig:constructionAnalysis} and to alot DOI space that is proportional to how often they are viewed, as exemplified in Figure~\ref{fig:HeatmapIMDB}. This prioritization approach is likely appropriate as Alam et al. showed that even though users view many DOIs during an extended analysis, they focus most of their attention on a smaller subset of them. 
+
+Finally, DOI attributes make it possible to collapse multiple DOIs into categories to reduce the amount of information shown, as discussed in section~\ref{sec:Interaction}, Abstract/Elaborate.
+
+
+\noindent \textbf{Showing DOI attributes} can be supported via conventional techniques such as linking DOI attributes to visual channels (e.g., color, shape) or by relying on glyph designs. Displaying DOI attributes can enable analysts to visually detect how DOIs with similar properties clusters over time. For such tasks to be possible, in addition to showing attributes, DOIs need to be grouped based on when they were viewed or in what transitions they were involved. For example, scarf-plots inherently order DOIs by time (Figure~\ref{fig:ScarfsIMDB}), but scan-paths and transition matrices have to be clustered to group together co-viewed DOIs (Figure~\ref{fig:ScanpathsIMDB}). Additionally, showing multiple attributes for each DOI facilitates a visual approximation of attribute-derived measures, supporting summarization tasks. Figure~\ref{fig:constructionAnalysis} exemplifies showing multiple data attributes using glyph based designs. 
+
+
+\noindent \textbf{Reducing clutter} is essential in busy DOI visualizations. Clustering is one effective way to impose order on visualizations. Figure~\ref{fig:ScanpathsIMDB} shows scanpaths that orders DOIs based on how often there are transitions between them. This in effect shortens the vertical transition in the paths. Second, linking DOI appearance to their attributes can divide DOIs into data categories or layers that are visually separable, in accordance with Gestalt principles. Third, reducing shown information using semantic zooming and DOI grouping, and highlighting and filtering, can also reduce clutter, as discussed in the next sections. 
+
+A further factor needs to be considered when supporting analyses of DOI data from many subjects. Visualization data-sets can support hundreds or thousands of DOIs, which subjects, based on their interests and exploration, will only see small subsets of. These subsets may differ significantly between subjects, leading to a tradeoff: should visualizations be optimized to best show a single user's behavior, or to show a user's behavior in the context of other users' data? The scan-paths in Figure~\ref{fig:ScanpathsIMDB} show DOIs that were viewed by all subjects, and use the same DOI-set and ordering for each user. Alternatively, each subjects' scan-path could also show and order DOIs based solely on that subject's data. The former approach shows less relevant data for each user but makes it easy to compare user behavior, while the latter would show more relevant data for each user but would hinder comparison. Similarly, scanpaths can be separate or integrate individual users' data as shown in Figure~\ref{fig:ScanpathsIMDB}, making it easier or harder to compare subjects.
+
+\subsection{Interaction}
+\label{sec:Interaction}
+
+\noindent \textbf{Selection :} Selections allow users to track interesting objects by marking them~\cite{Yi07}. With respect to selection targets, DOI methods support selections of DOIs, DOI categories, users, and time intervals.  As for methods of selection, two options are possible: `in situ' selections of DOIs shown in the visualization, and query-based selections of DOIs by attribute values. Finally, selected items should be highlighted visually and brushing and linking should translate selections over multiple views, supporting connect and compare interactions. Figures~\ref{fig:ScanpathsIMDB},~\ref{fig:ScarfsIMDB},~\ref{fig:HeatmapIMDB},~\ref{fig:HeatmapArchitecture} exemplify DOI selections, time-window selections, and brushing and linking.
+
+\noindent \textbf{Reconfiguration :}
+Reconfigurations change the spatial arrangement of data.  In section~\ref{sec:Encoding} we already discussed the benefit of clustering co-viewed DOIs to reduce clutter and to support the detection of correlations between DOI categories and when they are viewed. Additionally, DOIs should be orderable based on their attributes. Similarly, clustering and arranging subjects by their behavior can create more organized visualizations, while the ability to cluster subjects on their background or demographic data (e.g., expert vs. naive subjects) can support tasks typical of human experimentation. Finally, visualizations should also support interactive repositioning (e.g., of users, DOIs), to allow analysts to manually arrange and group items.
+
+
+\noindent \textbf{Exploration} enables users to analyze different subsets of data instances. DOI data visualizations should support time-scrolling, panning, and zooming efficiently. Exploration options also include the ability to flexibly define which DOI attributes should be mapped visually, given that the number of variables that can be visually encoded concurrent may be limited. 
+	
+\noindent \textbf{Abstract/Elaborate} interactions allow users to control a visualization's level of abstraction. Our discussion on encoding emphasizes the need for representations that support analyses at multiple time-scales, DOI grouping, and the ability to control the amount of data shown. 
+
+First, semantic zooming can be an efficient way to explore different time scales and involves aggregating and summarizing data over variable time-steps (e.g., milliseconds to minutes). An alternative to semantic zooming are pixel based techniques which allow individual viewing-events to merge and blend together visually\cite{keim2000designing}. The re-imagined scarfplot design in Figure~\ref{fig:ScarfsIMDB} exemplifies the first approach by grouping co-viewed elements together, while the heatmap in Figure~\ref{fig:heatmap}, the second. The stacked glyph plot Figure~\ref{fig:constructionAnalysis} also exemplify semantic zooming by providing the ability to interactively adjust the data granularity used for detail viewing.  
+
+Second, DOIs could be grouped by using attribute queries to define DOI categories, by exploiting DOI hierarchies (i.e., DOIs that are contained by other DOIs), or manually. Aggregating DOIs visually can again be done semantically, by allowing analysts to explicitly collapse multiple DOIs into single ones, or by showing data in a way that allows categories to emerge and separate visually (Figure~\ref{fig:constructionAnalysis}). 
+
+ Finally, details on demand can give access to additional data via tool-tips and auxiliary information data panels, populated with data obtained through brushing and linking.
+  
+	
+\noindent \textbf{Filtering} enables users to change the set of data items being presented based on specific conditions, and should be possible on all selectable data categories previously mentioned. DOIs should be hidden or revealed based on their attributes, how often they are viewed, when they are viewed, and which users view them (e.g., ``Show only DOIs that both of two selected users viewed'').
+
+The number of DOIs shown could be controlled directly (e.g., ``Show top $25\%$ most viewed data''), or by adjusting the amount of space allotted to users and filling it with as much data as can fit, as suggested in Figure~\ref{fig:ScarfsIMDB}. The latter is a useful way of controlling the amount of information based on available screen space and how many users or time-intervals one needs to compare.
+
+Defining time-windows of interest can support both reconfiguration and filtering interactions. Since DOI visualizations will likely need to prioritize which data to show, defining specific time windows that such configurations should be based on, can support novel tasks. For example, by prioritizing the display of data that subjects viewed late in an experiment, an analysts could un-clutter the visualization of data which subjects viewed during preliminary exploration and search processes, and more clearly reveal how final data interests crystallize.
+
+\noindent \textbf{Connection/Comparison} interactions show associations and relationships between data items, and can be implemented using one of Gleicher et al.'s visual comparison methods: juxtaposition, superposition, and encoding of differences~\cite{Glei11}.In juxtaposition, two visualization placing side by side facilitate comparison. Next, in superposition, we can render one visualization over another to aid similarity among them. Finally, in explicit encoding, we can describe explicit relationship visually by encoding two data in a single view.
 
 Visual analyses are not limited to the above mentioned categories. Besides, the three categories are the basic categories. We can generate hybrid categories from them. In Figure~\ref{fig:ComparisonCategories}, we describe an example of two user data $User_1$ and $User_2$. Figure~\ref{fig:ComparisonCategories}(i) depicts comparison by juxtaposing them, by superpositioning them in Figure~\ref{fig:ComparisonCategories}(ii). Figure~\ref{fig:ComparisonCategories}(iii) depicts a explicit encoding of intersection between them.  
 \begin{figure}[htbp]
@@ -127,32 +171,13 @@ Visual analyses are not limited to the above mentioned categories. Besides, the 
 	\label{fig:ComparisonCategories}
 \end{figure}
 
-Again, clustering support will facilitate analyzers to compare visualization with less cluttering and more associativity among data. Kurzhal et al.~\cite{Kur14} described a clustering method using string-edit distance of AOI sequences. 
+To support juxtaposition, data from multiple users or from multiple time-intervals should be shown using compact, stackable, and comparable visualizations. The designs in Figures~\ref{fig:ScanpathsIMDB},~\ref{fig:ScarfsIMDB},~\ref{fig:HeatmapIMDB},~\ref{fig:HeatmapArchitecture}, and~\ref{fig:constructionAnalysis} can be resized to show more or less of a user's data, to multiple user-views to fit in a single screen, and the scanpaths use the same DOI ordering for all users to support comparison. Superposition is exemplified in the right panel of Figure~\ref{fig:ScanpathsIMDB}. Selecting and highlighting overlaps and differences (e.g., ``Show DOIs viewed by all participants'', ``Show DOIs that are unique to a subject'') can implement the third method of comparison. Brushing and linking across users and across time would support all comparison and correlation tasks.
 
-\subsection{Supporting Interactions}
-DOI data analysis will be largely impacted by using interactive visualization and visual analytics. Kurzhal et al.~\cite{Kur14} and Blascheck et al.~\cite{Bla16} already described visual analytics for AOI data. For interaction, Yi et al.~\cite{Yi07} proposed seven categories of interaction for information visualization: encoding, comparison, selection, reconfiguration, exploration, abstract/elaborate, and filtering. We already described about encoding in Section~\ref{sec:LargeDataSupport} and Section~\ref{sec:DataAttributeSupport}, about comparison in Section~\ref{sec:ComparisonSupport}. We discuss the rest of them in context of DOI data below. 
-
-\noindent \textbf{Selection :} Selections allow users to track interesting objects by marking them~\cite{Yi07}. With respect to selection targets, DOI methods support selections of DOIs, DOI categories, users, and time intervals.  As for methods of selection, two options are possible: `in situ' selections of DOIs shown in the visualization, and query-based selections of DOIs by attribute values. Finally, selected items should be highlighted visually and brushing and linking should translate selections over multiple views, supporting connect and compare interactions. 
-
-\noindent \textbf{Reconfiguration :}
-Reconfigurations change the spatial arrangement of data.  We already discussed the benefit of clustering co-viewed DOIs to reduce clutter and to support the detection of correlations between DOI categories and when they are viewed. Additionally, DOIs should be orderable based on their attributes. Similarly, clustering and arranging subjects by their behavior can create more organized visualizations, while the ability to cluster subjects on their background or demographic data (e.g., expert vs. naive subjects) can support tasks typical of human experimentation. Finally, visualizations should also support interactive repositioning (e.g., of users, DOIs), to allow analysts to manually arrange and group items.
+Finally, clustering can reveal similarities between users or time-intervals computationally. AOI sequences of multiple users have previously been clustered using a string-edit distance~\cite{Kur14}. This gave good results for short, highly constrained perceptual tasks with few AOIs. However, this distance measure may not be robust enough to handle DOI data collected over long, open-ended tasks, since such data is not temporally-aligned and is bound to differ at the key-hole level that string-editing operates. Instead, comparing users in a space of derived features (e.g., DOIs they viewed most, common DOI transitions or sequences) may be more robust to local differences. It may also allow features to be included in and excluded from a distance measure, thus enabling an exploration of which features explain observed behavior.
 
 
-\noindent \textbf{Exploration} enables users to analyze different subsets of data instances. DOI data visualizations should support time-scrolling, panning, and zooming efficiently. Exploration options also include the ability to flexibly define which DOI attributes should be mapped visually, given that the number of variables that can be visually encoded concurrent may be limited. 
-	
-\noindent \textbf{Abstract/Elaborate} interactions allow users to control a visualization's level of abstraction. Our discussion on encoding emphasizes the need for representations that support analyses at multiple time-scales, DOI grouping, and the ability to control the amount of data shown. 
 
-First, semantic zooming can be an efficient way to explore different time scales and involves aggregating and summarizing data over variable time-steps (e.g., milliseconds to minutes). An alternative to semantic zooming are pixel based techniques which allow individual viewing-events to merge and blend together visually\cite{keim2000designing}. 
-
-Second, DOIs could be grouped by using attribute queries to define DOI categories, by exploiting DOI hierarchies (i.e., DOIs that are contained by other DOIs), or manually. Aggregating DOIs visually can again be done semantically, by allowing analysts to explicitly collapse multiple DOIs into single ones, or by showing data in a way that allows categories to emerge and separate visually. 
-
- Finally, details on demand can give access to additional data via tool-tips and auxiliary information data panels, populated with data obtained through brushing and linking.
-  
-	
-\noindent \textbf{Filtering} enables users to change the set of data items being presented based on specific conditions, and should be possible on all selectable data categories previously mentioned. DOIs should be hidden or revealed based on their attributes, how often they are viewed, when they are viewed, and which users view them (e.g., ``Show only DOIs that both of two selected users viewed'').
-	
-
-
-\section{Evaluation}
-Construction
+%\section{Evaluation}
+%Construction
 \section{Conclusion}
+Visual interpretation for DOI data is significantly vital for DOI-based eye-tracking data analysis. In this chapter, we provided possible visualization and interaction techniques based on the existing solutions in the literature. Moreover, we have discussed challenges for visually interpreting DOI data and their solutions. 
