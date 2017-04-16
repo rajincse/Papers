@@ -1,17 +1,17 @@
 \chapter{VISUAL SOLUTIONS FOR DOI INTERPRETATION}
 \label{chap:DOIVis}
-In this chapter we discuss the possible visual interpretations for DOI data. AOI is image-space counter part of DOI. Although plethora of visual solutions exist for AOI~\cite{Bla14}, three distinct properties of DOIs prohibit them to interpret DOI data. First, DOI data has volumes and multiple granularities. Second, DOI data deals with data attributes. Third, DOI data supports different range of analysis questions possible compared to AOI data. 
+In this chapter, we discuss the possible visual interpretations for DOI data. AOI is the image-space counterpart of DOI. Although a plethora of visual solutions exists for AOI~\cite{Bla14}, three distinct properties of DOIs prohibit them to interpret DOI data. First, DOI data has volumes and multiple granularities. Second, DOI-data deals with data attributes. Third, DOI data supports a different range of analysis questions possible compared to AOI data. 
 
-Thus, DOI visualizations should allow analysts to explore DOI data at many levels of detail, including multiple temporal scales (e.g., seconds vs. minutes) and data granularities (e.g., individual vs. categories of DOIs).  DOI attributes should be shown visually and queried flexibly to allow analysts to detect correlations between a user's interest in data and that data's properties. Attributes should be used to deal with the scale of the data by allowing users to filter, highlight, and aggregate data with specific attribute values. Finally, visualizations need to support the DOI analysis tasks. 
+Thus, DOI visualizations should allow analysts to explore DOI data at many levels of detail, including multiple temporal scales (e.g., seconds vs. minutes) and data granularities (e.g., individual vs. categories of DOIs).  DOI attributes should be shown visually and flexibly queried to allow analysts to detect correlations between a user's interest in data and that data's properties. Attributes should be used to deal with the scale of the data by allowing users to filter, highlight, and aggregate data with specific attribute values. Finally, visualizations need to support the DOI analysis tasks. 
 
 
 
-\section{Existing Visualizations for Eye-tracking Data}
+\section{Background}
 \label{sec:ClassicVisualization}
 In this section, we discuss existing visualization techniques for eye-tracking data. Specifically, we will focus on three basic visualization techniques: Heatmap, Scanpath, and Scarfplot. %Moreover, we will briefly discuss about three advanced techniques : AOI-river, Transition Matrices, and Directed graphs.
 
 \subsection{Heatmap}
-Heatmap visualization contains a 2D matrix where each cell is assigned a color. The color used in the cell represent value of the cell. Multiple color schemes exist to represent color to value. The most popular color scheme is the 'Rainbow' color scheme. In rainbow color scheme, 'red' represents maximum and 'violet' represents minimum. Many heatmap visualizations also use green or blue for minimum. However, rainbow color scheme lacks perceptual ordering, and not sensitive small value changes~\cite{borland2007rainbow}. Hence, visualization researchers consider rainbow color scheme as misleading. Many heatmaps use color scales such as gray-scale, heated-object, and linearized optimal scale~\cite{silva2007there}. Figure~\ref{fig:heatmapsExample} depicts an example of heatmaps with three different color schemes. 
+Heatmap visualization contains a 2D matrix where each cell is assigned a color. The color used in the cell represent the value of the cell. Multiple color schemes exist to describe color to value. The most common color scheme is the 'Rainbow' color scheme. In the rainbow color scheme, 'red' represents the maximum and 'violet' accounts for the minimum. Many heatmap visualizations also use green or blue for the minimum. However, rainbow color scheme lacks perceptual ordering, and not sensitive small value changes~\cite{borland2007rainbow}. Hence, visualization researchers consider rainbow color scheme as misleading. Many heatmaps use color scales such as gray-scale, heated-object, and linearized optimal scale~\cite{silva2007there}. Figure~\ref{fig:heatmapsExample} depicts an example of heatmaps with three different color schemes. 
 
 \begin{figure}[htbp]
   \centering
@@ -23,7 +23,7 @@ Heatmap visualization contains a 2D matrix where each cell is assigned a color. 
 
 
 \subsection{Scanpath}
-A scanpath visualization depicts transitions among multiple entities over time. Scanpath visualization either show temporal information in a linear scale or discard temporal information. For example, we encode transitions among five entities $e_1 \rightarrow e_2\rightarrow e_3\rightarrow e_4\rightarrow e_5\}$ with scanpath visualization. Figure~\ref{fig:scanpathExample}(a) portray all transitions among entity to entity. Such techniques require a layout with minimal crossing among transitions. However, it produces a compact visualization. Again, in Figure~\ref{fig:scanpathExample}(b), all entities lie vertically and are connected with a horizontal line to show temporal information. For depicting a transition between $e_1$ and $e_2$, we place transition markers (e.g. a circle) along their horizontal lines. Then, we connect the markers with transition encoding (e.g. an arrow). The latter technique is more suitable for following transitions. However, it takes more space than the former version. 
+A scanpath visualization depicts transitions among multiple entities over time. Scanpath visualization either show temporal information on a linear scale or discard temporal information. For example, we encode transitions among five entities $e_1 \rightarrow e_2\rightarrow e_3\rightarrow e_4\rightarrow e_5\}$ with scanpath visualization. Figure~\ref{fig:scanpathExample}(a) portray all transitions among entity to entity. Such techniques require a layout with minimal crossing among transitions. However, it produces a compact visualization. Again, in Figure~\ref{fig:scanpathExample}(b), all entities lie vertically and are connected to a horizontal line to show temporal information. For depicting a transition between $e_1$ and $e_2$, we place transition markers (e.g. a circle) along with their horizontal lines. Then, we connect the markers with a transitional encoding (e.g. an arrow). The latter technique is more suitable for tracking transitions. However, it takes more space than the former version. 
 
 \begin{figure}[htbp]
   \centering
@@ -42,36 +42,35 @@ In a scarplot technique, visual entities are joined as multiple tapes known as s
 \end{figure}
 
 \section{Case Studies}
-In this section, we discuss our implementation of four DOI analysis visualizations: heatmap, scanpath, scarfplot, and stacked glyph-plot. We developed these visualizations based on collected DOI data from experiments in Chapter~\ref{chap:CaseStudies}. Specifically, we developed  for the experiment described in Section~\ref{sec:ExperimentIMDB}. Next, we developed another heatmap for experiment described in Section~\ref{sec:ExperimentArchitecture}, and a stacked glyph plot for the experiment described in Section~\ref{sec:ExperimentConstruction}. We discuss more about them below. 
+In this section, we discuss our implementation of four DOI analysis visualizations: heatmap, scanpath, scarfplot, and stacked glyph-plot. We developed these visualizations based on collected DOI data from experiments in Chapter~\ref{chap:CaseStudies}. Specifically, we generated for the study described in Section~\ref{sec:ExperimentIMDB}. Next, we developed another heatmap for the study described in Section~\ref{sec:ExperimentArchitecture}, and a stacked glyph plot for the experiment described in Section~\ref{sec:ExperimentConstruction}. We discuss more of them below. 
 
 \subsection{DOI Vis for Tracking Data Consumption Experiment}
-We already discussed about the data collection and instrumentation methods about the tracking data consumption experiment in Section~\ref{sec:ExperimentIMDB}. To analyze the data collected from this experiment, we developed three visualizations: heatmap, scanpath, and scarfplot. 
+We already discussed the data collection and instrumentation methods about the tracking data consumption experiment in Section~\ref{sec:ExperimentIMDB}. To analyze the data collected from this study, we developed three visualizations: heatmap, scanpath, and scarfplot. 
 
-First, we developed a time-annotated heatmap (Figure~\ref{fig:HeatmapIMDB}) where each cell's color represents viewing score (i.e. viewing intensity). We chose the grayscale color scheme to render the heatmap where black represents maximum and white represents minimum. In our visualization, we facilitate interaction of panning to view time-based data. For facilitating comparison, we allowed rendering user data views side by side. 
+First, we developed a time-annotated heatmap (Figure~\ref{fig:HeatmapIMDB}) where each cell's color represents viewing score (i.e. viewing-intensity). We chose the grayscale color scheme to render the heatmap where black represents maximum and white represents the minimum. In our visualization, we facilitate interaction of panning to view time-based data. For facilitating comparison, we allowed rendering user data views side by side. 
 \begin{figure}[htb]
   \centering
 	\includegraphics[width=0.6\linewidth]{images/HeatmapIMDB.eps}
-  \caption{Heatmap of real DOI data. User data is shown separately. DOI-rows are scaled vertically to make DOIs viewed often more salient. DOIs are ordered by viewing amount; those beyond a threshold are not shown.
-  A time-window (white section) helps prioritize which data is shown.}
+  \caption{An example of a heatmap generated from real DOI data. It shows user-data separately. DOI-rows are scaled vertically to make often viewed DOIs more salient. The visualization orders DOIs by viewing-score and do not display the DOIs with viewing-scores are beyond a threshold. A time-window (white section) helps prioritize for selecting which data to show.}
 	\label{fig:HeatmapIMDB}
 \end{figure}
 
-Second, we have implemented a scanpath for the same experiment (Figure~\ref{fig:ScanpathsIMDB}). Unlike heatmap, we considered every DOI is viewed when its viewing score crossed a threshold value (e.g. 0.75). Then, we connected the DOI cell to render the scanpath. The scanpath rendering had two versions: juxtaposed (Figure~\ref{fig:ScanpathsIMDB}(left)) and superpositioned(Figure~\ref{fig:ScanpathsIMDB}(right)). We applied a string edit-distance clustering over the vertical sequence of DOIs to reduce cluttering. 
+Second, we have implemented a scanpath for the same experiment (Figure~\ref{fig:ScanpathsIMDB}). Unlike heatmap, we considered every DOI as `viewed' when its viewing score crossed a threshold value (e.g. 0.75). Then, we connected the DOI cell to render the scanpath. The scanpath rendering had two versions: juxtaposed (Figure~\ref{fig:ScanpathsIMDB}(left)) and superpositioned(Figure~\ref{fig:ScanpathsIMDB}(right)). We applied a string edit-distance clustering over the vertical sequence of DOIs to reduce cluttering. 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.75\linewidth]{images/ScanpathsIMDB.eps}
-  \caption{Scanpaths of real DOI data. (left) Data is shown separately for each user. Depicted DOIs are the same for all four users, enabling the comparison of the scanpath profile; the top two users viewed simialr data. (right) Users' data are shown next to each other for each DOI; we notice that the four users cluster into two pairs, based on their interests.}
+  \caption{Scanpaths of real DOI data. (left) Data is shown separately for each user. Depicted DOIs are the same for all four users, enabling the comparison of the scanpath profile; the top two users viewed similar data. (right) Users' data are shown next to each other for each DOI; we notice that the four users cluster into two pairs, based on their interests.}
 	\label{fig:ScanpathsIMDB}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{images/ScarfsIMDB.eps}
-  \caption{Re-imagined scarfplots for movie DOI data, sketched for two users. DOI are labeled explicitly, and scaled according to how much they were viewed around particular time-points. Resizing a users' plot vertically would show less or more data. A selection for one user (Goodfellas) is highlighted in all data. }
+  \caption{A DOI-scarfplot for movie DOI data sketched for two users. DOI are labeled explicitly and scaled according to their viewing-score around particular time-points. Vertical resizing of a users' plot would show less or more data. The figure highlighted a selection for one user (Goodfellas) in all data. }
 	\label{fig:ScarfsIMDB}
 \end{figure}
 
-Third, we modified the original scarfplot to enable DOI data visualization. We developed a scarfplot with clear labels (Figure~\ref{fig:ScarfsIMDB}. Moreover, the labels are connected with the scarf area on the scarflines. To support multiple granularities, we rendered multiple scarflines to render DOIs clearly. 
+Third, we modified the original scarfplot to enable DOI data visualization. We developed a scarfplot with clear labels (Figure~\ref{fig:ScarfsIMDB}. Moreover, the labels attach themselves with the scarf area on the scarflines. To support multiple granularities, we rendered many scarflines to show DOIs clearly. 
 %\begin{figure}[htb]
   %\centering
 	%\includegraphics[width=0.5\linewidth]{images/MatrixGraphIMDB.eps}
