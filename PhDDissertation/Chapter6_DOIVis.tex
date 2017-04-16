@@ -76,6 +76,20 @@ Third, we modified the original scarfplot to enable DOI data visualization. We d
 
 \subsection{DOI Vis for Student Learning Experiment}
 We developed an interactive heatmap visualization for the student learning experiment from the Section~\ref{sec:ExperimentArchitecture}.  
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{images/architecture.eps}
+  \caption{Heatmap for architecture }
+	\label{fig:HeatmapArchitecture}
+\end{figure}
+
+\subsection{DOI Vis for Construction Hazard Detection Experiment}
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{images/constructionAnalysis.eps}
+  \caption{Stacked Glyph plot for Construction}
+	\label{fig:constructionAnalysis}
+\end{figure}
 \section{Enhancing Visualization for DOI Data}
 Visualization techniques discussed in Section~\ref{sec:ClassicVisualization} can interpret DOI data with several limitations. First, heatmap visualization dimension may exceed due to large data scale DOI data. The example depicted in Figure~\ref{fig:heatmapsExample} shows a 2D matrix of $5 \times 26$ dimensions. If we want to use heatmap for DOI data, then dimension may exceed $100 \times 100$. For example, a DOI data of time length 3 minute may produce a heatmap of $180 \times 75$ (i.e. 1 second per time cell and maximum 75 DOIs detected in 1 sec). Thus, we need filtration and sorting in such cases. Second, scanpath diagram have similar dimension related problem. However, with the increasing amount of DOIs will produce cluttering in transitions. Hence, the ordering DOI elements are vital in such cases. We can use clustering to solve this problem. Third, scarfplot are suitable for interpreting DOIs in a compact manner. However, labels are not clearly visible in a scarfplot. Thus, distinguishing DOI elements will be challenging. To solve this, we may use different textures and encoding for DOI data elements in scarflines. We discuss possible enhancements for DOI visualization below. 
 
