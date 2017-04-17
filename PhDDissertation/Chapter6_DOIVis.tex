@@ -15,7 +15,7 @@ Heatmap visualization contains a 2D matrix where each cell is assigned a color. 
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{images/heatmapsExample.eps}
+  \includegraphics[width=0.85\linewidth]{images/heatmapsExample.eps}
   \caption{Heatmap visualization with three different color schemes: (a) rainbow, (b) gray-scale, and (c) heated object.}
 	\label{fig:heatmapsExample}
 \end{figure}
@@ -50,7 +50,7 @@ We already discussed the data collection and instrumentation methods about the t
 First, we developed a time-annotated heatmap (Figure~\ref{fig:HeatmapIMDB}) where each cell's color represents viewing score (i.e. viewing-intensity). We chose the grayscale color scheme to render the heatmap where black represents maximum and white represents the minimum. In our visualization, we facilitate interaction of panning to view time-based data. For facilitating comparison, we allowed rendering user data views side by side. 
 \begin{figure}[htb]
   \centering
-	\includegraphics[width=0.6\linewidth]{images/HeatmapIMDB.eps}
+	\includegraphics[width=0.75\linewidth]{images/HeatmapIMDB.eps}
   \caption{An example of a heatmap generated from real DOI data. It shows user-data separately. DOI-rows are scaled vertically to make often viewed DOIs more salient. The visualization orders DOIs by viewing-score and do not display the DOIs with viewing-scores are beyond a threshold. A time-window (white section) helps prioritize for selecting which data to show.}
 	\label{fig:HeatmapIMDB}
 \end{figure}
@@ -90,7 +90,7 @@ We developed an interactive heatmap visualization (Figure~\ref{fig:HeatmapArchit
 \subsection{DOI-Vis for the Construction Hazard Detection Experiment}
 We implemented a glyph-based visualization for hazard detection experiment discussed in Section~\ref{sec:ExperimentConstruction}. The visualization (Figure~\ref{fig:constructionAnalysis}) employs focus+context technique and glyph based solution to handle multiple granularities of DOI data and to handle data attributes. 
 
-Focus+context is an interactive technique which is similar to a technique called overview+detail. Overview+detail have two sections of the involving visualization: overview and detail. In the `Overview' section, we can view the whole display with minimal readability, and the detail view shows a detail of a part of the `Detail' section. On the other hand, focus+context combines the two sections in a single coherent view~\cite{spence1982data}. Using such technique will facilitate analyzers to navigate through DOI data. 
+Focus$+$context is an interactive technique which is similar to overview$+$detail technique. Overview$+$detail have two sections of the involving visualization: overview and detail. In the `Overview' section, we can view the whole display with minimal readability, and the detail view shows a detail of a part of the `Detail' section. On the other hand, focus+context combines the two sections in a single coherent view~\cite{spence1982data}. Using such technique will facilitate analyzers to navigate through DOI data. 
 
 On the other hand, a glyph is a small visual object that is discretely placed in visualizations. It is useful to depict data attributes~\cite{borgo2013glyph}. Glyph designing often combines concepts of Gestalt psychology~\cite{kohler1970gestalt}, visual channel selection, and design criteria. For example, if we want to design a glyph for $O = {a_1, a_2}$ where $a_i$ is the $i$th attribute for object $O$. We assume that the attributes are sorted in descending order of importance(i.e. $a_1$ is the most important attribute and $a_2$ is the least). We can assign four visual channels for all the attributes: color, and size. According to the pop-out effect of visual channel, color precedes size in importance. Thus, users will be able to detect whether a visual object is red or blue first then whether it is big or small. 
 
@@ -165,7 +165,7 @@ Defining time-windows of interest can support both reconfiguration and filtering
 Visual analyses are not limited to the categories as mentioned earlier. Besides, the three types are the basic categories. We can generate hybrid categories from them. In Figure~\ref{fig:ComparisonCategories}, we describe an example of two user data $User_1$ and $User_2$. Figure~\ref{fig:ComparisonCategories}(i) depicts comparison by juxtaposing them, by superpositioning them in Figure~\ref{fig:ComparisonCategories}(ii). Figure~\ref{fig:ComparisonCategories}(iii) depicts a specific encoding of intersection between them.  
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\linewidth]{images/ComparisonCategories.eps}
+  \includegraphics[width=0.75\linewidth]{images/ComparisonCategories.eps}
   \caption{An example of comparison categories by Gleicher et al.~\cite{Glei11}. i) Juxtaposition, ii)Superposition, and iii) Explicit encoding (Intersection).}
 	\label{fig:ComparisonCategories}
 \end{figure}
