@@ -69,7 +69,7 @@ Finally, we note that the object scores ($gs$) do not directly equate to probabi
 Salvucci and Anderson described the concept of ``intelligent gaze interpretation'' in the context of a gaze-activated interface ~\cite{Sal00}. They more accurately detected which interface control a user was gazing at, by integrating both the proximity of the gaze to the control, and the likelihood that the control was the target of a gaze-interaction, based on the current state and context of the interface. Formally, their algorithm identified the most likely currently viewed item $i_{viewed}$ by solving Equation~\ref{eq:IViewed}.
 
 \begin{equation}
-i_{viewed} = \displaystyle \argmax_{i\in I}%[Pr(g|i)\cdot Pr(i)]
+i_{viewed} = \displaystyle \argmax_{i\in I}[Pr(g|i)\cdot Pr(i)]
 \label{eq:IViewed}
 \end{equation}
 
