@@ -25,6 +25,7 @@ We opted to instrument this visualization for three reasons. First, it is highly
 To choose transitions functions $T$ underlying our predictive algorithm, we made simple assumptions about how the visualization is used, an approach also employed by Salvucci~\cite{Sal00}. We assumed that transitions between connected items would occur more often than between unconnected objects. We also assumed that highlighted elements are more likely to be viewed than those that are not. We translated these assumptions into specific weights, as exemplified in Table~\ref{tab:Transition2}. We show in Section~\ref{sec:EvalResults} that these assumptions hold for the instrumented visualization and the subjects that used it in our study. 
 
 \begin{table}[htbp]
+\caption{Example transition probabilities in our instrumented visualization (assumed).}
 	\centering
 		\begin{tabular}{|l|c|}
 			\hline
@@ -34,10 +35,9 @@ To choose transitions functions $T$ underlying our predictive algorithm, we made
 			Movie to unconnected genre & 1\\\hline
 			Movie to connected genre & 3\\\hline
 			Movie to unconnected director & 1\\\hline
-			Movie to connected director & 3\\\hline
-			\hline			
+			Movie to connected director & 3\\\hline			
 		\end{tabular}
-	\caption{Example transition probabilities in our instrumented visualization (assumed).}
+	
 	\label{tab:Transition2}
 \end{table}
 
@@ -156,6 +156,7 @@ Thus, observed transitions should be compared to the default case, which assumes
 To compute unbiased probabilities, every time we counted a transition from a source to a target, we also counted all target options available to the subject at that point, given the state and structure of the visualization at the time of transition. Reverting to our simplified example, for each of our ten observed transitions we would count two possible transitions to connected actors and eight possible transitions to unconnected actors, ending up with $20$ counts for connected actors, and $80$ counts for unconnected actors. These numbers allow us to compute the two unbiased probabilities as $20/(20+80)$ and $80/(20+80)$.
 
 \begin{table}[htbp]	
+\captionof{table}{Transitions from a Movie object to a target object, divided by: (i) type of source and target; (ii) whether the target was highlighted (H); (iii) whether the target was highlighted and connected to the source (HC); (iv) and whether source and target were neither highlighted nor connected. Columns show: (i) the number of direct transitions for the source/target combination; (ii) the observed transition probability from the source to that target; (iii) the (unbiased) probability of transition between source and target if all elements had equal probability to be viewed; (iv) the ratio between observed and unbiased transition probabilities.}
 	\centering
 		\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
@@ -176,11 +177,12 @@ To compute unbiased probabilities, every time we counted a transition from a sou
 																&CH	&282	&0.483	&0.072	&6.693	\\	
 				\hline
 		\end{tabular}
-		\captionof{table}{Transitions from a Movie object to a target object, divided by: (i) type of source and target; (ii) whether the target was highlighted (H); (iii) whether the target was highlighted and connected to the source (HC); (iv) and whether source and target were neither highlighted nor connected. Columns show: (i) the number of direct transitions for the source/target combination; (ii) the observed transition probability from the source to that target; (iii) the (unbiased) probability of transition between source and target if all elements had equal probability to be viewed; (iv) the ratio between observed and unbiased transition probabilities.}
+		
 	\label{tab:TransitionFromMovie}
 \end{table}
 
 \begin{table}[htbp]	
+\captionof{table}{Transitions from Actor objects. }
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
@@ -197,11 +199,12 @@ To compute unbiased probabilities, every time we counted a transition from a sou
 																			&H	&39	&0.476	&0.069	&6.918	\\	
 				\hline
 		\end{tabular}
-		\captionof{table}{Transitions from Actor objects. }
+		
 	\label{tab:TransitionFromActor}
 \end{table}
 
 \begin{table}[htbp]	
+\captionof{table}{Transitions from Director objects}
 	\centering
 \begin{tabular}{|c|c|c|c|c|c|}
 			\hline
@@ -218,11 +221,12 @@ To compute unbiased probabilities, every time we counted a transition from a sou
 															&H	&234	&0.478	&0.101	&4.708	\\	
 				\hline
 		\end{tabular}
-		\captionof{table}{Transitions from Director objects}
+		
 	\label{tab:TransitionFromDirector}
 \end{table}
 
 \begin{table}[htbp]	
+\captionof{table}{Transitions from Genre objects}
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
@@ -239,7 +243,7 @@ To compute unbiased probabilities, every time we counted a transition from a sou
 																&H	&526	&0.602	&0.057	&10.627	\\	
 				\hline
 		\end{tabular}		
-		\captionof{table}{Transitions from Genre objects}
+		
 	\label{tab:TransitionFromGenre}
 \end{table}
 %\begin{table}[htbp]	

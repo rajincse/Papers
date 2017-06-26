@@ -5,7 +5,7 @@ Version=4
 [ProjectInfo]
 MainFile=PhDDissertation.tex
 UseBibTeX=1
-UseMakeIndex=1
+UseMakeIndex=0
 ActiveProfile=LaTeX ⇨ DVI ⇨ PDF
 ProjectLanguage=en
 ProjectDialect=US
