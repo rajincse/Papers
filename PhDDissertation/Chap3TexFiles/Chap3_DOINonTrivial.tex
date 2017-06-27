@@ -2,13 +2,13 @@
 \label{sec:DOINonTrivial}
 Many eye-tracking related studies generate visual stimuli using computer programs coded by visualization researchers. In such cases, since the structure and layout of the visual content in the stimuli is accessible at runtime, we can relate gaze positions supplied on the fly by an eye-tracker to the visual content of such visualizations.
 
-For example, in Figure~\ref{fig:Miserables}, a network diagram depicts the characters from the novel Les Miserables. Links between two characters are present if they co-occurred in the same chapter. The colors indicate different clusters of characters. The visualization has interactions such as dragging nodes (i.e. rectangles). Moreover, users can input a `compactness' value to change the layout of the visualization. The lower value of compactness indicates a more compact arrangement of the network. Figure~\ref{fig:MiserablesCompactness} shows the same visualization with four different compactness values. 
+For example, in Figure~\ref{fig:Miserables}, a network diagram depicts the characters from the novel Les Miserables. Each rectangle node represents a character. Links between two characters are present if they co-occurred in the same chapter. The colors indicate different clusters of characters. The visualization has interactions such as dragging nodes (i.e. rectangles). Moreover, users can input a `compactness' value to change the layout of the visualization. The lower value of compactness indicates a more compact arrangement of the network. Figure~\ref{fig:MiserablesCompactness} shows the same visualization with four different compactness values. 
 
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.99\linewidth]{images/Miserables.eps}
-  \caption{An interactive network visualization, depicting characters from Les Miserables. Each rectangle node represents a character and links represent character co-occurrence in the same chapter. Different colors represent different clusters of characters. Interaction such as dragging nodes is available for this visualization.}
+  \caption{An interactive network visualization, depicting characters from Les Miserables.}
     \label{fig:Miserables}
 \end{figure}
 
@@ -19,12 +19,12 @@ For example, in Figure~\ref{fig:Miserables}, a network diagram depicts the chara
     \label{fig:MiserablesCompactness}
 \end{figure}
 
-Figure~\ref{fig:MiserablesSimple} is a smaller version of the original network diagram with the major characters only. This figure also depicts collected gaze points from a user looking at Fantine and Cosette. It is evident that we can match the positions of these gaze samples to the two rectangles closest to them (i.e. the visual content). Hence, we label this eye-tracking analysis as being in `visualization space' (i.e., relating gazes to visual objects shown on the screen) rather than 'image space' (i.e., relating gazes to pixels in a stimulus).
+Figure~\ref{fig:MiserablesSimple} is a smaller version of the original network diagram with the major characters only. The dashed circles represent a user's gaze points in it. This figure also depicts collected gaze points from a user looking at Fantine and Cosette. It is evident that we can match the positions of these gaze samples to the two rectangles closest to them (i.e. the visual content). Hence, we label this eye-tracking analysis as being in `visualization space' (i.e., relating gazes to visual objects shown on the screen) rather than 'image space' (i.e., relating gazes to pixels in a stimulus).
 
 \begin{figure}[htb]
   \centering
   \includegraphics[width=0.99\linewidth]{images/MiserablesSimple.eps}
-  \caption{A network diagram with major characters of Les Miserables. The dashed circles represent a user's gazes. Here, most gaze points are adjacent to Fantine and Cosette. }
+  \caption{A network diagram with major characters of Les Miserables.}
     \label{fig:MiserablesSimple}
 \end{figure}
 
@@ -32,11 +32,11 @@ Moreover, the visual objects in the Les Miserables visualization stand for actua
 
 We hypothesize that this is a compelling alternative to traditional analysis methods, primarily AOI (area of interest) analyses. Using conventional AOI-based approaches, analyzers would be required to define AOIs over already rendered 2D stimuli. In our example, and most real-life visualizations, this would be time-consuming because of the many visual objects displayed on the screen. Moreover, the 2D layout of the visualization may change in response to user interactions (e.g., users move node), in which case the AOI annotations would need to change. Moreover, AOIs are not annotated by any attributes so defining AOIs on characters wouldn't implicitly mean that we could also track other data subsets such as based on gender.  
 
-However, as described in Chapter~\ref{chap:Intro}, mapping gazes to individual data objects can be imprecise since eye-trackers produce noisy, low-resolution data. Figure ~\ref{fig:MiserablesGaze} illustrates this. We can use the na\"{i}ve approach of mapping gazes to the nearest visual object. Using this approach, we can confidently map $g_1, g_2$ to Fontaine, and $g_4, g5$ to Cosette. However, it is unclear what we should do about $g_3$ since it is squarely between the two nodes. 
+However, as described in Chapter~\ref{chap:Intro}, mapping gazes to individual data objects can be imprecise since eye-trackers produce noisy, low-resolution data. Figure ~\ref{fig:MiserablesGaze} illustrates this. We have 2 rectangles Fontaine and Cosette, and five gazes $g_1, g_2, g_3, g_4, g_5$. The na\"{i}ve approach of maps gazes to the nearest visual object. Using this approach, we can confidently map $g_1, g_2$ to Fontaine, and $g_4, g5$ to Cosette. However, it is unclear what we should do about $g_3$ since it is squarely between the two nodes. 
 
 \begin{figure}[htb]
   \centering
   \includegraphics[width=0.75\linewidth]{images/MiserablesGaze.eps}
-  \caption{Using proximity alone to map gazes to visual objects. We have 2 rectangles Fontaine and Cosette, and five gazes $g_1, g_2, g_3, g_4, g_5$. Each gaze is to be mapped to either Fontaine or Cosette. $g_1, g_2$ maps to Fontaine and $g_4$ map to Cosette. However, $g_3$ cannot be mapped directly to neither Fontaine nor Cosette. }
+  \caption{Using proximity to map gazes to visual objects. }
     \label{fig:MiserablesGaze}
 \end{figure}

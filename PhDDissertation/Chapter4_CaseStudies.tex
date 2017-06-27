@@ -21,7 +21,7 @@ We explored an existing learning environment designed to teach architecture conc
 
 As described before, we instrumented the HTML and javascript code to allow the learning environment to permanently communicate (via AJAX protocols) to a viewed object detection module the shape, position, and nature (i.e., attributes) of the content it showed on the screen at any moment in time. As part of our experimental setup, students interacted with the web content on a local machine that we equipped with an eye-tracker. The detection module received gaze data from the eye-tracker and matched it to the visual content reported by the learning environment, to identify and record likely viewing targets.
 
-Individual DOM elements with sufficient semantic meaning (e.g., paragraphs, images, headers, navigation widgets) formed the basis of DOI elements (Figure~\ref{fig:archictecture}). However, several images depicted complex schematics or included multiple panels. In such cases, we defined more granular DOIs within those pictures. 
+Individual DOM elements with sufficient semantic meaning (e.g., paragraphs, images, headers, navigation widgets) formed the basis of DOI elements (Figure~\ref{fig:archictecture}). In Figure~\ref{fig:archictecture}, we depict our instrumentation using our DOI method from Chapter~\ref{chap:DOIDataCollection}. The overlays in the figure illustrate defined DOIs. However, several images depicted complex schematics or included multiple panels. In such cases, we defined more granular DOIs within those pictures. 
 
 We annotated DOIs with attributes such as which learning concept the DOI was referring to (e.g., facade, heat transmission, material type). Moreover, its complexity level (introductory, medium, advanced), the type of visual content it was depicted with (e.g., text, image, navigation widget), and the type of learning content (e.g., definition, example, exercise). The learning environment communicated These attributes to the instrumentation library, which in turn stored them as part of the description of viewed objects.
 
@@ -32,7 +32,7 @@ This experimental setup and data collection process were designed to allow our c
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{images/architectureDOI.eps}
-  \caption{One page of an interactive, HTML environment for learning architecture concepts instrumented using our DOI instrumentation method from Chapter~\ref{chap:DOIDataCollection}. Overlays illustrate defined DOIs.}
+  \caption{A single page of an interactive, HTML environment for learning architecture concepts.}
 	\label{fig:archictecture}
 \end{figure}
 
@@ -47,7 +47,7 @@ Instead, we modeled a 3D construction scene from a real scene, using the Unity 3
 
 The scene was dynamic and involved multiple unfolding hazardous situations (e.g., a construction worker rushing in front of a vehicle). Subjects were assigned a virtual character which the scene placed in a truck that moved along a predetermined path through the scene (Figure ~\ref{fig:construction}). Subjects had no control over the transition of the camera (i.e., the truck's path), but they could change their viewing angle by rotating the camera in the horizontal plane. The whole 'trip' through the construction scene lasted approximately $8$ minutes. 
 
-We instrumented the Unity scene using Bernhard et al.'s GTOM approach~\cite{Bern14}. Specifically, in addition to rendering the scene on the screen for subjects to view, we assigned each tracked object a specific color and rendered objects into a color buffer. We then identified colors in the proximity of gaze coordinates supplied by the eye-tracker and used this information to detect objects subjects potentially viewed. Figure~\ref{fig:construction} illustrates an example of the process.
+We instrumented the Unity scene using Bernhard et al.'s GTOM approach~\cite{Bern14}. Specifically, in addition to rendering the scene on the screen for subjects to view, we assigned each tracked object a specific color and rendered objects into a color buffer. We then identified colors in the proximity of gaze coordinates supplied by the eye-tracker and used this information to detect objects subjects potentially viewed. Figure~\ref{fig:construction} illustrates an example of the process. Each 3D object tracked in the scene is projected in the color buffer using a distinct color. Gazes are mapped to objects in the 3D space via their colors in the buffer.
 
 Through the instrumentation process, we exported object attributes such as type (e.g., machinery, human, static), hazards associated with each object (e.g., collision, electrocution), whether objects were moving or not,  and their distance from the subject's camera. At the same time, we used the color buffers to compute the size of objects and their position (i.e., the center of mass) on the screen, and we tracked which of all objects were visible and which not. We note that the latter five types of attributes were time dependent. We also recorded screen captures and computed the bounds of objects on the screen. 
 
@@ -60,7 +60,7 @@ In addition to enabling the study of hazardous situations that are not safe to r
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{images/construction.eps}
-  \caption{A 3D construction scene model (top) instrumented using Bernhard et al.'s color-buffer (bottom) approach~\cite{Bern14}. Each 3D object tracked in the scene is projected in the color buffer using a distinct color. Gazes are mapped to objects in the 3D space via their colors in the buffer.}
+  \caption{A 3D construction scene model (top) instrumented using Bernhard et al.'s color-buffer (bottom) approach~\cite{Bern14}. }
 	\label{fig:construction}
 \end{figure}
 

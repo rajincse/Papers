@@ -2,7 +2,7 @@
 \label{sec:DOICollectionEvaluation}
 
 \subsection{Overview}
-We instrumented D{\"o}rk's interactive PivotPaths visualization of multifaceted data~\cite{Dor12}. Figure~\ref{fig:pivotpaths} shows the visualization which links to the popular internet movie database (IMDB). We collected data from $9$ subjects, each using our instrumented visualization for $50$ minutes on a series of structured and unstructured tasks. We used these data to test the validity and effectiveness of our approach in two ways. 
+We instrumented D{\"o}rk's interactive PivotPaths visualization of multifaceted data~\cite{Dor12}. Figure~\ref{fig:pivotpaths} shows the visualization which links to the popular internet movie database (IMDB). In this figure,  movies are displayed in the center of the screen, actors at the top, and directors and genres share the bottom space. Actors, directors, and genres associated to movies are connected through curves. Users can highlight objects and their connected neighbors by hovering over them. We collected data from $9$ subjects, each using our instrumented visualization for $50$ minutes on a series of structured and unstructured tasks. We used these data to test the validity and effectiveness of our approach in two ways. 
 
 First, we compared the output of the predictive algorithm to human annotations. We found that data collected automatically were on average as similar to human annotations, as human annotations were analogous to each other. We conducted this analysis for all three viewed detection algorithms described in Sections~\ref{sec:AOIBasedViewedObjectDetection} to~\ref{sec:MehthodsIntelligentAlgorithm} and found that the AOI algorithm performs poorly compared to the other two and that the predictive algorithm improves detection accuracy by about $5\%$  (Figure~\ref{fig:quantitative}). 
 
@@ -15,7 +15,7 @@ Second, we showed that our instrumentation method provides relevant information 
 \begin{figure}[htb]
   \centering
   \includegraphics[width=\linewidth]{images/PivotPath.eps}
-  \caption{PivotPaths visualization of IMDB data. Movies are displayed in the center of the screen, actors at the top, and directors and genres share the bottom space. Actors, directors, and genres associated to movies are connected through curves. Users can highlight objects and their connected neighbors by hovering over them.}
+  \caption{A PivotPaths visualization of IMDB data.}
 	\label{fig:pivotpaths}
 \end{figure}
 Our PivotPaths visualization of IMDB data renders movies in the center of the screen, actors on top, and genres and directors at the bottom (Figure~\ref{fig:pivotpaths}). The visualization connects actors, directors, and genres by curves to the associated movies. Moreover, the elements are larger, and their connections more salient, if they associate with multiple movies. Actors, genres, and directors are colored distinctively, which is particularly important for genres and directors since they occupy the same visual space. Such views are created in response to users' searches for specific movies, actors, and directors, and show only data that are most relevant to the search. As shown in Figure~\ref{fig:pivotpaths}, users can hover over visual elements to highlight them and their connections. Users can also click on visual elements to transition the view to one centered on the select element. Finally, users can freely zoom and pan. 

@@ -47,30 +47,30 @@ In this section, we discuss our implementation of four DOI analysis visualizatio
 \subsection{DOI-Vis for the Tracking Data Consumption Experiment}
 We already discussed the data collection and instrumentation methods about the tracking data consumption experiment in Section~\ref{sec:ExperimentIMDB}. To analyze the data collected from this study, we developed three visualizations: heatmap, scanpath, and scarfplot. 
 
-First, we developed a time-annotated heatmap (Figure~\ref{fig:HeatmapIMDB}) where each cell's color represents viewing score (i.e. viewing-intensity). We chose the grayscale color scheme to render the heatmap where black represents maximum and white represents the minimum. In our visualization, we facilitate interaction of panning to view time-based data. For facilitating comparison, we allowed rendering user data views side by side. 
+First, we developed a time-annotated heatmap (Figure~\ref{fig:HeatmapIMDB}) where each cell's color represents viewing score (i.e. viewing-intensity). It shows user-data separately. DOI-rows are scaled vertically to make often viewed DOIs more salient. The visualization orders DOIs by viewing-score and do not display the DOIs with viewing-scores are beyond a threshold. A time-window (white section) helps to prioritize selecting which data to show. We chose the grayscale color scheme to render the heatmap where black represents maximum and white represents the minimum. In our visualization, we facilitate interaction of panning to view time-based data. For facilitating comparison, we allowed rendering user data views side by side. 
 \begin{figure}[htb]
   \centering
-	\includegraphics[width=0.75\linewidth]{images/HeatmapIMDB.eps}
-  \caption{An example of a heatmap generated from real DOI data. It shows user-data separately. DOI-rows are scaled vertically to make often viewed DOIs more salient. The visualization orders DOIs by viewing-score and do not display the DOIs with viewing-scores are beyond a threshold. A time-window (white section) helps prioritize for selecting which data to show.}
+	\includegraphics[width=0.85\linewidth]{images/HeatmapIMDB.eps}
+  \caption{An example of a heatmap generated from real DOI data. }
 	\label{fig:HeatmapIMDB}
 \end{figure}
 
-Second, we have implemented a scanpath for the same experiment (Figure~\ref{fig:ScanpathsIMDB}). Unlike heatmap, we considered every DOI as `viewed' when its viewing score crossed a threshold value (e.g. 0.75). Then, we connected the DOI cell to render the scanpath. The scanpath rendering had two versions: juxtaposed (Figure~\ref{fig:ScanpathsIMDB}(left)) and superpositioned(Figure~\ref{fig:ScanpathsIMDB}(right)). We applied a string edit-distance clustering over the vertical sequence of DOIs to reduce cluttering. 
+Second, we have implemented a scanpath for the same experiment (Figure~\ref{fig:ScanpathsIMDB}). Unlike heatmap, we considered every DOI as `viewed' when its viewing score crossed a threshold value (e.g. 0.75). Then, we connected the DOI cell to render the scanpath. The scanpath rendering had two versions: juxtaposed (Figure~\ref{fig:ScanpathsIMDB}(left)) and superpositioned(Figure~\ref{fig:ScanpathsIMDB}(right)). We applied a string edit-distance clustering over the vertical sequence of DOIs to reduce cluttering. In Figure~\ref{fig:ScanpathsIMDB}(left), depicted DOIs are the same for all four users, enabling the comparison of the scanpath profile; the top two users viewed similar data. Besides, in Figure~\ref{fig:ScanpathsIMDB}(right), four users cluster into two pairs, based on their interests.
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.75\linewidth]{images/ScanpathsIMDB.eps}
-  \caption{Scanpaths of real DOI data. (left) Data are shown separately for each user. Depicted DOIs are the same for all four users, enabling the comparison of the scanpath profile; the top two users viewed similar data. (right) Users' data are shown next to each other for each DOI; we notice that the four users cluster into two pairs, based on their interests.}
+  \caption{Scanpaths of real DOI data: (Left) Data are shown separately for each user, (Right) Users' data are shown next to each other for each DOI.}
 	\label{fig:ScanpathsIMDB}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{images/ScarfsIMDB.eps}
-  \caption{A DOI-scarfplot for movie DOI data sketched for two users. DOI are labeled explicitly and scaled according to their viewing-score around particular time-points. Vertical resizing of a users' plot would show less or more data. The figure highlighted a selection for one user (Goodfellas) in all data. }
+  \caption{A DOI-scarfplot for movie DOI data sketched for two users.}
 	\label{fig:ScarfsIMDB}
 \end{figure}
 
-Third, we modified the original scarfplot to enable DOI data visualization. We developed a scarfplot with clear labels (Figure~\ref{fig:ScarfsIMDB}. Moreover, the labels attach themselves with the scarf area on the scarflines. To support multiple granularities, we rendered many scarflines to show DOIs clearly. 
+Third, we modified the original scarfplot to enable DOI data visualization. We developed a scarfplot with clear labels (Figure~\ref{fig:ScarfsIMDB}. Moreover, the labels attach themselves with the scarf area on the scarflines. To support multiple granularities, we rendered many scarflines to show DOIs clearly. DOI are labeled explicitly and scaled according to their viewing-score around particular time-points. Vertical resizing of a users' plot would show less or more data. The figure highlighted a selection for one user (Goodfellas) in all data. 
 %\begin{figure}[htb]
   %\centering
 	%\includegraphics[width=0.5\linewidth]{images/MatrixGraphIMDB.eps}

@@ -42,12 +42,12 @@ Human eyes do not fixate on a single pixel point. Instead, they can view a small
 	\label{fig:discreminateFig4}
 \end{figure}
 
-We advocate for a fuzzy interpretation (i.e. finding a partial truth value instead of absolute true or false) continuous of gaze data and detect likelihoods that objects are viewed rather than certainties. To this end, we can compute object gaze scores $gs$ (for all objects $i$ in a visualization, and at all times $t$). The gaze scores range between zero- user did not view the object, and one-user certainly viewed the object. We show them in Figure~\ref{fig:gazeScoreFig3} and Formula~\ref{eq:GS}. 
+We advocate for a fuzzy interpretation (i.e. finding a partial truth value instead of absolute true or false) continuous of gaze data and detect likelihoods that objects are viewed rather than certainties. To this end, we can compute object gaze scores $gs$ (for all objects $i$ in a visualization, and at all times $t$). The gaze scores range between zero- user did not view the object, and one-user certainly viewed the object. We show them in Figure~\ref{fig:gazeScoreFig3} and Formula~\ref{eq:GS}. In Figure~\ref{fig:gazeScoreFig3}, $d$ is the distance from the object to the gaze sample, and $R$ approximates the size of the user's foveated region.
 
 \begin{figure}[htb]
   \centering
   \includegraphics[width=0.6\linewidth]{images/gazeScoreFig3.eps}
-  \caption{Calculating gaze score $gs$ for a gaze sample landing near an object. $d$ is the distance from the object to the gaze sample, and $R$ approximates the size of the user's foveated region.}
+  \caption{Calculating gaze score $gs$ for a gaze sample landing near an object. }
 	\label{fig:gazeScoreFig3}
 \end{figure}
 
