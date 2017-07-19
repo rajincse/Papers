@@ -9,7 +9,7 @@ Previous efforts found it useful to define tasks regarding their operands, data 
 Additionally, existing work also found it useful to define tasks regarding their objective primitives, or what type of cognitive task they involve. For example, Roth's five objective primitives include: identify (i.e., find a piece of information given some other piece of information), compare (i.e., compare two pieces of information at the same time), rank (i.e. determine order of information pieces), associate (i.e. capture relationships between different information pieces), and delineate (i.e. group or cluster information pieces)~\cite{Roth13}.  Roth's objective primitives are validated empirically and are thus well suited to categorize both loosely defined and specific objectives. We combined these objectives with our operand models to define the possible range of possible DOI tasks. For example, a specific task involving these operands and this objective would be ``Which character was viewed most (objective: rank) by user A (operand: who)?''. 
 
 \subsection{Objectives and Probable Data Questions}
-After reviewing multiple taxonomies and frameworks, we decided to use Roth's five objective primitives --- \textit{identify, compare, rank, associate, delineate} ~\cite{Roth13}  --- for two reasons. First, these targets were validated empirically and shown to correlate with how real users think about the tasks they are doing. Second, they are a compromise between loosely defined objectives with a broad meaning and very specific targets. For example, Andrienko et al. define only two cognitive objectives, identify and compare. While these are indeed sufficient to describe Roths primitives (e.g., an association is a comparison of attributes), we think Roth's more fundamental objectives map to analysts' goals more directly, making it easier to consider possible tasks in practice. Conversely, Amar et al. define very specific targets which we felt occasionally overlapped and made it difficult to map detailed data questions to single objectives~\cite{Ama05}. 
+After reviewing multiple taxonomies and frameworks, we decided to use Roth's five objective primitives --- \textit{identify, compare, rank, associate, delineate} ~\cite{Roth13}  --- for two reasons. First, these targets were validated empirically and shown to correlate with how real users think about the tasks they are doing. Second, they are a compromise between loosely defined objectives with a broad meaning and very specific targets. For example, Andrienko et al. define only two cognitive objectives, identify and compare. While these are indeed sufficient to describe Roths primitives (e.g., an association is a comparison of attributes), we think Roth's more fundamental objectives map to analysts' goals more directly, making it easier to consider possible tasks in practice. Conversely, Amar et al. has defined very specific targets which we felt occasionally overlapped and made it difficult to map detailed data questions to single objectives~\cite{Ama05}. We discuss the five objective primitive in context of DOI below. We also give task examples in Table~\ref{tab:Tasks1} and Table~\ref{tab:Tasks2}.
 
 \vspace{2mm}
 
@@ -41,7 +41,7 @@ After reviewing multiple taxonomies and frameworks, we decided to use Roth's fiv
 \hangindent=3mm\textit{C4: Compare individual or groups of subjects based on their properties, during all or part of the experiment.}
 
 \vspace{2mm}
-\noindent\textbf{Rank} allows analysts to determine the order of multiple objects. The space of probable ranking questions is similar to that of comparison questions, only involving more than two operands. It is important to note that ranking operations, by Roth's definition, will include questions on the identification of extremums, outliers, and means and centroids. A few examples of particular ranking tasks are shown in Table~\ref{tab:Tasks}. 
+\noindent\textbf{Rank} allows analysts to determine the order of multiple objects. The space of probable ranking questions is similar to that of comparison questions, only involving more than two operands. It is important to note that ranking operations, by Roth's definition, will include questions on the identification of extremums, outliers, and means and centroids. A few examples of particular ranking tasks are shown in Table~\ref{tab:Tasks2}. 
 
 
 \vspace{2mm}
@@ -71,54 +71,68 @@ We note that the phrasing 'are there correlations', which denotes a confirmatory
 \vspace{2mm}
 \noindent\textbf{Delineate} tasks capture analysts' objective of organizing data in logical structures, such as clusters or groups. Delineate tasks operate on the same operands as compare and rank tasks. 
 
-\begin{sidewaystable}
-%\begin{table}[htbp]	
-\caption{DOI task examples.}
+%\begin{sidewaystable}
+\begin{table}[htbp]	
+\caption{DOI task examples: Indentify (I) and Compare (C).}
 	\centering
     \begin{tabular}{|l|l|}
     \hline
     Task Type & Task Instance \\
     \hline
-        I(i)& What was the type distribution of advanced architecture concepts that subjects looked at?\\
-    I1(ii) &Cumulatively, how much time did subject X spend looking at moving objects?\\
-    I1(iv) &On average, how close were experienced users’ fixations from the center of the closest object?\\
-    I2(ii) &Which subject looked at definition X in the first minute of the experiment?\\
-    I2(iii) & What is the average experience of subjects who looked at\\& every object associated with `caught in between' hazards at least twice?\\
+        I(i)& What was the type distribution of advanced architecture concepts\\& that subjects looked at?\\
+    I1(ii) & Cumulatively, how much time did subject X spend looking at\\& moving objects?\\
+    I1(iv) & On average, how close were experienced users' fixations from the\\& center of the closest object?\\
+    I2(ii) & Which subject looked at definition X in the first minute of the\\& experiment?\\
+    I2(iii) & What is the average experience of subjects who looked at every\\& object associated with `caught in between' hazards at least twice?\\
     I3 & How fatigued did subject X report to be at the end of the study?\\
     \hline
-    C1(ii) & Do experienced users view hazard-tagged objects faster once they become visible, than do novices?\\
+    C1(ii) & Do experienced users view hazard-tagged objects faster once they\\& become visible, than do novices?\\
 C1(iii) & Do experienced users fixate closer to objects than do novices?\\
-C2 (i) & When do subjects look at genres more, in the beginnings or at the ends of tasks?\\
-C2 (iii) & Do subjects fixate closer to objects in the first minute of a task than in the last minute of it?\\
-C3(i)& What distinguishes visible data that subjects looked at, from visible data that they ignored?\\
-C3(iii)& Are examples being viewed more than definitions by experienced users?\\
+C2 (i) & When do subjects look at genres more, in the beginnings or at the\\& ends of tasks?\\
+C2 (iii) & Do subjects fixate closer to objects in the first minute of a\\& task than in the last minute of it?\\
+C3(i)& What distinguishes visible data that subjects looked at, from\\& visible data that they ignored?\\
+C3(iii)& Are examples being viewed more than definitions\\& by experienced users?\\
 C4 & Are our experienced users typically older than our novices?\\
     \hline
+    \end{tabular} 
+    
+    \label{tab:Tasks1}
+		\end{table}
+%\end{sidewaystable}
+
+%\begin{sidewaystable}
+\begin{table}[htbp]	
+\caption{DOI task examples: Rank (R), Associate (A), and Delineate (D).}
+	\centering
+    \begin{tabular}{|l|l|}
+    \hline
+    Task Type & Task Instance \\
+    \hline
 R1(i) & Which user tends to look at examples first?\\
-R3(ii) & What do users look at most in the first few seconds after spotting a new movie: actors, directors, genres, or ratings?\\
-R3 (ii) &What type of learning object do successful learners look at most?\\
-R2 (ii)&  During which task did subjects start looking at examples earliest?\\
-R3(ii) &Which one object was viewed most by experienced subjects in the third section of the experiment?\\
+R3(ii) & What do users look at most in the first few seconds after\\& spotting a new movie: actors, directors, genres, or ratings?\\
+R3 (ii) & What type of learning object do successful learners look at most?\\
+R2 (ii)& During which task did subjects start looking at examples earliest?\\
+R3(ii) & Which one object was viewed most by experienced subjects in the\\& third section of the experiment?\\
 R4 & Which user was the most successful learner?\\
     \hline
-    A1 (i)& Is there are correlation between the background of subjects (e.g., science) \\&and the format of learning content they focus on (e.g. numeric)?\\
-A2 (ii)& Do people fixate further away from objects as time progresses in a task?\\
-A2 (i) & Is there are correlation between how near objects are to a subject and how much subjects focus on them?\\
-A3 &  Do subjects tend to fixate closer to objects that appear smaller on the screen?\\
-A4& Is users’ experience correlated with their ability to identify more hazards? \\
-A5& Is there a correlation between the genres and ratings of movies that subjects viewed? \\
+    A1 (i)& Is there are correlation between the background of subjects\\& (e.g., science) and the format of learning content they focus on\\& (e.g. numeric)?\\
+A2 (ii)& Do people fixate further away from objects as time progresses\\& in a task?\\
+A2 (i) & Is there are correlation between how near objects are to a subject\\& and how much subjects focus on them?\\
+A3 & Do subjects tend to fixate closer to objects that appear smaller\\& on the screen?\\
+A4& Is users' experience correlated with their ability to identify\\& more hazards? \\
+A5& Is there a correlation between the genres and ratings of movies\\& that subjects viewed? \\
 A6& Do effective learners look at examples more as time progresses?\\
 \hline
 D1 (i + ii) & Cluster subjects based on the what content they viewed, and when.\\
 D2 (i) & Cluster tasks based on how the content viewed in them. \\
-D3 (iv) &Cluster the objects tracked in the experiment by \\&the attributes of the users who viewed them (e.g., their experience, their performance).
+D3 (iv) & Cluster the objects tracked in the experiment by the attributes\\& of the users who viewed them (e.g., their experience,\\& their performance).
 \\
 D4 & Cluster subjects based on their attributes. \\
 \hline
 %\vspace{0.1mm}
     \end{tabular} 
     
-    \label{tab:Tasks}
-\end{sidewaystable}
-%\end{table}
+    \label{tab:Tasks2}
+%\end{sidewaystable}
+\end{table}
 

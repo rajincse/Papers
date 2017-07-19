@@ -390,7 +390,7 @@
       \@college \\[3\baselineskip]
       \rule{3in}{0.5pt} \\
       \@gradschooldean \\[1ex]
-      University Graduate School
+      Vice President for Research and Economic Development \\and Dean of the University Graduate School
     \par}
   \end{flushright}
 
